@@ -2,55 +2,31 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def calculate_cellular_current(t, T_net_seq, RSSI_seq, H_seq):
-    """
-    计算任意时刻t的蜂窝网络总耗电电流I_cellular(t)
-    核心方程：I_cellular(t) = 静态电流项 + 动态电流项（信号强度相关 + 基站切换相关）
-    
-    参数说明：
-    t: 具体时刻（单位：小时），连续时间变量
-    T_net_seq: 网络类型时间序列，格式为[[t0, T0], [t1, T1], ..., [tn, Tn]]
-               其中T为网络类型（'2G'/'3G'/'4G'），需按时间顺序排列
-    RSSI_seq: 信号强度时间序列，格式为[[t0, r0], [t1, r1], ..., [tn, rn]]
-               其中r为RSSI值（单位：dBm），连续变化
-    H_seq: 基站切换频率时间序列，格式为[[t0, h0], [t1, h1], ..., [tn, hn]]
-           其中h为切换频率（单位：次/小时）
-    
-    返回值：
-    I_cellular: t时刻蜂窝网络总耗电电流（单位：mA）
-    """
+   
     # -------------------------- 1. 静态电流项 I_cell_static(T_net(t)) --------------------------
-    # 网络类型对应的静态电流（mA）：基于手机射频模块硬件特性，为行业典型值
-    # 【已知参数】后续可通过具体机型规格书校准
+ 
+  
     static_current_map = {
         '2G': 20,    # GSM网络：低带宽，射频电路基础功耗低
         '3G': 45,    # WCDMA网络：中等带宽，调制方式更复杂，功耗提升
         '4G': 70     # LTE网络：高带宽，OFDM技术，射频电路工作强度高
     }
-    # 插值获取t时刻的网络类型（处理时间序列的连续变化）
+   
     T_net_t = interpolate_time_series(t, T_net_seq)
-    # 静态电流：根据网络类型直接获取
     I_static = static_current_map[T_net_t]
     
     # -------------------------- 2. 动态电流项 I_cell_dynamic --------------------------
     # 2.1 信号强度相关电流：k_tx * exp(-α * RSSI(t))
-    # 【已知参数】k_tx：发射机功率-电流转换系数（mA），来自射频芯片 datasheet
+    
     k_tx = 50
-    # 【已知参数】α：信号强度衰减系数（1/dBm），来自通信领域实证研究
     alpha = 0.05
-    # 插值获取t时刻的RSSI值（连续变化，如室内→室外→地铁的信号波动）
     RSSI_t = interpolate_time_series(t, RSSI_seq, is_numeric=True)
-    # 信号强度相关电流（物理逻辑：RSSI越小，指数项越大，电流越大）
     I_signal = k_tx * np.exp(-alpha * RSSI_t)
-    
+   
     # 2.2 基站切换相关电流：k_handoff * H(t)
-    # 【已知参数】k_handoff：单次切换额外电流系数（mA·小时/次），来自实测统计
     k_handoff = 15
-    # 插值获取t时刻的基站切换频率（连续变化，如通勤时切换频繁，静止时切换少）
     H_t = interpolate_time_series(t, H_seq, is_numeric=True)
-    # 基站切换相关电流（物理逻辑：切换越频繁，额外功耗累积越多）
     I_handoff = k_handoff * H_t
-    
-    # 动态电流项 = 信号强度相关电流 + 基站切换相关电流
     I_dynamic = I_signal + I_handoff
     
     # -------------------------- 3. 蜂窝网络总电流 --------------------------
@@ -74,10 +50,10 @@ def interpolate_time_series(t, seq, is_numeric=True):
     values = np.array([item[1] for item in seq])
     
     if is_numeric:
-        # 数值型序列（RSSI、切换频率）：线性插值，保证连续变化
+       
         return np.interp(t, times, values)
     else:
-        # 字符串型序列（网络类型）：近邻匹配（时间最近的网络类型）
+        
         idx = np.argmin(np.abs(times - t))
         return values[idx]
 
@@ -126,4 +102,5 @@ if __name__ == "__main__":
     plt.title('Cellular Network Power Consumption Over 5-Hour Commute Scenario')
     plt.grid(True, alpha=0.3)
     plt.legend()
+
     plt.show()
