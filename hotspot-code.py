@@ -2,27 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def calculate_hotspot_current(t, F_wifi_seq, N_seq, I_cellular_seq):
-    """
-    计算任意时刻t的热点模块总耗电电流I_hotspot(t)
-    核心方程：I_hotspot(t) = 蜂窝网络电流（数据输入） + Wi-Fi AP动态电流（数据输出） + AP静态电流（基带基础功耗）
-    物理逻辑：热点同时承担「蜂窝客户端（从基站拿数据）」和「Wi-Fi AP（给其他设备发数据）」双角色，功耗叠加
-    
-    参数说明：
-    t: 具体时刻（单位：小时），连续时间变量
-    F_wifi_seq: Wi-Fi频段时间序列，格式为[[t0, f0], [t1, f1], ..., [tn, fn]]
-               f为频段（'2.4GHz'/'5GHz'），由用户设置或系统自动切换
-    N_seq: 连接设备数时间序列，格式为[[t0, n0], [t1, n1], ..., [tn, nn]]
-           n为连接设备数（整数≥0），连续变化（设备连接/断开时动态更新）
-    I_cellular_seq: 蜂窝网络电流时间序列，格式为[[t0, i0], [t1, i1], ..., [tn, in]]
-                   i为蜂窝网络电流（mA），与之前的蜂窝网络模型共享（需后续替换为实际调用）
-    
-    返回值：
-    I_hotspot: t时刻热点模块总耗电电流（单位：mA）
-    """
+   
     # -------------------------- 1. 插值获取t时刻的连续变量 --------------------------
   
     F_wifi_t = interpolate_time_series(t, F_wifi_seq, is_numeric=False)
-  
     N_t = interpolate_time_series(t, N_seq, is_numeric=True)
    
     # （实际应调用之前的calculate_cellular_current函数，此处为简化用时间序列插值）
@@ -35,11 +18,7 @@ def calculate_hotspot_current(t, F_wifi_seq, N_seq, I_cellular_seq):
         '5GHz': 75     # 5GHz发射功率20dBm（100mW），叠加射频损耗后取75mA
     }
     k_ap_t = k_ap_map[F_wifi_t]
-    
-   
     device_coeff = 0.3
-    
-   
     I_ap = k_ap_t * (1 + device_coeff * N_t)
     
     # -------------------------- 3. Wi-Fi AP静态电流（基带基础功耗） --------------------------
@@ -101,4 +80,5 @@ if __name__ == "__main__":
     plt.title('Hotspot Power Consumption Over 5-Hour Scenario')
     plt.grid(True, alpha=0.3)
     plt.legend()
+
     plt.show()
