@@ -1,0 +1,103 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def calculate_bluetooth_current(t, V_ble_seq, D_seq, C_seq):
+    """
+    计算任意时刻t的蓝牙模块总耗电电流I_bluetooth(t)
+    核心方程：I_bluetooth(t) = BLE电流项（版本为1时） + 传统蓝牙电流项（版本为0时）
+    物理逻辑：分低功耗蓝牙（BLE）和传统蓝牙，按实际使用版本动态切换，用占空比体现使用状态
+    
+    参数说明：
+    t: 具体时刻（单位：小时），连续时间变量
+    V_ble_seq: 蓝牙版本时间序列，格式为[[t0, v0], [t1, v1], ..., [tn, vn]]
+               v=1表示使用BLE（低功耗），v=0表示使用传统蓝牙，需按时间顺序排列
+    D_seq: 工作占空比时间序列，格式为[[t0, d0], [t1, d1], ..., [tn, dn]]
+           d为占空比（0~1，1表示全功率工作，0表示完全休眠），连续变化
+    C_seq: 传统蓝牙Class等级时间序列，格式为[[t0, c0], [t1, c1], ..., [tn, cn]]
+           c为Class等级（1/2/3，对应不同发射功率），仅当V_ble=0时生效
+    
+    返回值：
+    I_bluetooth: t时刻蓝牙模块总耗电电流（单位：mA）
+    """
+    # -------------------------- 1. 插值获取t时刻的连续变量 --------------------------
+   
+    V_ble_t = interpolate_time_series(t, V_ble_seq, is_numeric=False)
+    
+    D_t = interpolate_time_series(t, D_seq, is_numeric=True)
+    
+    C_t = interpolate_time_series(t, C_seq, is_numeric=False)
+    
+    # -------------------------- 2. BLE电流项（V_ble=1时） --------------------------
+    I_ble_idle = 1.2
+
+    I_ble_tx = 8
+   
+    I_ble = I_ble_idle + D_t * (I_ble_tx - I_ble_idle)
+    
+    # -------------------------- 3. 传统蓝牙电流项（V_ble=0时） --------------------------
+    I_class_map = {
+        '1': 30,   # Class 1：发射功率100mW（20dBm），基础功耗最高
+        '2': 8,    # Class 2：发射功率2.5mW（4dBm），手机常用，功耗中等
+        '3': 2     # Class 3：发射功率1mW（0dBm），功耗最低
+    }
+    I_classic_tx = 25
+    I_classic = I_class_map[C_t] + D_t * (I_classic_tx - I_class_map[C_t])
+    
+    # -------------------------- 4. 蓝牙总电流（按版本切换） --------------------------
+    # 指示函数：V_ble=1时取I_ble，V_ble=0时取I_classic
+    I_bluetooth = I_ble if V_ble_t == '1' else I_classic
+    return I_bluetooth
+
+def interpolate_time_series(t, seq, is_numeric=True):
+    """
+    时间序列插值函数：保证模型的连续时间特性（题目核心要求）
+    数值型变量（占空比）用线性插值，字符串型变量（版本、Class）用近邻匹配
+    
+    参数：
+    t: 目标时刻
+    seq: 时间序列，格式为[[t0, v0], [t1, v1], ..., [tn, vn]]
+    is_numeric: 是否为数值型序列（True=线性插值，False=近邻匹配）
+    
+    返回值：
+    v_t: t时刻的插值结果
+    """
+    times = np.array([item[0] for item in seq])
+    values = np.array([item[1] for item in seq])
+    
+    if is_numeric:
+        return np.interp(t, times, values)  # 数值型变量连续插值
+    else:
+        idx = np.argmin(np.abs(times - t))  # 字符串型变量近邻匹配
+        return values[idx]
+
+# -------------------------- 示例：模拟5小时使用场景（可替换为实测数据） --------------------------
+if __name__ == "__main__":
+    # 【需后续填充】以下时间序列为杜撰的合理场景，需替换为实测数据
+    # 1. 蓝牙版本时间序列：0~2小时用BLE（连智能手表），2~5小时用传统蓝牙（连旧音箱）
+    V_ble_seq = [
+        [0, '1'], [2, '1'], [2.1, '0'], [5, '0']
+    ]
+    # 2. 占空比时间序列：0~1小时传文件（占空比0.8），1~2小时闲置（0.05），2~3小时听歌（0.6），3~5小时闲置（0.1）
+    D_seq = [
+        [0, 0.8], [1, 0.8], [1.1, 0.05], [2, 0.05],
+        [2.1, 0.6], [3, 0.6], [3.1, 0.1], [5, 0.1]
+    ]
+    # 3. 传统蓝牙Class等级时间序列：2~5小时用Class 2（手机常用）
+    C_seq = [
+        [2, '2'], [5, '2']
+    ]
+    
+    # 生成连续时间点（0~5小时，每0.01小时一个点，保证连续特性）
+    t_range = np.linspace(0, 5, 500)
+    # 计算每个时刻的蓝牙电流
+    I_bluetooth_range = [calculate_bluetooth_current(t, V_ble_seq, D_seq, C_seq) for t in t_range]
+    
+    # 画图展示结果（直观呈现电流随时间的连续变化）
+    plt.figure(figsize=(10, 6))
+    plt.plot(t_range, I_bluetooth_range, label='I_bluetooth(t) (mA)', color='#ff7f0e')
+    plt.xlabel('Time (hours)')
+    plt.ylabel('Bluetooth Current (mA)')
+    plt.title('Bluetooth Power Consumption Over 5-Hour Scenario')
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    plt.show()
