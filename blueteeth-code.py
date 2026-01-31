@@ -2,36 +2,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def calculate_bluetooth_current(t, V_ble_seq, D_seq, C_seq):
-    """
-    计算任意时刻t的蓝牙模块总耗电电流I_bluetooth(t)
-    核心方程：I_bluetooth(t) = BLE电流项（版本为1时） + 传统蓝牙电流项（版本为0时）
-    物理逻辑：分低功耗蓝牙（BLE）和传统蓝牙，按实际使用版本动态切换，用占空比体现使用状态
-    
-    参数说明：
-    t: 具体时刻（单位：小时），连续时间变量
-    V_ble_seq: 蓝牙版本时间序列，格式为[[t0, v0], [t1, v1], ..., [tn, vn]]
-               v=1表示使用BLE（低功耗），v=0表示使用传统蓝牙，需按时间顺序排列
-    D_seq: 工作占空比时间序列，格式为[[t0, d0], [t1, d1], ..., [tn, dn]]
-           d为占空比（0~1，1表示全功率工作，0表示完全休眠），连续变化
-    C_seq: 传统蓝牙Class等级时间序列，格式为[[t0, c0], [t1, c1], ..., [tn, cn]]
-           c为Class等级（1/2/3，对应不同发射功率），仅当V_ble=0时生效
-    
-    返回值：
-    I_bluetooth: t时刻蓝牙模块总耗电电流（单位：mA）
-    """
+  
     # -------------------------- 1. 插值获取t时刻的连续变量 --------------------------
    
     V_ble_t = interpolate_time_series(t, V_ble_seq, is_numeric=False)
-    
     D_t = interpolate_time_series(t, D_seq, is_numeric=True)
-    
     C_t = interpolate_time_series(t, C_seq, is_numeric=False)
     
     # -------------------------- 2. BLE电流项（V_ble=1时） --------------------------
     I_ble_idle = 1.2
-
     I_ble_tx = 8
-   
     I_ble = I_ble_idle + D_t * (I_ble_tx - I_ble_idle)
     
     # -------------------------- 3. 传统蓝牙电流项（V_ble=0时） --------------------------
@@ -44,30 +24,19 @@ def calculate_bluetooth_current(t, V_ble_seq, D_seq, C_seq):
     I_classic = I_class_map[C_t] + D_t * (I_classic_tx - I_class_map[C_t])
     
     # -------------------------- 4. 蓝牙总电流（按版本切换） --------------------------
-    # 指示函数：V_ble=1时取I_ble，V_ble=0时取I_classic
+   
     I_bluetooth = I_ble if V_ble_t == '1' else I_classic
     return I_bluetooth
 
 def interpolate_time_series(t, seq, is_numeric=True):
-    """
-    时间序列插值函数：保证模型的连续时间特性（题目核心要求）
-    数值型变量（占空比）用线性插值，字符串型变量（版本、Class）用近邻匹配
-    
-    参数：
-    t: 目标时刻
-    seq: 时间序列，格式为[[t0, v0], [t1, v1], ..., [tn, vn]]
-    is_numeric: 是否为数值型序列（True=线性插值，False=近邻匹配）
-    
-    返回值：
-    v_t: t时刻的插值结果
-    """
+   
     times = np.array([item[0] for item in seq])
     values = np.array([item[1] for item in seq])
     
     if is_numeric:
-        return np.interp(t, times, values)  # 数值型变量连续插值
+        return np.interp(t, times, values)
     else:
-        idx = np.argmin(np.abs(times - t))  # 字符串型变量近邻匹配
+        idx = np.argmin(np.abs(times - t)) 
         return values[idx]
 
 # -------------------------- 示例：模拟5小时使用场景（可替换为实测数据） --------------------------
@@ -101,3 +70,4 @@ if __name__ == "__main__":
     plt.grid(True, alpha=0.3)
     plt.legend()
     plt.show()
+
