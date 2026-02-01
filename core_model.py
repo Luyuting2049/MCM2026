@@ -22,6 +22,71 @@ class Display:
         return (self.Pb + self.k * L) / self.V
 
 
+"""内存模块 (Memory - LPDDR)"""
+# 输入: 读带宽 BW_r (GB/s), 写带宽 BW_w (GB/s)
+# 输出: 电流值 (mA)
+# 核心公式/解释：I_mem = (delta_r * BW_r + delta_w * BW_w) + I_static
+# 1. 动态功耗：由数据总线（Data Bus）翻转引起。读取和写入的电流系数（delta）略有不同，
+#    通常写入操作因为需要驱动存储颗粒电容，功耗略高于读取。
+# 2. 静态功耗：即自刷新电流（Self-Refresh Current），用于在无读写操作时维持电荷不流失。
+
+class Memory:
+    """类的初始化"""
+    def __init__(self, cfg):
+        self.cfg = cfg.hardware
+        self.V = self.cfg.SYSTEM['voltage']
+        self.eta = self.cfg.SYSTEM['eta']
+        
+        # 内存特定参数 (以 LPDDR4x 为例)
+        mem_cfg = self.cfg.MEMORY
+        self.delta_r = mem_cfg['delta_read']   # 每 GB/s 消耗的电流 (mA/(GB/s))
+        self.delta_w = mem_cfg['delta_write']  # 每 GB/s 消耗的电流
+        self.I_static = mem_cfg['static_mA']   # 基础刷新电流
+
+    # 计算相应带宽下的电流
+    def I(self, bw_r, bw_w):
+        """
+        bw_r: 读取带宽 (GB/s)
+        bw_w: 写入带宽 (GB/s)
+        """
+        # 1. 动态读写分量
+        i_dynamic = (self.delta_r * bw_r) + (self.delta_w * bw_w)
+        
+        # 2. 叠加静态功耗并考虑转换效率
+        return (i_dynamic + self.I_static) / self.eta
+
+
+"""存储模块 (Storage - UFS/eMMC)"""
+# 输入: 读写状态 (is_active: True/False)
+# 输出: 电流值 (mA)
+# 核心公式/解释：I_store = I_io (Active) 或 I_sleep (Idle)
+# 1. Active 状态：当闪存控制器进行电荷泵操作、读写寻址及 ECC 纠错时，会产生显著电流。
+# 2. Idle 状态：存储模块进入深度休眠（Deep Sleep），电流极低，通常可忽略不计。
+
+class Storage:
+    """类的初始化"""
+    def __init__(self, cfg):
+        self.cfg = cfg.hardware
+        self.V = self.cfg.SYSTEM['voltage']
+        self.eta = self.cfg.SYSTEM['eta']
+        
+        # 存储特定参数 (参考 UFS 3.1 标准)
+        store_cfg = self.cfg.STORAGE
+        self.I_io = store_cfg['current_active']  # 活跃读写电流 (mA)
+        self.I_sleep = store_cfg['current_idle'] # 静态待机电流 (mA)
+
+    # 计算相应状态下的电流
+    def I(self, is_active=False):
+        """
+        is_active: 布尔值，代表当前是否有 I/O 操作
+        """
+        # 根据状态切换电流值
+        i_raw = self.I_io if is_active else self.I_sleep
+        
+        # 考虑效率转换
+        return i_raw / self.eta
+
+
 """
 处理器模块 (CPU & GPU)
 输入: CPU频率 f_c, CPU负载 μ_c; GPU频率 f_g, GPU负载 μ_g
