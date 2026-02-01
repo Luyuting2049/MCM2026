@@ -16,7 +16,27 @@ class HardwareConfig:
         'k_bright': (414.0 - 7.8) / 100.0,  # 亮度系数 (mW/%)，表示亮度每增加1%，电流增加多少mA
     }
 
-
+# 处理器模块参数 (基于物理拟合 I = af^2 + bf + c)
+    PROCESSOR = {
+        # 大核簇 (Big Cluster: Cores 6-7)
+        'big': {
+            'a': 1.15e-05,   # 非线性因子 (mA/MHz^2)，反映 DVFS 电压爬升带来的平方级惩罚
+            'b': 1.05e-03,   # 线性因子 (mA/MHz)，反映 CMOS 基础翻转损耗
+            'c': 20.61,      # 静态漏电 (mA)，代表处理器的基准静默电流
+        },
+        # 小核簇 (Little Cluster: Cores 0-5)
+        'little': {
+            'a': 4.12e-06,   # 小核非线性因子，通常远小于大核
+            'b': 6.84e-03,   # 小核线性因子
+            'c': 13.52,      # 小核静态漏电
+        }
+        'gpu': {
+            'a': 8.50e-06,   # GPU 非线性因子 (受电压域动态调节影响)
+            'b': 1.20e-03,   # GPU 线性因子 (大规模并行单元翻转损耗)
+            'c': 15.0,       # GPU 静态漏电 (mA)
+            'freq_max': 675, # GPU 最大工作频率 (MHz)
+        }
+    }
 
 class Signaling:
     BLUETOOTH = {
