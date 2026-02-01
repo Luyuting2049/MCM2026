@@ -16,6 +16,20 @@ class HardwareConfig:
         'k_bright': (414.0 - 7.8) / 100.0,  # 亮度系数 (mW/%)，表示亮度每增加1%，电流增加多少mA
     }
 
+
+    """内存与存储配置 (基于 Chae et al. 2024 文献及工业标准)"""
+
+MEMORY_PARAMS = {
+    'static_mA': 35.0,        # 考据自 LPDDR4x/5 IDD6 标准
+    'delta_read': 18.0,       # 转换自能效指标 2.0 pJ/bit @ 1.1V
+    'delta_write': 22.0,      # 考虑写入电荷泵损耗，略高于读取
+}
+
+STORAGE_PARAMS = {
+    'current_idle': 2.5,      # UFS 3.1 协议 DeepSleep 典型值
+    'current_active': 120.0,  # 持续 I/O 状态下的平均工作电流
+}
+
 # 处理器模块参数 (基于物理拟合 I = af^2 + bf + c)
     PROCESSOR = {
         # 大核簇 (Big Cluster: Cores 6-7)
