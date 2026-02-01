@@ -313,7 +313,8 @@ class WiFi:
         
         # 信号强度影响（信号越差，发射功率越高）
         beta = self.phy.get('beta', 0.04)
-        I_dynamic = k_freq / np.exp(beta * abs(rssi_db))
+        I_dynamic = k_freq * np.exp(beta * (abs(rssi_db) - 40)) 
+        # 减40是为了设置一个基准点，避免指数爆炸，或者调整你的 config 里的 k_freq 基础值
         
         return I_sleep + I_dynamic
     
