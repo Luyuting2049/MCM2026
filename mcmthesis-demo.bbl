@@ -43,6 +43,160 @@
     \field{year}{2010}
   \endentry
 
+  \entry{chan2015assessing}{article}{}{}
+    \name{author}{8}{}{%
+      {{hash=CCA}{%
+         family={Chan},
+         familyi={C\bibinitperiod},
+         given={Chien\bibnamedelima Aun},
+         giveni={C\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=LW}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Wenwen},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=BS}{%
+         family={Bian},
+         familyi={B\bibinitperiod},
+         given={Sen},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=CLI}{%
+         family={Chih-Lin},
+         familyi={C\bibinithyphendelim L\bibinitperiod},
+         given={I},
+         giveni={I},
+      }}%
+      {{hash=GAF}{%
+         family={Gygax},
+         familyi={G\bibinitperiod},
+         given={Andre\bibnamedelima F},
+         giveni={A\bibinitperiod\bibinitdelim F\bibinitperiod},
+      }}%
+      {{hash=LC}{%
+         family={Leckie},
+         familyi={L\bibinitperiod},
+         given={Christopher},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=YM}{%
+         family={Yan},
+         familyi={Y\bibinitperiod},
+         given={Ming},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=HK}{%
+         family={Hinton},
+         familyi={H\bibinitperiod},
+         given={Kerry},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{CCA+1}
+    \strng{fullhash}{CCALWBSCLIGAFLCYMHK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{number}{11}
+    \field{pages}{182\bibrangedash 191}
+    \field{title}{Assessing network energy consumption of mobile applications}
+    \field{volume}{53}
+    \field{journaltitle}{IEEE Communications Magazine}
+    \field{year}{2015}
+  \endentry
+
+  \entry{cruz2019catalog}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=CL}{%
+         family={Cruz},
+         familyi={C\bibinitperiod},
+         given={Luis},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=AR}{%
+         family={Abreu},
+         familyi={A\bibinitperiod},
+         given={Rui},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{CLAR1}
+    \strng{fullhash}{CLAR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{number}{4}
+    \field{pages}{2209\bibrangedash 2235}
+    \field{title}{Catalog of energy patterns for mobile applications}
+    \field{volume}{24}
+    \field{journaltitle}{Empirical software engineering}
+    \field{year}{2019}
+  \endentry
+
+  \entry{di2017software}{inproceedings}{}{}
+    \name{author}{6}{}{%
+      {{hash=DND}{%
+         family={Di\bibnamedelima Nucci},
+         familyi={D\bibinitperiod\bibinitdelim N\bibinitperiod},
+         given={Dario},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=PF}{%
+         family={Palomba},
+         familyi={P\bibinitperiod},
+         given={Fabio},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=PA}{%
+         family={Prota},
+         familyi={P\bibinitperiod},
+         given={Antonio},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=PA}{%
+         family={Panichella},
+         familyi={P\bibinitperiod},
+         given={Annibale},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=ZA}{%
+         family={Zaidman},
+         familyi={Z\bibinitperiod},
+         given={Andy},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=DLA}{%
+         family={De\bibnamedelima Lucia},
+         familyi={D\bibinitperiod\bibinitdelim L\bibinitperiod},
+         given={Andrea},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{DND+1}
+    \strng{fullhash}{DNDPFPAPAZADLA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{booktitle}{2017 IEEE 24th international conference on software analysis, evolution and reengineering (SANER)}
+    \field{pages}{103\bibrangedash 114}
+    \field{title}{Software-based energy profiling of android apps: Simple, efficient and reliable?}
+    \field{year}{2017}
+  \endentry
+
   \entry{hinton2011power}{article}{}{}
     \name{author}{5}{}{%
       {{hash=HK}{%
@@ -118,6 +272,81 @@
     \field{pages}{135\bibrangedash 140}
     \field{title}{Run-time power estimation in high performance microprocessors}
     \field{year}{2001}
+  \endentry
+
+  \entry{li2014empirical}{inproceedings}{}{}
+    \name{author}{4}{}{%
+      {{hash=LD}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Ding},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=HS}{%
+         family={Hao},
+         familyi={H\bibinitperiod},
+         given={Shuai},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=GJ}{%
+         family={Gui},
+         familyi={G\bibinitperiod},
+         given={Jiaping},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=HWG}{%
+         family={Halfond},
+         familyi={H\bibinitperiod},
+         given={William\bibnamedelima GJ},
+         giveni={W\bibinitperiod\bibinitdelim G\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{LD+1}
+    \strng{fullhash}{LDHSGJHWG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \field{booktitle}{2014 IEEE International Conference on Software Maintenance and Evolution}
+    \field{pages}{121\bibrangedash 130}
+    \field{title}{An empirical study of the energy consumption of android applications}
+    \field{year}{2014}
+  \endentry
+
+  \entry{pathak2012energy}{inproceedings}{}{}
+    \name{author}{3}{}{%
+      {{hash=PA}{%
+         family={Pathak},
+         familyi={P\bibinitperiod},
+         given={Abhinav},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=HYC}{%
+         family={Hu},
+         familyi={H\bibinitperiod},
+         given={Y\bibnamedelima Charlie},
+         giveni={Y\bibinitperiod\bibinitdelim C\bibinitperiod},
+      }}%
+      {{hash=ZM}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Ming},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{PAHYCZM1}
+    \strng{fullhash}{PAHYCZM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{booktitle}{Proceedings of the 7th ACM european conference on Computer Systems}
+    \field{pages}{29\bibrangedash 42}
+    \field{title}{Where is the energy spent inside my app? Fine Grained Energy Accounting on Smartphones with Eprof}
+    \field{year}{2012}
   \endentry
 \enddatalist
 \endinput

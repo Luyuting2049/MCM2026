@@ -74,6 +74,7 @@
 \usepackage{amsmath, amsfonts, booktabs}
 \usepackage{enumitem}
 \usepackage{caption}
+\usepackage{siunitx}
 \captionsetup{font=small, labelfont=bf}
 \usepackage{mathtools}
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -257,7 +258,7 @@ Lithium-ion battery capacity degrades with usage due to irreversible electrochem
 \subsection{Hardware Components Modeling}
 \subsubsection{Display Power Model}
 
-\hspace*{\parindent} While Carroll \& Heiser's work \cite{carroll2010analysis} established a linear relationship between display power and backlight intensity for LCDs, this model is inapplicable to modern AMOLED displays. The fundamental difference lies in AMOLED's pixel-independent emission, which replaces uniform backlighting. We therefore adopt a more sophisticated model tailored to AMOLED's characteristics \cite{joseph2001run}, whose formulation accurately captures the power consumption patterns of contemporary screens.
+\hspace*{\parindent} While Carroll \& Heiser's seminal work \cite{carroll2010analysis} established a linear relationship between display power and backlight intensity for LCDs, this model is inapplicable to modern AMOLED displays. The fundamental difference lies in AMOLED's pixel-independent emission, which replaces uniform backlighting. We therefore adopt a more sophisticated model tailored to AMOLED's characteristics \cite{joseph2001run}, whose formulation accurately captures the power consumption patterns of contemporary screens.
 
 \begin{figure}[ht]
     \centering
@@ -307,14 +308,260 @@ This model provides a physically-grounded method to estimate the AMOLED display'
 \subsection{Signaling Modules Modeling}
 \subsubsection{Cellular and Wi-Fi Communication}
 \subsubsection{Bluetooth and Short-Range Communication}
+
+\paragraph{Bluetooth Module}
+The power consumption modeling of Bluetooth modules is fundamentally based on the core physical principles of radio frequency (RF) communication:
+First is the duty cycle principle. Bluetooth operates in the 2.4 GHz ISM unlicensed band, and the activation time ratio of the RF circuit directly determines power consumption: synchronous packets are sent at high frequency during continuous data transmission (duty cycle $\approx 1$, high power consumption), while only intermittent scanning of surrounding devices is performed in idle standby (duty cycle $\approx 0.05$, significantly lower power consumption).
+Second is the power-current linear relationship: different Bluetooth Class levels correspond to fixed maximum transmit powers (e.g., \SI{100}{mW} for Class 1, \SI{2.5}{mW} for Class 2). With the supply voltage of mobile phone Bluetooth modules fixed at \SI{3.7}{V}, the basic physical formula $P=U \cdot I$ is satisfied, so the Class level directly determines the baseline current of the Bluetooth module.
+As the default mode of mainstream mobile phones, Bluetooth Low Energy (BLE) is designed based on the above physical principles: by shortening RF activation time and reducing transmit power (corresponding to Class 4 with a transmit power of only \SI{0.5}{mW}), its static power consumption is reduced to 1/10 of that of classic Bluetooth.
+
+Based on the above physical background, we construct a continuous-time Bluetooth current model, using an indicator function to dynamically distinguish between BLE and classic Bluetooth modes:
+\[
+I_{\text{bluetooth}}(t) = I_{\text{ble}}(t) \cdot \mathbb{I}(V_{\text{ble}}(t) = 1) + I_{\text{classic}}(t) \cdot \mathbb{I}(V_{\text{ble}}(t) = 0)
+\]
+where the indicator function $\mathbb{I}(\cdot)$ denotes mode switching: $V_{\text{ble}}(t)=1$ for BLE mode, and $V_{\text{ble}}(t)=0$ for classic Bluetooth mode.
+
+For BLE mode (default for mainstream mobile phones), the current is the linear superposition of idle scanning current and dynamic transmission current:
+\[
+I_{\text{ble}}(t) = I_{\text{ble\_idle}} + D(t) \cdot (I_{\text{ble\_tx}} - I_{\text{ble\_idle}})
+\]
+For classic Bluetooth mode (compatible with legacy devices), the current is superimposed by Class-level static current and dynamic transmission current:
+\[
+I_{\text{classic}}(t) = I_{\text{class}}(C(t)) + D(t) \cdot (I_{\text{classic\_tx}} - I_{\text{class}}(C(t)))
+\]
+
+
+\begin{table}[htbp]
+  \centering
+  \caption{Parameters of Bluetooth Power Consumption Model}
+  \begin{tabular}{>{\raggedright}p{2.2cm} >{\raggedright}p{0.8cm} >{\raggedright\arraybackslash}p{6cm}}
+    \toprule
+    Parameter          & Unit & Description                                                                 \\
+    \midrule
+    $V_{\text{ble}}(t)$ & —    & Bluetooth mode at time $t$ (1=BLE, 0=classic)                                \\
+    $C(t)$             & —    & Classic Bluetooth Class level (dynamically negotiated)                      \\
+    $D(t)$             & —    & Duty cycle (0~1, reflects user behavior)                                    \\
+    $I_{\text{ble\_idle}}$ & mA   & BLE idle current (measured: 1.2)                                            \\
+    $I_{\text{ble\_tx}}$   & mA   & BLE transmission current (measured: 8.0)                                   \\
+    $I_{\text{class}}(C(t))$ & mA & Classic Bluetooth static current (30.0/8.0/2.0 for Class 1/2/3)             \\
+    $I_{\text{classic\_tx}}$ & mA  & Classic Bluetooth transmission current (measured: 25.0)                     \\
+    $U$                & V    & Supply voltage (constant: 3.7)                                              \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:bluetooth_params}
+  \vspace{-2mm}
+\end{table}
+
+
+\paragraph{Hotspot Module}
+The power consumption modeling of the hotspot module is based on the underlying physical mechanisms of dual-role communication superposition and radio frequency (RF) transmission: 
+when the hotspot is active, the mobile phone undertakes two communication roles simultaneously — it acts as a cellular network client (maintaining connection with the base station to receive downlink data, with power consumption described by the cellular network model $I_{\text{cellular}}(t)$ mentioned earlier), and as a Wi-Fi Access Point (AP) (transmitting Wi-Fi signals for peripheral device access, generating independent AP RF power consumption). 
+The communication power consumption of these two roles is linearly superimposed, forming the core power consumption source of the hotspot.
+
+The RF power consumption of a Wi-Fi AP follows clear physical laws: it is positively correlated with transmit power and the number of connected devices. 
+Transmit power is determined by the working frequency band — the 5 GHz band has larger path loss and requires higher transmit power (\SI{20}{dBm} vs \SI{17}{dBm} for 2.4 GHz), resulting in higher RF amplifier current. 
+When multiple devices are connected, communication resources need to be scheduled in time division, leading to an increased activation duty cycle of the RF circuit; experimental data shows that the AP power consumption increases by about 30\% for each additional connected device.
+
+In addition, the mobile phone needs to run routing protocols (e.g., DHCP, NAT) when acting as an AP, and the processor must continuously forward network traffic. 
+This additional power consumption has been included in the processor current $I_{\text{processor}}(t)$, so this model only focuses on RF power consumption related to communication.
+
+Based on these physical characteristics, we construct a continuous-time hotspot current model, where the total current is the linear superposition of cellular network current, AP RF dynamic current, and AP static current:
+\[
+I_{\text{hotspot}}(t) = I_{\text{cellular}}(t) + I_{ap}(F_{\text{wifi}}(t), N(t)) + I_{ap\_static}
+\]
+where:
+- $I_{\text{cellular}}(t)$: Cellular network current, directly adopted from the previous cellular network model, reflecting the basic power consumption of the hotspot to maintain cellular connection;
+- $I_{ap}(F_{\text{wifi}}(t), N(t)) = k_{ap}(F_{\text{wifi}}(t)) \cdot (1 + 0.3 \cdot N(t))$: AP RF dynamic current, determined by the frequency band transmit current coefficient and the number of connected devices;
+- $I_{ap\_static} = \SI{20}{mA}$: AP static current, the basic power consumption of the Wi-Fi AP baseband circuit, independent of the number of connected devices.
+
+
+\begin{table}[htbp]
+  \centering
+  \caption{Parameters of Hotspot Power Consumption Model}
+  \begin{tabular}{>{\raggedright}p{2.5cm} >{\raggedright}p{0.8cm} >{\raggedright\arraybackslash}p{5.5cm}}
+    \toprule
+    Parameter          & Unit & Physical Definition                                                                 \\
+    \midrule
+    $F_{\text{wifi}}(t)$ & —    & Wi-Fi band of hotspot at time $t$ (2.4GHz/5GHz), determined by user settings          \\
+    $N(t)$             & —    & Number of connected devices at time $t$, dynamically changing with scenarios (e.g., 1 for commute, 3 for home) \\
+    $k_{ap}(F_{\text{wifi}}(t))$ & mA & AP transmit current coefficient by band (\SI{45}{mA} for 2.4GHz, \SI{75}{mA} for 5GHz) \\
+    $0.3$              & —    & Device count influence coefficient, reflecting power consumption increment from multi-device scheduling \\
+    $I_{ap\_static}$   & mA   & AP static current (\SI{20}{mA}), basic power consumption of Wi-Fi AP baseband circuit \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:hotspot_params}
+  \vspace{-2mm}
+\end{table}
+
+
+
+
 \subsubsection{Special Note: GPS as Positioning Sensor}
 
-\subsection{Software Role in the Modeling Framework}
-\subsubsection{OS Overhead: Embedded in Hardware Parameters}
-\subsubsection{Application Impact: Hardware Usage Drivers}
 
 
-\section{Hardware-Software Parameter Calibration Methodology}
+
+
+\section{Software-to-Hardware Power Mapping and Calibration}
+
+\subsection{Software Consumption Analysis}
+
+\subsubsection{Theoretical Framework}
+Software does not directly consume power; it drives hardware, which then consumes power. We add two new coefficients to the hardware-based model:
+
+\[
+\frac{dQ(t)}{dt} = -\sum_{i=1}^{N} \underbrace{I_i(\theta_i)}_{\text{hardware}} \times \underbrace{A_i(t)}_{\text{when to use}} \times \underbrace{\eta_i}_{\text{how to use}}
+\]
+
+\begin{itemize}
+    \item \(I_i(\theta_i)\): hardware current model (from Chapter 2)
+    \item \(A_i(t)\): activation level (0=off, 1=full load)
+    \item \(\eta_i\): software efficiency factor (\(\eta=1\) = best, higher = worse)
+\end{itemize}
+
+Example: same network chip can be used efficiently (\(\eta=1.2\), big downloads) or inefficiently (\(\eta=2.5\), many small HTTP requests).
+
+\subsubsection{Literature-Based Key Factors}
+From papers, we know:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Scenario} & \textbf{Percentage} & \textbf{Key Hardware} \\
+\midrule
+Idle state & 61\% & Screen (45\%), Background network (16\%) \\
+Active state (no screen) & 39\% & Network (70\%), CPU (15\%), GPS (10\%) \\
+API calls share & 85\%* & Network APIs (60\%), Sensor APIs (25\%) \\
+\bottomrule
+\end{tabular}
+\caption{Power distribution in smartphones (summarized from literature)}
+\end{table}
+
+*Percentage of active non-screen consumption.
+
+\textbf{Takeaway:} Focus on screen and network modules. Their \(\eta\) values need careful calibration.
+
+\subsubsection{Application Category Selection}
+We pick five app types that are:
+\begin{enumerate}
+    \item Simple (no complex games)
+    \item Similar within category (low variance)
+    \item Cover different hardware usage patterns
+\end{enumerate}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcl}
+\toprule
+\textbf{Category} & \textbf{Examples} & \textbf{Key Hardware Focus} \\
+\midrule
+Video streaming & TikTok, YouTube & Screen, Network, Decoder \\
+Social media & WeChat, Weibo & Network (small HTTP), Screen \\
+Navigation & Gaode Maps & GPS, Network, Screen \\
+Web browsing & Chrome & Network, CPU (rendering) \\
+Music & Spotify & Audio CPU, Background network \\
+\bottomrule
+\end{tabular}
+\caption{Five selected app categories and their hardware focus}
+\end{table}
+
+These five cover most daily usage scenarios while keeping analysis manageable.
+
+\subsection{App-Based Parameter Calibration}
+
+\subsubsection{New Parameter Definitions}
+Where do \(A_i(t)\) and \(\eta_i\) come from?
+
+\textbf{1. Activation Level \(A_i(t)\):}
+\begin{itemize}
+    \item From app behavior logs (e.g., Android Profiler)
+    \item Binary or continuous: 0/1 for on/off, or 0-1 for partial usage
+    \item Example: For video app, \(A_{\text{screen}}(t)=1\) when playing, 0 when paused
+\end{itemize}
+
+\textbf{2. Efficiency Factor \(\eta_i\):}
+\begin{itemize}
+    \item From protocol analysis: HTTP vs. WebSocket, big files vs. small requests
+    \item From literature measurements
+    \item Network: \(\eta_{\text{network}}=1.2\) (video streaming) to 2.5 (social media)
+    \item Screen: \(\eta_{\text{screen}}=1.0\) (dark mode) to 1.5 (bright UI)
+\end{itemize}
+
+\subsubsection{Calibration for Five App Categories}
+We calibrate parameters for each category:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccc}
+\toprule
+\textbf{App Type} & \(\eta_{\text{network}}\) & \(\eta_{\text{screen}}\) & \textbf{Typical \(A_i\) Pattern} \\
+\midrule
+Video streaming & 1.2 & 1.3 & Screen: always on, Network: bursts \\
+Social media & 2.5 & 1.8 & Screen: on/off, Network: frequent small \\
+Navigation & 1.5 & 1.5 & GPS: always on, Screen: mostly on \\
+Web browsing & 1.8 & 1.2 & Network: mixed, Screen: reading mode \\
+Music & 1.3 & N/A & Screen: mostly off, Network: occasional \\
+\bottomrule
+\end{tabular}
+\caption{Calibrated parameters for five app categories}
+\end{table}
+
+\textbf{How we got these numbers:}
+\begin{enumerate}
+    \item Literature values for similar apps
+    \item Common-sense estimates (e.g., HTTP is inefficient)
+    \item Will be refined in future work with real measurements
+\end{enumerate}
+
+\subsubsection{Implementation in the Model}
+To use in code:
+
+\begin{verbatim}
+# Example: social media app for 1 minute
+for t in range(60):  # seconds
+    # Screen: on for 45s, off for 15s
+    A_screen = 1.0 if t < 45 else 0.0
+    
+    # Network: every 10s a small HTTP request
+    if t % 10 == 0:
+        I_network = network_model(...) * 2.5  # eta=2.5
+    else:
+        I_network = 0
+    
+    total_current = I_screen*A_screen*1.8 + I_network + ...
+\end{verbatim}
+
+This completes the software-aware power model. Next chapter will combine these apps into full usage scenarios.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.86\textwidth]{soft-hard.png}
+\caption{Software behavior to hardware component mapping diagram.}
+\label{fig:soft-hard}
+\end{figure}
+
+\subsection{}
+\subsection{}
+\subsection{}
+
+
+
+
+
+
 
 \section{Scenario-Based Analysis and Prediction}
 
@@ -327,8 +574,15 @@ This model provides a physically-grounded method to estimate the AMOLED display'
 %参考文献
 %这里是放没引用过的参考文献，作为提醒
 
+\cite{di2017software} % 2，开发者建议
+\cite{cruz2019catalog} % 8，用户建议
 
-\cite{carroll2010analysis}
+\cite{li2014empirical} % 6
+\cite{chan2015assessing} % 5
+\cite{pathak2012energy} % 7
+
+
+
 
 \printbibliography % 这一行是把reference.bib文件中的参考文献打印出来
 % 每个参考文献都得被引用，否则不会出现在参考文献列表中

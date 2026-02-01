@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.23)  1 FEB 2026 21:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.23)  2 FEB 2026 06:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/39023/Desktop/MCM2026/mcmthesis-demo.tex
-(c:/Users/39023/Desktop/MCM2026/mcmthesis-demo.tex
+**c:/Users/39023/Desktop/paper/MCM2026/mcmthesis-demo.tex
+(c:/Users/39023/Desktop/paper/MCM2026/mcmthesis-demo.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (./mcmthesis.cls
@@ -874,65 +874,98 @@ Package: enumitem 2025/02/06 v3.11 Customized lists
 \enit@inbox=\box69
 \enit@count@id=\count480
 \enitdp@description=\count481
+) (e:/texlive/2025/texmf-dist/tex/latex/siunitx/siunitx.sty
+Package: siunitx 2025-07-09 v3.4.14 A comprehensive (SI) units package
+\l__siunitx_number_uncert_offset_int=\count482
+\l__siunitx_number_exponent_fixed_int=\count483
+\l__siunitx_number_min_decimal_int=\count484
+\l__siunitx_number_min_integer_int=\count485
+\l__siunitx_number_round_precision_int=\count486
+\l__siunitx_number_lower_threshold_int=\count487
+\l__siunitx_number_upper_threshold_int=\count488
+\l__siunitx_number_group_first_int=\count489
+\l__siunitx_number_group_size_int=\count490
+\l__siunitx_number_group_minimum_int=\count491
+\l__siunitx_angle_tmp_dim=\dimen280
+\l__siunitx_angle_marker_box=\box70
+\l__siunitx_angle_unit_box=\box71
+\l__siunitx_compound_count_int=\count492
+ (e:/texlive/2025/texmf-dist/tex/latex/translations/translations.sty
+Package: translations 2022/02/05 v1.12 internationalization of LaTeX2e packages (CN)
+)
+\l__siunitx_table_tmp_box=\box72
+\l__siunitx_table_tmp_dim=\dimen281
+\l__siunitx_table_column_width_dim=\dimen282
+\l__siunitx_table_integer_box=\box73
+\l__siunitx_table_decimal_box=\box74
+\l__siunitx_table_uncert_box=\box75
+\l__siunitx_table_before_box=\box76
+\l__siunitx_table_after_box=\box77
+\l__siunitx_table_before_dim=\dimen283
+\l__siunitx_table_carry_dim=\dimen284
+\l__siunitx_unit_tmp_int=\count493
+\l__siunitx_unit_position_int=\count494
+\l__siunitx_unit_total_int=\count495
 ) (e:/texlive/2025/texmf-dist/tex/latex/mathtools/mathtools.sty
 Package: mathtools 2024/10/04 v1.31 mathematical typesetting tools
  (e:/texlive/2025/texmf-dist/tex/latex/mathtools/mhsetup.sty
 Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 )
-\g_MT_multlinerow_int=\count482
-\l_MT_multwidth_dim=\dimen280
+\g_MT_multlinerow_int=\count496
+\l_MT_multwidth_dim=\dimen285
 \origjot=\skip142
-\l_MT_shortvdotswithinadjustabove_dim=\dimen281
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen282
-\l_MT_above_intertext_sep=\dimen283
-\l_MT_below_intertext_sep=\dimen284
-\l_MT_above_shortintertext_sep=\dimen285
-\l_MT_below_shortintertext_sep=\dimen286
-\xmathstrut@box=\box70
-\xmathstrut@dim=\dimen287
+\l_MT_shortvdotswithinadjustabove_dim=\dimen286
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen287
+\l_MT_above_intertext_sep=\dimen288
+\l_MT_below_intertext_sep=\dimen289
+\l_MT_above_shortintertext_sep=\dimen290
+\l_MT_below_shortintertext_sep=\dimen291
+\xmathstrut@box=\box78
+\xmathstrut@dim=\dimen292
 )
-LaTeX Font Info:    Trying to load font information for T1+ntxtlf on input line 89.
+LaTeX Font Info:    Trying to load font information for T1+ntxtlf on input line 90.
  (e:/texlive/2025/texmf-dist/tex/latex/newtx/t1ntxtlf.fd
 File: t1ntxtlf.fd 2021/05/24 v1.1 font definition file for T1/ntx/tlf
 )
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 12.0pt on input line 89.
-\@quotelevel=\count483
-\@quotereset=\count484
+(Font)              scaled to size 12.0pt on input line 90.
+\@quotelevel=\count497
+\@quotereset=\count498
+Package translations Info: No language package found. I am going to use `english' as default language. on input line 90.
  (./mcmthesis-demo.aux)
 \openout1 = `mcmthesis-demo.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-\c@lstlisting=\count485
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+\c@lstlisting=\count499
  (e:/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count486
-\scratchdimen=\dimen288
-\scratchbox=\box71
-\nofMPsegments=\count487
-\nofMParguments=\count488
+\scratchcounter=\count500
+\scratchdimen=\dimen293
+\scratchbox=\box79
+\nofMPsegments=\count501
+\nofMParguments=\count502
 \everyMPshowfont=\toks50
-\MPscratchCnt=\count489
-\MPscratchDim=\dimen289
-\MPnumerator=\count490
-\makeMPintoPDFobject=\count491
+\MPscratchCnt=\count503
+\MPscratchDim=\dimen294
+\MPnumerator=\count504
+\makeMPintoPDFobject=\count505
 \everyMPtoPDFconversion=\toks51
 )
 *geometry* driver: auto-detecting
@@ -969,13 +1002,13 @@ LaTeX Font Info:    ... okay on input line 89.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 89.
+Package hyperref Info: Link coloring OFF on input line 90.
 (./mcmthesis-demo.out) (./mcmthesis-demo.out)
 \@outlinefile=\write6
 \openout6 = `mcmthesis-demo.out'.
 
-\c@mv@tabular=\count492
-\c@mv@boldtabular=\count493
+\c@mv@tabular=\count506
+\c@mv@boldtabular=\count507
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
  (e:/texlive/2025/texmf-dist/tex/latex/biblatex/lbx/english.lbx
@@ -992,25 +1025,29 @@ Package biblatex Info: Data encoding 'utf8' specified.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'mcmthesis-demo.bbl' found.
  (./mcmthesis-demo.bbl)
-Package biblatex Info: Reference section=0 on input line 89.
-Package biblatex Info: Reference segment=0 on input line 89.
+Package biblatex Info: Reference section=0 on input line 90.
+Package biblatex Info: Reference segment=0 on input line 90.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
+ (e:/texlive/2025/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl
+File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
+)
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 90.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 12.0pt on input line 103.
+(Font)              scaled to size 12.0pt on input line 104.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 24.88pt on input line 103.
+(Font)              scaled to size 24.88pt on input line 104.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 20.74pt on input line 103.
+(Font)              scaled to size 20.74pt on input line 104.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 14.4pt on input line 103.
+(Font)              scaled to size 14.4pt on input line 104.
  [1
 
 {e:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{e:/texlive/2025/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc}]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 17.28pt on input line 107.
+(Font)              scaled to size 17.28pt on input line 108.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 17.28pt on input line 107.
+(Font)              scaled to size 17.28pt on input line 108.
  (./mcmthesis-demo.toc
 LaTeX Font Info:    Trying to load font information for U+msa on input line 1.
  (e:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -1033,19 +1070,19 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 
  [2]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 14.4pt on input line 117.
+(Font)              scaled to size 14.4pt on input line 118.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 169.
+(Font)              scaled to size 8.0pt on input line 170.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.0pt on input line 169.
+(Font)              scaled to size 6.0pt on input line 170.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.95pt on input line 173.
-LaTeX Font Info:    Trying to load font information for T1+fvs on input line 173.
+(Font)              scaled to size 10.95pt on input line 174.
+LaTeX Font Info:    Trying to load font information for T1+fvs on input line 174.
  (e:/texlive/2025/texmf-dist/tex/latex/bera/t1fvs.fd
 File: t1fvs.fd 2004/09/07 scalable font definitions for T1/fvs.
 )
 LaTeX Font Info:    Font shape `T1/fvs/m/n' will be
-(Font)              scaled to size 9.85492pt on input line 173.
+(Font)              scaled to size 9.85492pt on input line 174.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1055,12 +1092,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [3{e:/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}]
-LaTeX Font Info:    Trying to load font information for TS1+ntxtlf on input line 186.
+LaTeX Font Info:    Trying to load font information for TS1+ntxtlf on input line 187.
  (e:/texlive/2025/texmf-dist/tex/latex/newtx/ts1ntxtlf.fd
 File: ts1ntxtlf.fd 2015/01/18 v1.0 fd file for TS1/ntxtlf
 )
 LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
-(Font)              scaled to size 12.0pt on input line 186.
+(Font)              scaled to size 12.0pt on input line 187.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1070,13 +1107,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [4{e:/texlive/2025/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
-<LCD_AMOLED.png, id=192, 2810.5pt x 1557.82pt>
+<LCD_AMOLED.png, id=232, 2810.5pt x 1557.82pt>
 File: LCD_AMOLED.png Graphic file (type png)
 <use LCD_AMOLED.png>
-Package pdftex.def Info: LCD_AMOLED.png  used on input line 264.
+Package pdftex.def Info: LCD_AMOLED.png  used on input line 265.
 (pdftex.def)             Requested size: 407.66833pt x 225.96132pt.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 265.
+(Font)              scaled to size 10.95pt on input line 266.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1094,9 +1131,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [6]
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
-(Font)              scaled to size 12.0pt on input line 333.
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1105,8 +1139,66 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [7]
-\c@lastpage=\count494
- [8] 
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[8]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[9]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+LaTeX Font Info:    Trying to load font information for T1+ntxtt on input line 520.
+(e:/texlive/2025/texmf-dist/tex/latex/newtx/t1ntxtt.fd
+File: t1ntxtt.fd 2012/04/20 v3.1
+)
+LaTeX Font Info:    Font shape `T1/ntxtt/m/n' will be
+(Font)              scaled to size 12.0pt on input line 520.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[10]
+<soft-hard.png, id=293, 4506.7572pt x 3687.2154pt>
+File: soft-hard.png Graphic file (type png)
+<use soft-hard.png>
+Package pdftex.def Info: soft-hard.png  used on input line 551.
+(pdftex.def)             Requested size: 389.55266pt x 318.6697pt.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
+(Font)              scaled to size 12.0pt on input line 587.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[11]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[12 <./soft-hard.png>]
+\c@lastpage=\count508
+ [13] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (./mcmthesis-demo.aux)
  ***********
@@ -1114,24 +1206,24 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `mcmthesis-demo.out' has not changed.
-(rerunfilecheck)             Checksum: 1AE2DB681F10FCBDCA78919CA4198141;6272.
+(rerunfilecheck)             Checksum: 42B5EFAF8DF757D871E97B90C2282B66;7267.
 Package logreq Info: Writing requests to 'mcmthesis-demo.run.xml'.
 \openout1 = `mcmthesis-demo.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26332 strings out of 467533
- 450917 string characters out of 5423668
- 1380220 words of memory out of 5000000
- 54762 multiletter control sequences out of 15000+600000
- 681136 words of font info for 92 fonts, out of 8000000 for 9000
+ 30276 strings out of 467533
+ 574033 string characters out of 5423668
+ 1464604 words of memory out of 5000000
+ 58658 multiletter control sequences out of 15000+600000
+ 681458 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,13n,131p,1921b,1250s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/bera/fvsr8a.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmb.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmr.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
-Output written on mcmthesis-demo.pdf (8 pages, 1630684 bytes).
+ 90i,16n,131p,1927b,2128s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/bera/fvsr8a.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmb.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmr.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
+Output written on mcmthesis-demo.pdf (13 pages, 4888433 bytes).
 PDF statistics:
- 299 PDF objects out of 1000 (max. 8388607)
- 260 compressed objects within 3 object streams
- 52 named destinations out of 1000 (max. 500000)
- 246 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 407 PDF objects out of 1000 (max. 8388607)
+ 356 compressed objects within 4 object streams
+ 84 named destinations out of 1000 (max. 500000)
+ 315 words of extra memory for PDF output out of 10000 (max. 10000000)
 
