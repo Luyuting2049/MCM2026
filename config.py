@@ -29,13 +29,13 @@ class HardwareConfig:
 
     """内存与存储配置 (基于 Chae et al. 2024 文献及工业标准)"""
 
-    MEMORY_PARAMS = {
+    MEMORY = {
         'static_mA': 35.0,        # mA自刷新电流 考据自 LPDDR4x/5 IDD6 标准  范围（20-50）
         'delta_read': 18.0,       # mA/(GB/s)读取数据时的电流增量系数  转换自能效指标 2.0 pJ/bit @ 1.1V  范围（12-25）
         'delta_write': 22.0,      # mA/(GB/s)写入数据时的电流增量系数  考虑写入电荷泵损耗，略高于读取  范围（15-30）
     }
 
-    STORAGE_PARAMS = {
+    STORAGE = {
         'current_idle': 2.5,      # mA休眠电流 UFS 3.1 协议 DeepSleep 典型值 范围（1-5）
         'current_active': 120.0,  # mA读写电流 持续 I/O 状态下的平均工作电流  范围（100-300）
         'peak_burst': 650.0 ,     # mA瞬时突发电流 (Burst) 范围（500-800）
@@ -134,5 +134,4 @@ class ConfigAll:
         self.sgl = Signaling()
 
 # 创建全局实例
-cfg = ConfigAll()  # 默认
-# 要换场景：cfg = ConfigAll('BLUETOOTH_SCENARIO_2')
+cfg = ConfigAll() 

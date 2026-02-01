@@ -12,7 +12,6 @@ class Display:
     def __init__(self, cfg):
         self.cfg = cfg.hardware
         self.V = self.cfg.SYSTEM['voltage']
-        self.eta = self.cfg.SYSTEM['eta']
         
         amoled = self.cfg.DISPLAY['AMOLED']
         self.C = amoled['C']          # 基础功率
@@ -39,21 +38,22 @@ class Display:
         
         # 2. 计算单像素功耗（文献公式核心）
         # P_pixel = β_R×R + β_G×G + β_B×B + a×(R+G+B) + b
-        p_pixel = (self.beta_R * R + 
-                   self.beta_G * G + 
-                   self.beta_B * B + 
-                   self.a * (R + G + B) + 
-                   self.b)
+        # 假设系数是μW级别，转为mW
+        p_pixel_mW = ((self.beta_R * 0.001) * R + 
+                      (self.beta_G * 0.001) * G + 
+                      (self.beta_B * 0.001) * B + 
+                      (self.a * 0.001) * (R + G + B) + 
+                      (self.b * 0.001))
         
         # 3. 假设屏幕有100万像素（720×1280≈0.92M）
         pixel_count = 1000000
         
         # 4. 总功耗（考虑亮度）
         # P_total = C + Br × Σ(p_pixel)
-        power_mW = self.C + brightness * (p_pixel * pixel_count)
+        power_mW = self.C + brightness * (p_pixel_mW * pixel_count)
         
         # 5. 转成电流
-        current_mA = power_mW / self.V / self.eta
+        current_mA = power_mW / self.V
         
         return current_mA
 
@@ -121,6 +121,50 @@ class Storage:
         
         # 考虑效率转换
         return i_raw / self.eta
+
+
+"""传感器与外设模块 (Sensors & Peripherals)"""
+# 输入: 各个传感器的状态标识 (gps_state, cam_state, imu_state)
+# 输出: 电流值 (mA)
+# 核心公式/解释：I_sensor = (Σ S_i * I_active,i) / η
+# 1. 状态驱动：每个传感器 i 对应一个开关 S_i（或模式索引）。
+# 2. 考据逻辑：GPS 的功耗主要集中在射频前端(RF)和基带搜星运算；摄像头则包含图像传感器(CIS)与信号处理(ISP)的开销。
+# 3. 典型值来源：基于 AOSP 功耗配置文件(Power Profile)及主流 SoC 传感器子系统(LPI)标定。
+
+class Sensors:
+    """类的初始化"""
+    def __init__(self, cfg):
+        self.cfg = cfg.hardware
+        self.V = self.cfg.SYSTEM['voltage']
+        self.eta = self.cfg.SYSTEM['eta']
+        
+        # 典型功耗参数标定 (典型值考据)
+        # GPS: 搜星阶段需全功率运行 RF，追踪阶段通过间歇休眠降低功耗
+        self.gps_map = {'off': 0.0, 'track': 60.0, 'search': 140.0}
+        
+        # Camera: 包含 Sensor Core 供电与 ISP 处理损耗
+        self.cam_map = {'off': 0.0, 'preview': 450.0, 'video': 600.0}
+        
+        # IMU (加速计+陀螺仪): 主要是采样频率驱动
+        self.imu_map = {'low': 2.0, 'high': 15.0}
+
+    # 计算当前组合状态下的总电流
+    def I(self, gps_mode='off', cam_mode='off', imu_mode='low'):
+        """
+        gps_mode: 'off', 'track', 'search'
+        cam_mode: 'off', 'preview', 'video'
+        imu_mode: 'low', 'high'
+        """
+        # 1. 提取各模块当前模式对应的电流
+        i_gps = self.gps_map.get(gps_mode, 0.0)
+        i_cam = self.cam_map.get(cam_mode, 0.0)
+        i_imu = self.imu_map.get(imu_mode, 2.0)
+        
+        # 2. 离散电流线性叠加
+        i_total_raw = i_gps + i_cam + i_imu
+        
+        # 3. 考虑转换效率 η
+        return i_total_raw / self.eta
 
 
 """
@@ -193,7 +237,7 @@ class Bluetooth:
             idle = self.phy['ble_idle']
             tx = self.phy['ble_tx']
         else:  # classic
-            idle = self.phy['classic_idle'][class_type]
+            idle = self.phy['class_currents'][class_type]
             tx = self.phy['classic_tx']
         
         # 线性插值：I = I_idle + D*(I_tx - I_idle)
@@ -221,7 +265,9 @@ class Cellular:
         # 2. 信号强度补偿电流（信号越差，发射功率越高）
         k_rssi = self.phy.get('k_rssi', 50.0)
         alpha = self.phy.get('alpha', 0.05)
-        I_signal = k_rssi * np.exp(-alpha * rssi_db)
+        # rssi范围：-50到-100，映射到0到50
+        rssi_offset = abs(rssi_db) - 50  # -50→0, -100→50
+        I_signal = k_rssi * (1 + alpha * rssi_offset)
         
         # 3. 基站切换开销电流
         k_handoff = self.phy.get('k_handoff', 15.0)
@@ -309,3 +355,4 @@ class Hotspot:
         I_ap_dynamic = k_freq * (1 + alpha * device_count)
         
         return I_cell + I_ap_static + I_ap_dynamic
+
