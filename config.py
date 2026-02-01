@@ -23,7 +23,7 @@ class HardwareConfig:
             'a': 1.15e-05,   # 非线性因子 (mA/MHz^2)，反映 DVFS 电压爬升带来的平方级惩罚
             'b': 1.05e-03,   # 线性因子 (mA/MHz)，反映 CMOS 基础翻转损耗
             'c': 20.61,      # 静态漏电 (mA)，代表处理器的基准静默电流
-        },
+        }
         # 小核簇 (Little Cluster: Cores 0-5)
         'little': {
             'a': 4.12e-06,   # 小核非线性因子，通常远小于大核
@@ -39,6 +39,12 @@ class HardwareConfig:
     }
 
 class Signaling:
+    COMMON = {
+        'rssi_min': -100,    # 最小信号强度 (dB)
+        'rssi_max': -50,     # 最大信号强度 (dB)
+        'temp_coeff': 0.01,  # 温度系数 (mA/℃)
+        'default_temp': 25,  # 默认工作温度 (℃)
+    }
     BLUETOOTH = {
         'ble_idle': 1.2,
         'ble_tx': 8.0,
