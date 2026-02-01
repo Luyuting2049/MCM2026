@@ -1,0 +1,152 @@
+{
+  // ========== 基础设置 ==========
+  "latex-workshop.showContextMenu": true,
+  "latex-workshop.intellisense.package.enabled": true,
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  
+  // ========== 编译设置 ==========
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "xelatex",
+      "tools": ["xelatex"]
+    },
+    {
+      "name": "latexmk",
+      "tools": ["latexmk"]
+    },
+    {
+      "name": "PDFlatex",
+      "tools": ["pdflatex"]
+    },
+    {
+      "name": "xelatex -> bibtex -> xelatex",
+      "tools": ["xelatex", "bibtex", "xelatex"]
+    },
+    {
+      "name": "pdflatex -> bibtex -> pdflatex2",
+      "tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
+    }
+  ],
+  
+  "latex-workshop.latex.tools": [
+    {
+      "name": "xelatex",
+      "command": "xelatex",
+      "args": [
+        "-synctex=1",  // 必须要有这个参数才能双向链接
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ]
+    },
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-synctex=1",  // 必须要有这个参数才能双向链接
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-pdf",
+        "-outdir=%OUTDIR%",
+        "%DOC%"
+      ]
+    },
+    {
+      "name": "pdflatex",
+      "command": "pdflatex",
+      "args": [
+        "-synctex=1",  // 必须要有这个参数才能双向链接
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ]
+    },
+    {
+      "name": "bibtex",
+      "command": "bibtex",
+      "args": ["%DOCFILE%"]
+    }
+  ],
+  
+  // 默认使用latexmk（自动处理多轮编译）
+  "latex-workshop.latex.recipe.default": "latexmk",
+  
+  // ========== 预览设置 ==========
+  // 使用VSCode内置预览（标签页形式）
+  "latex-workshop.view.pdf.viewer": "tab",
+  
+  // 预览器位置：右侧
+  "latex-workshop.view.pdf.tab.editorGroup": "right",
+  
+  // 或者使用浏览器预览（可选）
+  // "latex-workshop.view.pdf.viewer": "browser",
+  
+  // ========== 双向链接设置 ==========
+  // 启用编译后自动建立同步链接
+  "latex-workshop.synctex.afterBuild.enabled": true,
+  
+  // 正向搜索快捷键：Ctrl+点击代码跳转到PDF
+  "latex-workshop.synctex.keybinding": "ctrl-click",
+  
+  // 反向搜索设置：双击PDF跳转到代码
+  "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+  
+  // ========== 文件清理设置 ==========
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux",
+    "*.bbl",
+    "*.blg",
+    "*.idx",
+    "*.ind",
+    "*.lof",
+    "*.lot",
+    "*.out",
+    "*.toc",
+    "*.acn",
+    "*.acr",
+    "*.alg",
+    "*.glg",
+    "*.glo",
+    "*.gls",
+    "*.ist",
+    "*.fls",
+    "*.log",
+    "*.fdb_latexmk",
+    "*.nav",
+    "*.snm",
+    "*.synctex.gz"
+  ],
+  
+  "latex-workshop.latex.clean.enabled": true,
+  "latex-workshop.latex.autoClean.run": "onFailed",
+  
+  // ========== 其他优化设置 ==========
+  // 实时监控文件变化（可选）
+  "latex-workshop.latex.watch.enabled": true,
+  "latex-workshop.latex.watch.interval": 1000,
+  
+  // 自动补全设置
+  "latex-workshop.intellisense.citation.format": "citation",
+  
+  // 主题设置（您原来的）
+  "workbench.colorTheme": "Eva Dark",
+  
+  // ========== 如果要切回外部预览器才需要的路径设置 ==========
+  // 如果需要使用SumatraPDF，取消注释以下部分，并确认路径
+  /*
+  "latex-workshop.view.pdf.viewer": "external",
+  "latex-workshop.view.pdf.external.viewer.command": "C:/Program Files/SumatraPDF/SumatraPDF.exe",
+  "latex-workshop.view.pdf.external.viewer.args": [
+    "%PDF%",
+    "-reuse-instance"
+  ],
+  "latex-workshop.view.pdf.external.synctex.command": "C:/Program Files/SumatraPDF/SumatraPDF.exe",
+  "latex-workshop.view.pdf.external.synctex.args": [
+    "-forward-search",
+    "%TEX%",
+    "%LINE%",
+    "%PDF%",
+    "-reuse-instance"
+  ]
+  */
+}

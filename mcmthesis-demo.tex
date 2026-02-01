@@ -1,0 +1,364 @@
+%% This is file `mcmthesis-demo.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mcmthesis.dtx  (with options: `demo')
+%%
+%% -----------------------------------
+%%
+%% This is a generated file.
+%%
+%% Copyright (C)
+%%       2010 -- 2015 by Zhaoli Wang
+%%       2014 -- 2019 by Liam Huang
+%%       2019 -- present by latexstudio.net
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Liam Huang.
+%%
+%%
+%% This is file `mcmthesis-demo.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mcmthesis.dtx  (with options: `demo')
+%%
+%% -----------------------------------
+%%
+%% This is a generated file.
+%%
+%% Copyright (C)
+%%       2010 -- 2015 by Zhaoli Wang
+%%       2014 -- 2019 by Liam Huang
+%%       2019 -- present by latexstudio.net
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Liam Huang.
+%%
+\documentclass{mcmthesis}
+\mcmsetup{CTeX = false,    % 使用 CTeX 套装时，设置为 true
+          tcn = {2611750}, problem = \textcolor{red}{A},
+          sheet = true, titleinsheet = true, keywordsinsheet = true,
+          titlepage = false, abstract = false}  
+\usepackage{newtxtext}     % \usepackage{palatino}
+\usepackage[backend=bibtex]{biblatex}   % for RStudio Complie
+\addbibresource{reference.bib} 
+\usepackage{tocloft}
+\setlength{\cftbeforesecskip}{6pt}
+\renewcommand{\contentsname}{\hspace*{\fill}\Large\bfseries Contents \hspace*{\fill}}
+\usepackage{float}
+\usepackage{graphicx}      % 插入图片
+\usepackage{subcaption}    % 子图支持
+\usepackage{verbatim}  % 基本verbatim环境
+\usepackage{fancyvrb}  % 更灵活的verbatim
+\usepackage{amsmath, amsfonts, booktabs}
+\usepackage{enumitem}
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf}
+\usepackage{mathtools}
+\DeclareMathOperator*{\argmin}{arg\,min}
+% 可选：设置verbatim样式
+\DefineVerbatimEnvironment{myverb}{Verbatim}{fontsize=\small, framesep=2mm}
+
+\title{River Shield: Mathematical Armor for Water Intake Protection}
+% \author{\small \href{http://www.latexstudio.net/}
+%   {\includegraphics[width=7cm]{mcmthesis-logo}}}
+\date{\today}
+
+%前面都是导入和设置，这里正式开始
+\begin{document}
+
+\begin{abstract}
+
+summary
+
+\begin{keywords}
+
+keyword1; keyword2; keyword3 
+
+\end{keywords}
+
+\end{abstract}
+
+\maketitle
+
+%% Generate the Table of Contents, if it's needed.
+% \renewcommand{\contentsname}{\centering Contents}
+\tableofcontents        % 若不想要目录, 注释掉该句
+\thispagestyle{empty}
+
+\newpage
+
+
+
+
+\section{Introduction}
+
+\subsection{Problem Background}
+
+Smartphones have been
+
+\subsection{Problem Restatement}
+
+In this problem, we're asked to build a 
+
+\subsection{Our Work}
+
+
+\section{Model Preparation}
+
+\subsection{Assumptions and Justifications}
+
+\subsection{Notations} % 这里除了像之前一样标注字母含义，还要标注专业术语缩写
+    We listed all the parameters and terminologied here. Our model has x parameters in all, 
+    involving n depending on the physical configuration 
+    and (x-n) tunable according to different scenarios.  
+
+    %这里放完整表格
+
+    We will restate related parameters before the modeling of each components.
+
+\subsection{Data Statement} % 数据来源、用途
+
+\subsection{Our Modeling Philosophy} % 主要是硬件通过软件来consume那个，还有从所有因素开始一点点筛选/合并
+
+Our core view is that software applications are not "true consumers" but "managers" of the hardwares which directly consume power.
+Therefore, building a precise mapping from software operations to hardware components'consumption is essential, worthing a specific "methodology".
+
+Besides, we begin with comprehensive consideration of all possible influencing factors according to \cite{hinton2011power} and grdually shrinking it by merging, simplifying and justified ignoring.
+
+We also seek to link our model to real-world insights, bridging theory with practice, with the ultimate goal of developing truly applicable forecasting capabilities.
+
+\section{Core Model Development}
+
+
+
+
+
+
+\subsection{Fundamental Equation and Factor Selection}
+
+Our modeling framework treats smartphone hardware as parallel current-drawing components, yielding a governing differential equation for SOC(t). Software behavior influences battery drain exclusively by modulating hardware operating parameters—screen brightness, CPU utilization, network states, etc. We therefore develop modular sub-models that first translate software activities into hardware settings, then compute the resulting current consumption for each component.
+\subsubsection{Continuous-Time Battery Dynamics}
+
+\hspace*{\parindent}Based on the definition of State of Charge and the physical meaning of electric current, we obtain the following system of equations:
+
+\begin{equation}
+\left\{
+\begin{aligned}
+&\text{SOC}(t) = \frac{Q(t)}{Q_{\text{max}}} \\
+&\frac{dQ}{dt} = -I_{\text{total}}(t)
+\end{aligned}
+\right.
+\end{equation}
+
+where the first equation defines SOC as the ratio of remaining charge to maximum charge, and the second equation expresses charge conservation during discharge.
+
+Therefore, by differentiating the first equation and substituting the second, we derive the governing differential equation:
+
+\begin{equation}
+\label{eq:base_ode}
+\frac{d(\text{SOC})}{dt} = -\frac{I_{\text{total}}(t)}{C_{\text{eff}}(T, N_{\text{cycles}})}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $\text{SOC}(t) \in [0,1]$ is the state of charge at time $t$ (dimensionless)
+    \item $I_{\text{total}}(t)$ is the total discharge current (mA) at time $t$
+    \item $C_{\text{eff}}(T, N_{\text{cycles}})$ is the effective battery capacity (mAh)
+\end{itemize}
+
+
+To account for environmental and aging effects that reduce usable battery capacity, we introduce the effective capacity $C_{\text{eff}}$, which is related to the nominal capacity by:
+\begin{equation}
+\label{eq:effective_capacity}
+C_{\text{eff}} = C_{\text{nominal}} \times f_{\text{temp}}(T) \times f_{\text{aging}}(N_{\text{cycles}})
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $C_{\text{nominal}}$ is the manufacturer's rated capacity (e.g., 4000 mAh)
+    \item $f_{\text{temp}}(T)$ is the temperature correction factor ($0.7 \leq f_{\text{temp}} \leq 1.0$)
+    \item $f_{\text{aging}}(N_{\text{cycles}})$ is the aging correction factor based on charge-discharge cycles
+    \item $T$ is the battery temperature (°C)
+    \item $N_{\text{cycles}}$ is the number of complete charge-discharge cycles
+\end{itemize}
+
+
+The total discharge current $I_{\text{total}}(t)$ represents the sum of currents drawn by all active smartphone components:
+
+
+\begin{equation}
+\label{eq:current_decomposition}
+I_{\text{total}}(t) = I_{\text{display}}(t) + I_{\text{processor}}(t) + I_{\text{memory}}(t) + I_{\text{network}}(t) + I_{\text{sensors}}(t)
+\end{equation}
+
+Further decomposition and refined modelings are provided in the following subsections.
+
+And each component current incorporates two distinct elements:
+\begin{itemize}
+    \item \textbf{Baseline overhead}: The minimum power required for the component to remain operational, including essential operating system services and hardware idle states.
+    \item \textbf{Software-driven consumption}: Additional power drawn when applications and user activities activate hardware features above their baseline levels.
+\end{itemize}
+
+\paragraph{Time-to-Empty Prediction}
+Given initial conditions $\text{SOC}(t_0) = \text{SOC}_0$, the time until complete discharge ($\text{SOC}=0$) is obtained by solving:
+
+\begin{equation}
+\label{eq:time_to_empty}
+t_{\text{empty}} = \int_{\text{SOC}_0}^{0} \frac{C_{\text{eff}}}{I_{\text{total}}(\text{SOC}, t)} \, d\text{SOC}
+\end{equation}
+
+In practice, this is computed numerically due to the time-dependent nature of $I_{\text{total}}(t)$.
+
+This foundational model enables quantitative predictions of battery life under various usage scenarios. In the following chapter, we apply it to specific cases, analyze the results, and conduct comprehensive model validation.
+
+
+
+\subsubsection{Factor Selection and Simplification Strategy}
+
+Thanks to \cite{hinton2011power} , we're able to consider all kinds of 
+
+
+
+
+
+
+
+
+
+\subsubsection{Environmental and Aging Factors}
+
+Lithium-ion battery capacity degrades with usage due to irreversible electrochemical changes during charge-discharge cycling. The aging correction factor $f_{\text{aging}}$ depends on the accumulated cycle count $N_{\text{cycles}}$, where one cycle represents 100\% cumulative depth-of-discharge.
+% 环境影响化学反应，温度过高、过低分别会怎么样
+% 然后怎么处理也放在这里
+
+
+\subsection{Hardware Components Modeling}
+\subsubsection{Display Power Model}
+
+\hspace*{\parindent} While Carroll \& Heiser's work \cite{carroll2010analysis} established a linear relationship between display power and backlight intensity for LCDs, this model is inapplicable to modern AMOLED displays. The fundamental difference lies in AMOLED's pixel-independent emission, which replaces uniform backlighting. We therefore adopt a more sophisticated model tailored to AMOLED's characteristics \cite{joseph2001run}, whose formulation accurately captures the power consumption patterns of contemporary screens.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{LCD_AMOLED.png}
+    \caption{Schematic comparison of LCD and AMOLED power models.}
+    \label{fig:display_compare}
+\end{figure}
+
+The power consumption of a single AMOLED pixel is modeled as a function of its color intensity and the global brightness setting. The total display current $I_{\text{disp}}$ is calculated by summing the contribution of all pixels and converting the total power to current:
+
+\begin{equation}
+\label{eq:display_power}
+I_{\text{disp}} = \frac{1}{V} \left[ C + Br \cdot N \cdot \left( \beta_R R + \beta_G G + \beta_B B + a (R+G+B) + b \right) \right]
+\end{equation}
+
+where $R, G, B \in [0,1]$ are the normalized intensities of the red, green, and blue sub-pixels derived from $R_{avg}, G_{avg}, B_{avg}$. All other parameters are defined in Table~\ref{tab:display_params}.
+
+\begin{table}[h]
+    \centering
+    \caption{Parameters of the AMOLED Display Power Model}
+    \label{tab:display_params}
+    \begin{tabular}{cll}
+        \toprule
+        \textbf{Symbol} & \textbf{Unit} & \textbf{Meaning} \\
+        \midrule
+        $C$ & mW & Base power (black screen). \\
+        $\beta_R$, $\beta_G$, $\beta_B$ & mW & Power coeff. per sub-pixel intensity. \\
+        $a$ & mW & Linear coeff. for RGB sum correction. \\
+        $b$ & mW & Constant for RGB sum correction. \\
+        $R_{avg}$, $G_{avg}$, $B_{avg}$ & -- (0-255) & Assumed average screen color. \\
+        $N$ & -- & Pixel count ($10^6$, $\approx$720p). \\
+        $V$ & V & System voltage. \\
+        $Br$ & -- (0.0--1.0) & Global brightness factor. \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Equation~\eqref{eq:display_power} decomposes the display power into a fixed base cost $C$ and a dynamic component scaled by the global brightness $Br$. The term inside the parentheses, $(\beta_R R + \beta_G G + \beta_B B + a(R+G+B) + b)$, represents the power consumed by a \textbf{single pixel} at full brightness. The coefficients $\beta_R, \beta_G, \beta_B$ capture the efficiency of each sub-pixel, while the linear correction term $a(R+G+B)+b$, identified in \cite{joseph2001run}, is crucial for accurately modeling power at high luminance levels (e.g., white backgrounds common in applications). In contrast to the runtime screen analysis performed in the original study, \textbf{we simplify the model by assuming the screen displays a static, average color} $(R_{avg}, G_{avg}, B_{avg})$. This simplification allows for efficient system-level energy estimation without the need for real-time frame-buffer sampling, making it suitable for our integrated power model.
+
+This model provides a physically-grounded method to estimate the AMOLED display's current draw as a function of user-defined brightness. Having established the display power model, we now turn to the processing units---the CPU and GPU---whose power consumption is governed by dynamic voltage and frequency scaling (DVFS).
+
+
+\subsubsection{Processor Power Model (CPU + GPU)}
+\subsubsection{Memory and Storage Model}
+\subsubsection{Sensor Power Model (GPS, Camera, etc.)}
+
+\subsection{Signaling Modules Modeling}
+\subsubsection{Cellular and Wi-Fi Communication}
+\subsubsection{Bluetooth and Short-Range Communication}
+\subsubsection{Special Note: GPS as Positioning Sensor}
+
+\subsection{Software Role in the Modeling Framework}
+\subsubsection{OS Overhead: Embedded in Hardware Parameters}
+\subsubsection{Application Impact: Hardware Usage Drivers}
+
+
+\section{Hardware-Software Parameter Calibration Methodology}
+
+\section{Scenario-Based Analysis and Prediction}
+
+\section{Model Analysis and Evaluation} % 这里放模型优缺点和敏感度测试
+
+
+
+
+
+%参考文献
+%这里是放没引用过的参考文献，作为提醒
+
+
+\cite{carroll2010analysis}
+
+\printbibliography % 这一行是把reference.bib文件中的参考文献打印出来
+% 每个参考文献都得被引用，否则不会出现在参考文献列表中
+
+\newpage
+\newcounter{lastpage}
+\setcounter{lastpage}{\value{page}}
+\thispagestyle{empty} 
+
+\section{AI Use Report}
+Project Title: The River Intake Shield: Optimized Sensor Deployment and Emergency Response
+
+Team Control Number: [2611750]
+
+
+
+% 重置页码
+\clearpage
+\setcounter{page}{\value{lastpage}}
+
+\end{document}
+%%
+%% This work consists of these files mcmthesis.dtx,
+%%                                   figures/ and
+%%                                   code/,
+%% and the derived files             mcmthesis.cls,
+%%                                   mcmthesis-demo.tex,
+%%                                   README,
+%%                                   LICENSE,
+%%                                   mcmthesis.pdf and
+%%                                   mcmthesis-demo.pdf.
+%%
+%% End of file `mcmthesis-demo.tex'.
