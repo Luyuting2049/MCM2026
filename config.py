@@ -9,11 +9,21 @@ class HardwareConfig:
     }
 
     DISPLAY = {
-        'current_base': 7.8,      # 基础功率 (mW)
-        'current_max': 414.0,     # 最大功率 (mW)
-        'brightness_min': 0,      # 最小亮度 (%)
-        'brightness_max': 100,    # 最大亮度 (%)
-        'k_bright': (414.0 - 7.8) / 100.0,  # 亮度系数 (mW/%)，表示亮度每增加1%，电流增加多少mA
+        'AMOLED': {
+            # 基础功耗 (mW) - 黑色屏幕
+            'C': 50.0,
+            # R/G/B子像素系数 (mW/255) - 文献公式中的β
+            'beta_R': 0.8,
+            'beta_G': 0.6,
+            'beta_B': 1.0,
+            # RGB总和系数 - 文献公式中的a,b
+            'a': 0.05,
+            'b': 0.0,
+            # 屏幕平均RGB（简化用）
+            'avg_R': 128,
+            'avg_G': 128,
+            'avg_B': 128
+        }
     }
 
 
@@ -120,7 +130,7 @@ class Signaling:
 """统一配置"""
 class ConfigAll:
     def __init__(self, scenario_name='BLUETOOTH_SCENARIO_1'):
-        self.hw = HardwareConfig()
+        self.hardware = HardwareConfig()
         self.sgl = Signaling()
 
 # 创建全局实例

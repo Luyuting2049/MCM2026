@@ -2,24 +2,60 @@ import config
 import numpy as np
 
 
-"""显示器模块"""
-# 输入:亮度L(%)，输出:电流值(mA)
-# 核心公式/解释：特定亮度下电流值 = 基础电流 + 每度亮度增加的电流*亮度 （对比CPU那个，这种就可以用自然语言描述公式含义）
+"""显示屏模块"""
+# 核心公式（文献公式2简化）：
+# 功耗 = C + Br × [β_R×R + β_G×G + β_B×B + a×(R+G+B) + b]
+
+# 输入：brightness (0.0-1.0) - 屏幕亮度
+# 输出：current_mA - 显示屏电流 (mA)
 class Display:
-    """类的初始化"""
     def __init__(self, cfg):
         self.cfg = cfg.hardware
         self.V = self.cfg.SYSTEM['voltage']
-        self.Q = self.cfg.SYSTEM['Q']
         self.eta = self.cfg.SYSTEM['eta']
-        disp = self.cfg.DISPLAY
-        self.Pb = disp['current_base']
-        self.k = disp['k_bright']
-        self.I_max = disp['current_max'] / self.V
+        
+        amoled = self.cfg.DISPLAY['AMOLED']
+        self.C = amoled['C']          # 基础功率
+        self.beta_R = amoled['beta_R']
+        self.beta_G = amoled['beta_G']
+        self.beta_B = amoled['beta_B']
+        self.a = amoled['a']
+        self.b = amoled['b']
+        
+        # 使用平均屏幕颜色（简化）
+        self.R_avg = amoled['avg_R']
+        self.G_avg = amoled['avg_G']
+        self.B_avg = amoled['avg_B']
     
-    # 计算相应亮度下的电流
-    def I(self, L):
-        return (self.Pb + self.k * L) / self.V
+    def I(self, brightness=0.5):
+        """
+        计算AMOLED电流
+        亮度：0.0-1.0（对应0%-100%）
+        """
+        # 1. 归一化RGB值 (0-1)
+        R = self.R_avg / 255.0
+        G = self.G_avg / 255.0
+        B = self.B_avg / 255.0
+        
+        # 2. 计算单像素功耗（文献公式核心）
+        # P_pixel = β_R×R + β_G×G + β_B×B + a×(R+G+B) + b
+        p_pixel = (self.beta_R * R + 
+                   self.beta_G * G + 
+                   self.beta_B * B + 
+                   self.a * (R + G + B) + 
+                   self.b)
+        
+        # 3. 假设屏幕有100万像素（720×1280≈0.92M）
+        pixel_count = 1000000
+        
+        # 4. 总功耗（考虑亮度）
+        # P_total = C + Br × Σ(p_pixel)
+        power_mW = self.C + brightness * (p_pixel * pixel_count)
+        
+        # 5. 转成电流
+        current_mA = power_mW / self.V / self.eta
+        
+        return current_mA
 
 
 """内存模块 (Memory - LPDDR)"""
