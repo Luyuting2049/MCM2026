@@ -1,0 +1,129 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import config  # 确保目录下有 config.py
+import matplotlib
+
+# 如果中文字体显示有问题，可以取消下面两行的注释
+# matplotlib.rc("font", family='SimHei') 
+# plt.rcParams['axes.unicode_minus'] = False
+
+# ==========================================
+# 1. 导入或定义你的类（确保逻辑修正）
+# ==========================================
+
+class Display:
+    def __init__(self, cfg):
+        self.cfg = cfg.hardware
+        self.V = self.cfg.SYSTEM['voltage']
+        amoled = self.cfg.DISPLAY['AMOLED']
+        self.C, self.beta_R, self.beta_G, self.beta_B = amoled['C'], amoled['beta_R'], amoled['beta_G'], amoled['beta_B']
+        self.a, self.b = amoled['a'], amoled['b']
+        self.R_avg, self.G_avg, self.B_avg = amoled['avg_R'], amoled['avg_G'], amoled['avg_B']
+
+    def I(self, brightness=0.5):
+        R, G, B = self.R_avg/255.0, self.G_avg/255.0, self.B_avg/255.0
+        # 修正后的单像素功耗计算
+        p_pixel_mW = (self.beta_R*R + self.beta_G*G + self.beta_B*B + self.a*(R+G+B) + self.b) * 0.001
+        pixel_count = 1000000 
+        power_mW = self.C + brightness * (p_pixel_mW * pixel_count)
+        return power_mW / self.V
+
+class Processor:
+    def __init__(self, cfg):
+        self.cfg = cfg.hardware
+        self.V, self.eta = self.cfg.SYSTEM['voltage'], self.cfg.SYSTEM['eta']
+        p_cfg = self.cfg.PROCESSOR
+        self.a_c, self.b_c, self.c_c = p_cfg['big']['a'], p_cfg['big']['b'], p_cfg['big']['c']
+        self.a_g, self.b_g, self.c_g = p_cfg['gpu']['a'], p_cfg['gpu']['b'], p_cfg['gpu']['c']
+
+    def I(self, f_cpu, mu_cpu, f_gpu=400, mu_gpu=0.1):
+        i_cpu_dyn = mu_cpu * (self.a_c * f_cpu**2 + self.b_c * f_cpu)
+        i_gpu_dyn = mu_gpu * (self.a_g * f_gpu**2 + self.b_g * f_gpu)
+        return (i_cpu_dyn + i_gpu_dyn + self.c_c + self.c_g) / self.eta
+
+class Cellular:
+    def __init__(self, cfg):
+        self.phy = cfg.sgl.CELLULAR
+
+    def I(self, network_type='4G', rssi_db=-70):
+        static = {'2G':20.0, '3G':45.0, '4G':70.0}[network_type]
+        rssi_offset = abs(rssi_db) - 50 
+        i_signal = self.phy['k_rssi'] * (1 + self.phy['alpha'] * rssi_offset)
+        return static + min(800.0, i_signal) # 增加安全钳位，最高800mA
+
+class WiFi:
+    def __init__(self, cfg):
+        self.phy = cfg.sgl.WIFI
+
+    def I(self, is_on=True, rssi_db=-70):
+        if not is_on: return 0.0
+        # 修正逻辑：信号越差(abs越大)，电流越大
+        I_dynamic = self.phy['k_24ghz'] * np.exp(self.phy['beta'] * (abs(rssi_db) - 40))
+        return self.phy['sleep_current'] + I_dynamic
+
+# ==========================================
+# 2. 灵敏度分析引擎
+# ==========================================
+
+def run_sensitivity_analysis():
+    # 实例化
+    cfg_inst = config.ConfigAll()
+    disp = Display(cfg_inst)
+    proc = Processor(cfg_inst)
+    cell = Cellular(cfg_inst)
+    wifi = WiFi(cfg_inst)
+
+    # 基准场景参数
+    base_params = {
+        'brightness': 0.5,
+        'f_cpu': 1500,
+        'mu_cpu': 0.2,
+        'rssi_db': -80,
+        'wifi_rssi': -70
+    }
+
+    def get_total(p):
+        return disp.I(p['brightness']) + \
+               proc.I(p['f_cpu'], p['mu_cpu']) + \
+               cell.I('4G', p['rssi_db']) + \
+               wifi.I(True, p['wifi_rssi'])
+
+    base_i = get_total(base_params)
+    results = {}
+
+    # 测试各个参数波动 ±20% 的影响
+    for key in base_params:
+        p_low = base_params.copy()
+        p_high = base_params.copy()
+        
+        if 'rssi' in key: # 信号值越小代表环境越差
+            p_low[key] = base_params[key] + 15  # 变好
+            p_high[key] = base_params[key] - 15 # 变差
+        else:
+            p_low[key] = base_params[key] * 0.8
+            p_high[key] = base_params[key] * 1.2
+            
+        results[key] = (get_total(p_high) - base_i, get_total(p_low) - base_i)
+
+    # 绘图
+    labels = list(results.keys())
+    high_impact = [results[k][0] for k in labels]
+    low_impact = [results[k][1] for k in labels]
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+    y_pos = np.arange(len(labels))
+    
+    ax.barh(y_pos, high_impact, color='#7F9FAE', alpha=0.6, label='Increase Parameter (Worse Environment)')
+    ax.barh(y_pos, low_impact, color='#007075', alpha=0.6, label='Decrease Parameter (Better Environment)')
+    
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(labels)
+    ax.axvline(0, color='black', lw=1)
+    ax.set_xlabel('Total Current Change (mA)')
+    ax.set_title('Tornado Diagram: Sensitivity Analysis of Power Consumption')
+    ax.legend()
+    plt.grid(axis='x', linestyle='--', alpha=0.4)
+    plt.show()
+
+if __name__ == "__main__":
+    run_sensitivity_analysis()
