@@ -22,6 +22,56 @@ class Display:
         return (self.Pb + self.k * L) / self.V
 
 
+"""处理器模块 (CPU & GPU)"""
+# 输入: CPU频率(MHz), CPU负载(0-1), GPU频率(MHz), GPU负载(0-1)
+# 输出: 总电流值(mA)
+# 核心公式/解释：
+# 处理器电流 = [μ_cpu * (a_c*f_c^2 + b_c*f_c) + μ_gpu * (a_g*f_g^2 + b_g*f_g) + C_static] / η
+# 1. 动态部分：负载(μ)乘以频率(f)的多项式，体现了由于频率升高导致电压强制爬升(DVFS)带来的非线性功耗激增。
+# 2. 静态部分：C_static 代表芯片通电即存在的静态漏电流，与频率和负载无关。
+# 3. 效率转换：最终除以系统效率 η，得到电池端实际输出的电流。
+
+class Processor:
+    """类的初始化"""
+    def __init__(self, cfg):
+        self.cfg = cfg.hardware
+        self.V = self.cfg.SYSTEM['voltage']
+        self.Q = self.cfg.SYSTEM['Q_nominal']
+        self.eta = self.cfg.SYSTEM['eta']
+        
+        # 载入大核(CPU)物理参数
+        cpu_cfg = self.cfg.PROCESSOR['big']
+        self.a_c = cpu_cfg['a']
+        self.b_c = cpu_cfg['b']
+        self.c_c = cpu_cfg['c']
+        
+        # 载入GPU物理参数
+        gpu_cfg = self.cfg.PROCESSOR['gpu']
+        self.a_g = gpu_cfg['a']
+        self.b_g = gpu_cfg['b']
+        self.c_g = gpu_cfg['c']
+
+    # 计算相应频率与负载下的总电流
+    def I(self, f_cpu, mu_cpu, f_gpu, mu_gpu):
+        """
+        f_cpu/f_gpu: 频率 (MHz)
+        mu_cpu/mu_gpu: 负载率 (0.0 到 1.0)
+        """
+        # 1. 计算CPU动态电流分量
+        i_cpu_dynamic = mu_cpu * (self.a_c * f_cpu**2 + self.b_c * f_cpu)
+        
+        # 2. 计算GPU动态电流分量
+        i_gpu_dynamic = mu_gpu * (self.a_g * f_gpu**2 + self.b_g * f_gpu)
+        
+        # 3. 静态电流分量 (CPU与GPU静态漏电之和)
+        i_static = self.c_c + self.c_g
+        
+        # 4. 汇总并考虑能量转换效率 η
+        total_current = (i_cpu_dynamic + i_gpu_dynamic + i_static) / self.eta
+        
+        return total_current
+
+
 
 """蓝牙模块"""
 # 输入:模式mode('ble'或'classic')，类别class_type('1','2','3')，占空比duty_cycle(0~1)
