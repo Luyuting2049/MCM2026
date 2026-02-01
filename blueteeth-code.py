@@ -61,13 +61,5 @@ if __name__ == "__main__":
     # 计算每个时刻的蓝牙电流
     I_bluetooth_range = [calculate_bluetooth_current(t, V_ble_seq, D_seq, C_seq) for t in t_range]
     
-    # 画图展示结果（直观呈现电流随时间的连续变化）
-    plt.figure(figsize=(10, 6))
-    plt.plot(t_range, I_bluetooth_range, label='I_bluetooth(t) (mA)', color='#ff7f0e')
-    plt.xlabel('Time (hours)')
-    plt.ylabel('Bluetooth Current (mA)')
-    plt.title('Bluetooth Power Consumption Over 5-Hour Scenario')
-    plt.grid(True, alpha=0.3)
-    plt.legend()
-    plt.show()
+   
 
