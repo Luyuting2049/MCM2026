@@ -1,0 +1,46 @@
+{
+  "battery_capacity": 3700.0,
+  "units": "hours",
+  "results": {
+    "video": {
+      "description": "Video Streaming (TikTok/YouTube)",
+      "tte": {
+        "100%": 7.0,
+        "50%": 3.5,
+        "20%": 1.4
+      }
+    },
+    "social": {
+      "description": "Social Media (WeChat/Weibo)",
+      "tte": {
+        "100%": 5.24,
+        "50%": 2.62,
+        "20%": 1.05
+      }
+    },
+    "navigation": {
+      "description": "Navigation (Gaode Maps)",
+      "tte": {
+        "100%": 6.13,
+        "50%": 3.07,
+        "20%": 1.23
+      }
+    },
+    "browser": {
+      "description": "Web Browsing (Chrome)",
+      "tte": {
+        "100%": 12.63,
+        "50%": 6.31,
+        "20%": 2.51
+      }
+    },
+    "music": {
+      "description": "Music Playback (NetEase Cloud Music)",
+      "tte": {
+        "100%": 48,
+        "50%": 48,
+        "20%": 43.31
+      }
+    }
+  }
+}
