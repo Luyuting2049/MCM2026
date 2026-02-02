@@ -262,12 +262,11 @@ class Cellular:
         }
         I_static = static_currents[network_type]
         
-        # 2. 信号强度补偿电流（信号越差，发射功率越高）
+        # 2. 信号强度补偿电流（指数形式，与论文一致）
         k_rssi = self.phy.get('k_rssi', 50.0)
         alpha = self.phy.get('alpha', 0.05)
-        # rssi范围：-50到-100，映射到0到50
-        rssi_offset = abs(rssi_db) - 50  # -50→0, -100→50
-        I_signal = k_rssi * (1 + alpha * rssi_offset)
+        # 注意：RSSI是负值，如-70，-alpha*RSSI是正数
+        I_signal = k_rssi * np.exp(-alpha * rssi_db)
         
         # 3. 基站切换开销电流
         k_handoff = self.phy.get('k_handoff', 15.0)
