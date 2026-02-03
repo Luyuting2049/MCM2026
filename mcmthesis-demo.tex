@@ -697,7 +697,7 @@ The next step is to determine the specific mathematical descriptions for the act
 
 According to the empirical study of 405 diverse applications by \cite{li2014empirical}, the network component is the most power-hungry, accounting for over 40\% of the total energy consumption among all hardware components. The same study also reveals the energy distribution across temporal states, as shown in Fig.~\ref{fig:power_analysis}: the \textbf{idle} state consumes 61\% of the total energy, while within the remaining \textbf{non-idle} time, API calls are responsible for 85\% of the energy expenditure.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
@@ -718,7 +718,7 @@ According to the empirical study of 405 diverse applications by \cite{li2014empi
 
 To identify the key factors of energy consumption, we can conduct a simple analysis of the \textbf{idle} and \textbf{non-idle} states by examining the typical tasks performed during each state and the primary hardware components or signaling modules involved. This analysis is summarized in Table~\ref{tab:idle_nonidle_analysis}.
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Analysis of Tasks and Hardware Usage in Idle and Non-idle States}
 \label{tab:idle_nonidle_analysis}
@@ -784,7 +784,7 @@ Our criteria for selecting these typical software types are as follows:
 
 Based on these principles, we select the following five categories for detailed analysis:
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Five Typical Software Categories Selected for Analysis}
 \label{tab:software_categories}
@@ -899,7 +899,7 @@ Music & 0.0 & 300 & 0 & 4G \\
 
 Having established the power parameters for five application categories in the previous section, we now employ the integrated model to address practical prediction problems. We first benchmark the Time-To-Empty (TTE) for four primary application types (excluding music playback due to its TTE exceeding 24 hours in our simulation) under three initial battery levels: 100\%, 50\%, and 20\% SOC.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{static_benchmark.png}
     \caption{Static TTE benchmarking for four application categories at different initial SOC levels. Music playback is excluded as its TTE exceeds 24 hours.}
@@ -914,7 +914,7 @@ Figure \ref{fig:static_benchmark} shows clear linear scaling of TTE with initial
 
 To evaluate the model under realistic, time-varying conditions, we design and simulate four distinct 4-hour usage journeys, each combining different applications. The journeys are: \textit{Weekend Entertainment} (2h video + 2h music), \textit{Commute \& Work} (1h navigation + 1h social + 2h browsing), \textit{Mixed Daily Usage} (0.5h navigation + 1h social + 1h video + 1.5h music + 1h browsing), and \textit{Business Travel} (3h navigation + 1h music).
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{dynamic_journeys.png}
     \caption{Battery SOC trajectories during four simulated usage journeys. Background colors indicate the active application in each time segment. All journeys start from 100\% SOC.}
@@ -923,7 +923,7 @@ To evaluate the model under realistic, time-varying conditions, we design and si
 
 Figure \ref{fig:dynamic_journeys} shows the battery depletion trajectories. Steep declines correspond to high-power applications like navigation and video streaming, while gentle slopes occur during low-power activities like music playback. \textit{Business Travel} (Journey 4), dominated by continuous navigation, depletes the battery fastest, ending at 34.2\% SOC. \textit{Weekend Entertainment} (Journey 1), with its long music phase, preserves the most charge, ending at 58.7\% SOC.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{journey_comparison.png}
     \caption{Comparative performance of the four journeys: (Left) Final SOC after 4 hours; (Right) Total energy consumed.}
