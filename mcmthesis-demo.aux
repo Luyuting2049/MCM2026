@@ -6,114 +6,162 @@
 \bibdata{mcmthesis-demo-blx,reference}
 \citation{biblatex-control}
 \abx@aux@refcontext{nty/global//global/global/global}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Conclusion}{\thepage }{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Introduction}{4}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Problem Background}{4}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Our Work}{4}{subsection.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Our modeling framework architecture, showing the hierarchical mapping from software applications through hardware scheduling to battery drain.}}{4}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:ourwork}{{1}{4}{Our modeling framework architecture, showing the hierarchical mapping from software applications through hardware scheduling to battery drain}{figure.caption.1}{}}
 \citation{hinton2011power}
 \abx@aux@cite{0}{hinton2011power}
 \abx@aux@segm{0}{0}{hinton2011power}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{3}{section.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Problem Background}{3}{subsection.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Problem Restatement}{3}{subsection.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Our Work}{3}{subsection.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2}Model Preparation}{3}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Assumptions and Justifications}{3}{subsection.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Notations}{3}{subsection.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Data Statement}{3}{subsection.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Our Modeling Philosophy}{3}{subsection.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Core Model Development}{3}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Fundamental Equation and Factor Selection}{3}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Continuous-Time Battery Dynamics}{3}{subsubsection.3.1.1}\protected@file@percent }
-\newlabel{eq:base_ode}{{2}{4}{Continuous-Time Battery Dynamics}{equation.2}{}}
-\newlabel{eq:effective_capacity}{{3}{4}{Continuous-Time Battery Dynamics}{equation.3}{}}
-\newlabel{eq:current_decomposition}{{4}{4}{Continuous-Time Battery Dynamics}{equation.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Model Preparation}{5}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Assumptions and Justifications}{5}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Notations}{5}{subsection.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Key Parameters in the Energy Consumption Model}}{5}{table.caption.2}\protected@file@percent }
+\newlabel{tab:key_params}{{1}{5}{Key Parameters in the Energy Consumption Model}{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Our Modeling Philosophy}{5}{subsection.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Software behavior to hardware component mapping diagram.}}{6}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:soft-hard}{{2}{6}{Software behavior to hardware component mapping diagram}{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Core Model Development}{6}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Fundamental Equation and Modeling Framework}{6}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Continuous-Time Battery Dynamics}{6}{subsubsection.4.1.1}\protected@file@percent }
+\newlabel{eq:soc_dynamics}{{1}{6}{Continuous-Time Battery Dynamics}{equation.1}{}}
+\newlabel{eq:current_sum}{{2}{6}{Continuous-Time Battery Dynamics}{equation.2}{}}
+\newlabel{eq:tte}{{3}{6}{Continuous-Time Battery Dynamics}{equation.3}{}}
 \citation{hinton2011power}
 \abx@aux@cite{0}{hinton2011power}
 \abx@aux@segm{0}{0}{hinton2011power}
+\citation{hinton2011power}
+\abx@aux@cite{0}{hinton2011power}
+\abx@aux@segm{0}{0}{hinton2011power}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Factor Selection and Simplification Strategy}{7}{subsubsection.4.1.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Power consumption factors of hardware and signaling modules}}{7}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:hardware_signaling}{{3}{7}{Power consumption factors of hardware and signaling modules}{figure.caption.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Summary of Hardware and Signaling Module Modeling Approaches}}{7}{table.caption.5}\protected@file@percent }
+\newlabel{tab:module_summary}{{2}{7}{Summary of Hardware and Signaling Module Modeling Approaches}{table.caption.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3}Temperature and Aging Factors}{7}{subsubsection.4.1.3}\protected@file@percent }
+\citation{valoen2005effect}
+\abx@aux@cite{0}{valoen2005effect}
+\abx@aux@segm{0}{0}{valoen2005effect}
+\citation{wang2011cycle}
+\abx@aux@cite{0}{wang2011cycle}
+\abx@aux@segm{0}{0}{wang2011cycle}
 \citation{carroll2010analysis}
 \abx@aux@cite{0}{carroll2010analysis}
 \abx@aux@segm{0}{0}{carroll2010analysis}
 \citation{joseph2001run}
 \abx@aux@cite{0}{joseph2001run}
 \abx@aux@segm{0}{0}{joseph2001run}
-\@writefile{toc}{\contentsline {paragraph}{Time-to-Empty Prediction}{5}{section*.1}\protected@file@percent }
-\newlabel{eq:time_to_empty}{{5}{5}{Time-to-Empty Prediction}{equation.5}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Factor Selection and Simplification Strategy}{5}{subsubsection.3.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3}Environmental and Aging Factors}{5}{subsubsection.3.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Hardware Components Modeling}{5}{subsection.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Display Power Model}{5}{subsubsection.3.2.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Schematic comparison of LCD and AMOLED power models.}}{5}{figure.caption.2}\protected@file@percent }
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:display_compare}{{1}{5}{Schematic comparison of LCD and AMOLED power models}{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Hardware Components Modeling}{8}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Display Power Model}{8}{subsubsection.4.2.1}\protected@file@percent }
 \citation{joseph2001run}
 \abx@aux@cite{0}{joseph2001run}
 \abx@aux@segm{0}{0}{joseph2001run}
-\newlabel{eq:display_power}{{6}{6}{Display Power Model}{equation.6}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Parameters of the AMOLED Display Power Model}}{6}{table.caption.3}\protected@file@percent }
-\newlabel{tab:display_params}{{1}{6}{Parameters of the AMOLED Display Power Model}{table.caption.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Processor Power Model (CPU + GPU)}{6}{subsubsection.3.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.3}Memory and Storage Model}{6}{subsubsection.3.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.4}Sensor Power Model (GPS, Camera, etc.)}{6}{subsubsection.3.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Signaling Modules Modeling}{6}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Cellular and Wi-Fi Communication}{6}{subsubsection.3.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Bluetooth and Short-Range Communication}{6}{subsubsection.3.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Bluetooth Module}{6}{section*.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Hotspot Module}{7}{section*.6}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Parameters of Bluetooth Power Consumption Model}}{8}{table.caption.5}\protected@file@percent }
-\newlabel{tab:bluetooth_params}{{2}{8}{Parameters of Bluetooth Power Consumption Model}{table.caption.5}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Special Note: GPS as Positioning Sensor}{8}{subsubsection.3.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Software-to-Hardware Power Mapping and Calibration}{8}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Software Consumption Analysis}{8}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Theoretical Framework}{8}{subsubsection.4.1.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Parameters of Hotspot Power Consumption Model}}{9}{table.caption.7}\protected@file@percent }
-\newlabel{tab:hotspot_params}{{3}{9}{Parameters of Hotspot Power Consumption Model}{table.caption.7}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Literature-Based Key Factors}{9}{subsubsection.4.1.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Power distribution in smartphones (summarized from literature)}}{9}{table.caption.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3}Application Category Selection}{9}{subsubsection.4.1.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Five selected app categories and their hardware focus}}{10}{table.caption.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}App-Based Parameter Calibration}{10}{subsection.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}New Parameter Definitions}{10}{subsubsection.4.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Calibration for Five App Categories}{10}{subsubsection.4.2.2}\protected@file@percent }
-\citation{di2017software}
-\abx@aux@cite{0}{di2017software}
-\abx@aux@segm{0}{0}{di2017software}
-\citation{cruz2019catalog}
-\abx@aux@cite{0}{cruz2019catalog}
-\abx@aux@segm{0}{0}{cruz2019catalog}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Schematic comparison of LCD and AMOLED power models.}}{9}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:display_compare}{{4}{9}{Schematic comparison of LCD and AMOLED power models}{figure.caption.6}{}}
+\newlabel{eq:display_power}{{4}{9}{Display Power Model}{equation.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Processor Power Model (CPU + GPU)}{9}{subsubsection.4.2.2}\protected@file@percent }
+\citation{android_bonito_power_profile}
+\abx@aux@cite{0}{android_bonito_power_profile}
+\abx@aux@segm{0}{0}{android_bonito_power_profile}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces \relax }}{10}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:placeholder}{{5}{10}{\relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.3}Memory and Storage Model}{11}{subsubsection.4.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Memory Module (LPDDR)}{11}{section*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Storage Module (UFS/eMMC)}{11}{section*.9}\protected@file@percent }
+\citation{google_power_profile_guide}
+\abx@aux@cite{0}{google_power_profile_guide}
+\abx@aux@segm{0}{0}{google_power_profile_guide}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.4}Sensor Power Model (GPS, Camera, etc.)}{12}{subsubsection.4.2.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Empirical Power Parameters for Peripherals and Reference Ranges}}{12}{table.caption.10}\protected@file@percent }
+\newlabel{tab:sensor_parameters}{{3}{12}{Empirical Power Parameters for Peripherals and Reference Ranges}{table.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Signaling Modules Modeling}{13}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Cellular and Wi-Fi Communication}{13}{subsubsection.4.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}Bluetooth and Short-Range Communication}{14}{subsubsection.4.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Software-to-Hardware Power Mapping and Calibration}{14}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Software Consumption Analysis}{14}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Fundamental Modeling Framework}{14}{subsubsection.5.1.1}\protected@file@percent }
+\newlabel{eq:software_hardware_mapping}{{5}{14}{Fundamental Modeling Framework}{equation.5}{}}
 \citation{li2014empirical}
 \abx@aux@cite{0}{li2014empirical}
 \abx@aux@segm{0}{0}{li2014empirical}
-\citation{chan2015assessing}
-\abx@aux@cite{0}{chan2015assessing}
-\abx@aux@segm{0}{0}{chan2015assessing}
-\citation{pathak2012energy}
-\abx@aux@cite{0}{pathak2012energy}
-\abx@aux@segm{0}{0}{pathak2012energy}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Calibrated parameters for five app categories}}{11}{table.caption.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.3}Implementation in the Model}{11}{subsubsection.4.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}}{11}{subsection.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}}{11}{subsection.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}}{11}{subsection.4.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Scenario-Based Analysis and Prediction}{11}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Model Analysis and Evaluation}{11}{section.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Software behavior to hardware component mapping diagram.}}{12}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:soft-hard}{{2}{12}{Software behavior to hardware component mapping diagram}{figure.caption.11}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}AI Use Report}{13}{section.7}\protected@file@percent }
-\newlabel{LastPage}{{7}{12}{AI Use Report}{page.13}{}}
-\gdef\lastpage@lastpage{12}
-\gdef\lastpage@lastpageHy{13}
-\abx@aux@read@bbl@mdfivesum{656B56648F5ADDCB02EF2082CA43C718}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Software-to-hardware power mapping architecture}}{15}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:software_layers}{{6}{15}{Software-to-hardware power mapping architecture}{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Application Energy Profile Analysis}{15}{subsubsection.5.1.2}\protected@file@percent }
+\newlabel{fig:idle_dist}{{7a}{16}{Power distribution in idle state}{figure.caption.12}{}}
+\newlabel{sub@fig:idle_dist}{{a}{16}{Power distribution in idle state}{figure.caption.12}{}}
+\newlabel{fig:nonidle_breakdown}{{7b}{16}{Power breakdown in non-idle state}{figure.caption.12}{}}
+\newlabel{sub@fig:nonidle_breakdown}{{b}{16}{Power breakdown in non-idle state}{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Power consumption analysis of smartphone applications}}{16}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:power_analysis}{{7}{16}{Power consumption analysis of smartphone applications}{figure.caption.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Analysis of Tasks and Hardware Usage in Idle and Non-idle States}}{16}{table.caption.13}\protected@file@percent }
+\newlabel{tab:idle_nonidle_analysis}{{4}{16}{Analysis of Tasks and Hardware Usage in Idle and Non-idle States}{table.caption.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}App-Specific Model Calibration}{17}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Selection of Representative Application Categories}{17}{subsubsection.5.2.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Five Typical Software Categories Selected for Analysis}}{17}{table.caption.14}\protected@file@percent }
+\newlabel{tab:software_categories}{{5}{17}{Five Typical Software Categories Selected for Analysis}{table.caption.14}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Parameter Calibration}{17}{subsubsection.5.2.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Software Efficiency Factors $\eta $ by Application Type}}{18}{table.caption.15}\protected@file@percent }
+\newlabel{tab:efficiency_factors}{{6}{18}{Software Efficiency Factors $\eta $ by Application Type}{table.caption.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Activity Patterns $A_i(t)$ by Application Type}}{18}{table.caption.16}\protected@file@percent }
+\newlabel{tab:activity_patterns}{{7}{18}{Activity Patterns $A_i(t)$ by Application Type}{table.caption.16}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Typical Hardware Operation Parameters}}{18}{table.caption.17}\protected@file@percent }
+\newlabel{tab:hw_operation_params}{{8}{18}{Typical Hardware Operation Parameters}{table.caption.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Scenario-Based Analysis and Prediction}{18}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Static TTE Benchmarking}{18}{subsection.6.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Static TTE benchmarking for four application categories at different initial SOC levels. Music playback is excluded as its TTE exceeds 24 hours.}}{19}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:static_benchmark}{{8}{19}{Static TTE benchmarking for four application categories at different initial SOC levels. Music playback is excluded as its TTE exceeds 24 hours}{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Dynamic Time-Series Simulation: Mixed-Usage Journeys}{19}{subsection.6.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Battery SOC trajectories during four simulated usage journeys. Background colors indicate the active application in each time segment. All journeys start from 100\% SOC.}}{20}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:dynamic_journeys}{{9}{20}{Battery SOC trajectories during four simulated usage journeys. Background colors indicate the active application in each time segment. All journeys start from 100\% SOC}{figure.caption.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Comparative performance of the four journeys: (Left) Final SOC after 4 hours; (Right) Total energy consumed.}}{20}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:journey_comparison}{{10}{20}{Comparative performance of the four journeys: (Left) Final SOC after 4 hours; (Right) Total energy consumed}{figure.caption.20}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Stochastic Evaluation via Monte Carlo Simulation}{21}{subsection.6.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces \relax }}{21}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:placeholder}{{11}{21}{\relax }{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Sensitivity Analysis and Model Evaluation}{22}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Parameter Sensitivity: Identifying Environmental Drivers}{22}{subsection.7.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Tornado Diagram of Parameter Sensitivity.}}{22}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:tornado_sa}{{12}{22}{Tornado Diagram of Parameter Sensitivity}{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Assumption Validation: Discrete State Additivity}{22}{subsection.7.2}\protected@file@percent }
+\citation{gsmarena2023v2}
+\abx@aux@cite{0}{gsmarena2023v2}
+\abx@aux@segm{0}{0}{gsmarena2023v2}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Marginal Power Cost Analysis. }}{23}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:marginal_cost}{{13}{23}{Marginal Power Cost Analysis}{figure.caption.23}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Performance Boundaries: Where the Model Performs Well or Poorly}{23}{subsection.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.1}Experimental Setup and Data Comparison}{23}{subsubsection.7.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.2}Uncertainty Quantification}{23}{subsubsection.7.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Comparison of Model Predictions vs. GSMArena Observed Data}}{24}{table.caption.24}\protected@file@percent }
+\newlabel{tab:validation}{{9}{24}{Comparison of Model Predictions vs. GSMArena Observed Data}{table.caption.24}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.3}Performance Assessment: Strengths and Limitations}{24}{subsubsection.7.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Recommendations and Model Scalability}{25}{section.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Strategies for the User}{25}{subsection.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}System-Level Optimization}{25}{subsection.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Model Scalability and Generalization}{25}{subsection.8.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}AI Use Report}{27}{section.9}\protected@file@percent }
+\newlabel{LastPage}{{9}{26}{AI Use Report}{page.27}{}}
+\gdef\lastpage@lastpage{26}
+\gdef\lastpage@lastpageHy{27}
+\abx@aux@read@bbl@mdfivesum{1F5E052CB5A43D4BD9036FEBBBA54BA1}
 \abx@aux@defaultrefcontext{0}{carroll2010analysis}{nty/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{chan2015assessing}{nty/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{cruz2019catalog}{nty/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{di2017software}{nty/global//global/global/global}
+\abx@aux@defaultrefcontext{0}{google_power_profile_guide}{nty/global//global/global/global}
+\abx@aux@defaultrefcontext{0}{android_bonito_power_profile}{nty/global//global/global/global}
+\abx@aux@defaultrefcontext{0}{gsmarena2023v2}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{hinton2011power}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{joseph2001run}{nty/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{li2014empirical}{nty/global//global/global/global}
-\abx@aux@defaultrefcontext{0}{pathak2012energy}{nty/global//global/global/global}
+\abx@aux@defaultrefcontext{0}{valoen2005effect}{nty/global//global/global/global}
+\abx@aux@defaultrefcontext{0}{wang2011cycle}{nty/global//global/global/global}
 \abx@aux@defaultlabelprefix{0}{carroll2010analysis}{}
-\abx@aux@defaultlabelprefix{0}{chan2015assessing}{}
-\abx@aux@defaultlabelprefix{0}{cruz2019catalog}{}
-\abx@aux@defaultlabelprefix{0}{di2017software}{}
+\abx@aux@defaultlabelprefix{0}{google_power_profile_guide}{}
+\abx@aux@defaultlabelprefix{0}{android_bonito_power_profile}{}
+\abx@aux@defaultlabelprefix{0}{gsmarena2023v2}{}
 \abx@aux@defaultlabelprefix{0}{hinton2011power}{}
 \abx@aux@defaultlabelprefix{0}{joseph2001run}{}
 \abx@aux@defaultlabelprefix{0}{li2014empirical}{}
-\abx@aux@defaultlabelprefix{0}{pathak2012energy}{}
-\gdef \@abspage@last{13}
+\abx@aux@defaultlabelprefix{0}{valoen2005effect}{}
+\abx@aux@defaultlabelprefix{0}{wang2011cycle}{}
+\gdef \@abspage@last{27}

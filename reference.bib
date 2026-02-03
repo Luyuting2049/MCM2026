@@ -6,6 +6,57 @@
 % This file may safely be deleted. It will be recreated as
 % required.
 
+% 加新文献的时候就加在这里！（也就是reference.bib最前面）
+% 不然每次都要往下翻老长比较麻烦
+
+
+@misc{gsmarena2023v2,
+  author = {{GSMArena Team}},
+  title = {GSMArena Battery Life Test v2.0: The New Active Use Score},
+  year = {2023},
+  howpublished = {\url{https://www.gsmarena.com/battery-test-v2.php3}},
+  note = {Accessed: 2024-02-03. Empirical benchmark data for Pixel 3a (Bonito)}
+}
+
+@article{valoen2005effect,
+  title={The effect of temperature and discharge current on the cycle life of Li-ion batteries},
+  author={Val{\o}en, Lars Ole and Reimers, Jan N},
+  journal={Journal of Power Sources},
+  volume={150},
+  pages={197--207},
+  year={2005},
+  publisher={Elsevier}
+}
+
+@article{wang2011cycle,
+  title={Cycle-life model for graphite-LiFePO4 cells},
+  author={Wang, John and others},
+  journal={Journal of Power Sources},
+  volume={196},
+  number={8},
+  pages={3941--3948},
+  year={2011},
+  publisher={Elsevier}
+}
+
+
+@misc{android_bonito_power_profile,
+  author       = {{Google Android Open Source Project}},
+  title        = {Power Profile Data for Device 'bonito' (Google Pixel 3a)},
+  howpublished = {\url{https://cs.android.com/android/platform/superproject/main/+/main:external/perfetto/src/trace_processor/metrics/sql/android/power_profile_data/bonito.sql}},
+  year         = {2024},
+  note         = {Accessed: 2024-02-02},
+  commit       = {02cf2f5354d974c6bc83f2ca017aec94f92b4ac3}
+}
+
+@online{google_power_profile_guide,
+  author       = {Google},
+  title        = {Power Values: Android Open Source Project Source},
+  url          = {https://source.android.com/docs/core/power/values},
+  year         = {2023},
+  note         = {Technical documentation for hardware component power estimation}
+}
+
 @inproceedings{di2017software,
   title={Software-based energy profiling of android apps: Simple, efficient and reliable?},
   author={Di Nucci, Dario and Palomba, Fabio and Prota, Antonio and Panichella, Annibale and Zaidman, Andy and De Lucia, Andrea},

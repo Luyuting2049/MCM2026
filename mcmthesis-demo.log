@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.23)  2 FEB 2026 06:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.23)  3 FEB 2026 08:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -932,7 +932,11 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 \@quotelevel=\count497
 \@quotereset=\count498
 Package translations Info: No language package found. I am going to use `english' as default language. on input line 90.
- (./mcmthesis-demo.aux)
+ (./mcmthesis-demo.aux
+
+LaTeX Warning: Label `fig:placeholder' multiply defined.
+
+)
 \openout1 = `mcmthesis-demo.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 90.
@@ -1034,55 +1038,58 @@ File: translations-basic-dictionary-english.trsl (english translation file `tran
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 90.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 12.0pt on input line 104.
+(Font)              scaled to size 12.0pt on input line 118.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 24.88pt on input line 104.
+(Font)              scaled to size 24.88pt on input line 118.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 20.74pt on input line 104.
+(Font)              scaled to size 20.74pt on input line 118.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 14.4pt on input line 104.
- [1
-
-{e:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{e:/texlive/2025/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc}]
+(Font)              scaled to size 14.4pt on input line 118.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 17.28pt on input line 108.
+(Font)              scaled to size 17.28pt on input line 118.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 17.28pt on input line 108.
- (./mcmthesis-demo.toc
-LaTeX Font Info:    Trying to load font information for U+msa on input line 1.
+(Font)              scaled to size 17.28pt on input line 118.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 118.
  (e:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 1.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 118.
  (e:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 1.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 118.
  (e:/texlive/2025/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 1.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 118.
  (e:/texlive/2025/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
-))
+)
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 8.0pt on input line 118.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 6.0pt on input line 118.
+LaTeX Font Info:    Trying to load font information for TS1+ntxtlf on input line 118.
+ (e:/texlive/2025/texmf-dist/tex/latex/newtx/ts1ntxtlf.fd
+File: ts1ntxtlf.fd 2015/01/18 v1.0 fd file for TS1/ntxtlf
+)
+LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
+(Font)              scaled to size 12.0pt on input line 118.
+ [1
+
+{e:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{e:/texlive/2025/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc}{e:/texlive/2025/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}] (./mcmthesis-demo.toc)
 \tf@toc=\write7
 \openout7 = `mcmthesis-demo.toc'.
 
  [2]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 14.4pt on input line 118.
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 170.
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.0pt on input line 170.
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.95pt on input line 174.
-LaTeX Font Info:    Trying to load font information for T1+fvs on input line 174.
+(Font)              scaled to size 10.95pt on input line 125.
+LaTeX Font Info:    Trying to load font information for T1+fvs on input line 125.
  (e:/texlive/2025/texmf-dist/tex/latex/bera/t1fvs.fd
 File: t1fvs.fd 2004/09/07 scalable font definitions for T1/fvs.
 )
 LaTeX Font Info:    Font shape `T1/fvs/m/n' will be
-(Font)              scaled to size 9.85492pt on input line 174.
+(Font)              scaled to size 9.85492pt on input line 125.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1092,12 +1099,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [3{e:/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}]
-LaTeX Font Info:    Trying to load font information for TS1+ntxtlf on input line 187.
- (e:/texlive/2025/texmf-dist/tex/latex/newtx/ts1ntxtlf.fd
-File: ts1ntxtlf.fd 2015/01/18 v1.0 fd file for TS1/ntxtlf
-)
-LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
-(Font)              scaled to size 12.0pt on input line 187.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 14.4pt on input line 132.
+<OurWork.png, id=250, 2845.63126pt x 1707.37875pt>
+File: OurWork.png Graphic file (type png)
+<use OurWork.png>
+Package pdftex.def Info: OurWork.png  used on input line 151.
+(pdftex.def)             Requested size: 430.31812pt x 258.17996pt.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 10.95pt on input line 152.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
+(Font)              scaled to size 12.0pt on input line 166.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1106,39 +1118,49 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[4{e:/texlive/2025/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
-<LCD_AMOLED.png, id=232, 2810.5pt x 1557.82pt>
+[4 <./OurWork.png (PNG copy)>]
+<soft-hard.png, id=258, 674.52pt x 443.256pt>
+File: soft-hard.png Graphic file (type png)
+<use soft-hard.png>
+Package pdftex.def Info: soft-hard.png  used on input line 242.
+(pdftex.def)             Requested size: 389.55266pt x 255.99297pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[5]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[6 <./soft-hard.png>]
+<all.png, id=285, 670.9065pt x 386.8854pt>
+File: all.png Graphic file (type png)
+<use all.png>
+Package pdftex.def Info: all.png  used on input line 291.
+(pdftex.def)             Requested size: 385.02547pt x 222.03824pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[7 <./all.png>]
+<LCD_AMOLED.png, id=301, 2810.5pt x 1557.82pt>
 File: LCD_AMOLED.png Graphic file (type png)
 <use LCD_AMOLED.png>
-Package pdftex.def Info: LCD_AMOLED.png  used on input line 265.
+Package pdftex.def Info: LCD_AMOLED.png  used on input line 381.
 (pdftex.def)             Requested size: 407.66833pt x 225.96132pt.
-LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 266.
 
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[5 <./LCD_AMOLED.png>]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[6]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[7]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1147,23 +1169,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [8]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[9]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-LaTeX Font Info:    Trying to load font information for T1+ntxtt on input line 520.
-(e:/texlive/2025/texmf-dist/tex/latex/newtx/t1ntxtt.fd
-File: t1ntxtt.fd 2012/04/20 v3.1
-)
-LaTeX Font Info:    Font shape `T1/ntxtt/m/n' will be
-(Font)              scaled to size 12.0pt on input line 520.
+Overfull \hbox (31.91338pt too wide) in paragraph at lines 393--394
+[]\T1/ntxtlf/m/n/12 where $\OML/cmm/m/it/12 R; G; B \OMS/cmsy/m/n/12 2 \OT1/cmr/m/n/12 [0\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 1]$ \T1/ntxtlf/m/n/12 are nor-mal-ized in-ten-si-ties de-rived from the av-er-age color $\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 R[]; G[]; B[]\OT1/cmr/m/n/12 )$\T1/ntxtlf/m/n/12 ,
+ []
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1172,15 +1180,25 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[10]
-<soft-hard.png, id=293, 4506.7572pt x 3687.2154pt>
-File: soft-hard.png Graphic file (type png)
-<use soft-hard.png>
-Package pdftex.def Info: soft-hard.png  used on input line 551.
-(pdftex.def)             Requested size: 389.55266pt x 318.6697pt.
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
-(Font)              scaled to size 12.0pt on input line 587.
+[9 <./LCD_AMOLED.png>]
+<./figures/Figure_CPU2.png, id=323, 926.5014pt x 361.35pt>
+File: ./figures/Figure_CPU2.png Graphic file (type png)
+<use ./figures/Figure_CPU2.png>
+Package pdftex.def Info: ./figures/Figure_CPU2.png  used on input line 412.
+(pdftex.def)             Requested size: 452.9679pt x 176.66606pt.
 
+Overfull \hbox (53.80511pt too wide) in paragraph at lines 424--426
+\T1/ntxtlf/m/n/12 tional fre-quency range ($\OT1/cmr/m/n/12 0[]2200[]$\T1/ntxtlf/m/n/12 ) un-der vary-ing uti-liza-tion lev-els ($\OML/cmm/m/it/12 ^^V \OMS/cmsy/m/n/12 2 f\OT1/cmr/m/n/12 20%\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 50%\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 80%\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 100%\OMS/cmsy/m/n/12 g$\T1/ntxtlf/m/n/12 ). 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[10 <./figures/Figure_CPU2.png>]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1196,34 +1214,226 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[12 <./soft-hard.png>]
+[12]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[13]
+<layers.png, id=356, 1565.09718pt x 1422.81563pt>
+File: layers.png Graphic file (type png)
+<use layers.png>
+Package pdftex.def Info: layers.png  used on input line 667.
+(pdftex.def)             Requested size: 362.37569pt x 329.43346pt.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 8.0pt on input line 674.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 6.0pt on input line 674.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[14]
+<idle.png, id=366, 770.88pt x 578.16pt>
+File: idle.png Graphic file (type png)
+<use idle.png>
+Package pdftex.def Info: idle.png  used on input line 704.
+(pdftex.def)             Requested size: 217.42265pt x 163.06584pt.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 10.0pt on input line 705.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 10.0pt on input line 705.
+<nonidle.png, id=367, 770.88pt x 578.16pt>
+File: nonidle.png Graphic file (type png)
+<use nonidle.png>
+Package pdftex.def Info: nonidle.png  used on input line 711.
+(pdftex.def)             Requested size: 217.42265pt x 163.06584pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[15 <./layers.png (PNG copy)>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[16 <./idle.png (PNG copy)> <./nonidle.png (PNG copy)>]
+Overfull \hbox (11.75479pt too wide) in paragraph at lines 792--810
+ [][] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[17]
+<static_benchmark.png, id=395, 867.24pt x 505.89pt>
+File: static_benchmark.png Graphic file (type png)
+<use static_benchmark.png>
+Package pdftex.def Info: static_benchmark.png  used on input line 904.
+(pdftex.def)             Requested size: 362.37569pt x 211.38393pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[18]
+<dynamic_journeys.png, id=406, 1011.78pt x 722.7pt>
+File: dynamic_journeys.png Graphic file (type png)
+<use dynamic_journeys.png>
+Package pdftex.def Info: dynamic_journeys.png  used on input line 919.
+(pdftex.def)             Requested size: 362.37569pt x 258.83746pt.
+<journey_comparison.png, id=408, 867.24pt x 361.35pt>
+File: journey_comparison.png Graphic file (type png)
+<use journey_comparison.png>
+Package pdftex.def Info: journey_comparison.png  used on input line 928.
+(pdftex.def)             Requested size: 362.37569pt x 150.98853pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[19 <./static_benchmark.png>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[20 <./dynamic_journeys.png> <./journey_comparison.png>]
+<./figures/Figure_prediction1.png, id=427, 672.8337pt x 393.1488pt>
+File: ./figures/Figure_prediction1.png Graphic file (type png)
+<use ./figures/Figure_prediction1.png>
+Package pdftex.def Info: ./figures/Figure_prediction1.png  used on input line 954.
+(pdftex.def)             Requested size: 362.37569pt x 211.74529pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[21 <./figures/Figure_prediction1.png>]
+<./figures/Figure_sa1.png, id=437, 722.7pt x 433.62pt>
+File: ./figures/Figure_sa1.png Graphic file (type png)
+<use ./figures/Figure_sa1.png>
+Package pdftex.def Info: ./figures/Figure_sa1.png  used on input line 987.
+(pdftex.def)             Requested size: 385.02547pt x 231.01509pt.
+LaTeX Font Info:    Trying to load font information for T1+ntxtt on input line 992.
+ (e:/texlive/2025/texmf-dist/tex/latex/newtx/t1ntxtt.fd
+File: t1ntxtt.fd 2012/04/20 v3.1
+)
+LaTeX Font Info:    Font shape `T1/ntxtt/m/n' will be
+(Font)              scaled to size 12.0pt on input line 992.
+<./figures/Figure_sa1.2_off&on.png, id=438, 722.7pt x 505.89pt>
+File: ./figures/Figure_sa1.2_off&on.png Graphic file (type png)
+<use ./figures/Figure_sa1.2_off&on.png>
+Package pdftex.def Info: ./figures/Figure_sa1.2_off&on.png  used on input line 999.
+(pdftex.def)             Requested size: 385.02547pt x 269.5176pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[22 <./figures/Figure_sa1.png>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[23 <./figures/Figure_sa1.2_off&on.png>]
+Overfull \hbox (4.76741pt too wide) in paragraph at lines 1048--1050
+\T1/ntxtlf/m/n/12 ob-served in \T1/ntxtlf/b/n/12 Web Brows-ing \T1/ntxtlf/m/n/12 ($\OT1/cmr/m/n/12 5\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 1%$\T1/ntxtlf/m/n/12 ). Un-like video, brows-ing is in-her-ently bursty^^Vinvolving
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[24]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[25]
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/sc' will be
+(Font)              scaled to size 12.0pt on input line 1116.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[26{e:/texlive/2025/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf-pc.enc}]
 \c@lastpage=\count508
- [13] 
+ [27] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (./mcmthesis-demo.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `mcmthesis-demo.out' has not changed.
-(rerunfilecheck)             Checksum: 42B5EFAF8DF757D871E97B90C2282B66;7267.
+(rerunfilecheck)             Checksum: A1DB892EDA0E4B03261355DC65CA5AC6;9934.
 Package logreq Info: Writing requests to 'mcmthesis-demo.run.xml'.
 \openout1 = `mcmthesis-demo.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 30276 strings out of 467533
- 574033 string characters out of 5423668
- 1464604 words of memory out of 5000000
- 58658 multiletter control sequences out of 15000+600000
- 681458 words of font info for 93 fonts, out of 8000000 for 9000
+ 30463 strings out of 467533
+ 578212 string characters out of 5423668
+ 1465685 words of memory out of 5000000
+ 58812 multiletter control sequences out of 15000+600000
+ 698715 words of font info for 109 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,16n,131p,1927b,2128s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/bera/fvsr8a.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmb.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmr.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
-Output written on mcmthesis-demo.pdf (13 pages, 4888433 bytes).
+ 90i,16n,131p,1927b,1380s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/bera/fvsr8a.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmb.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmr.pfb><e:/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
+Output written on mcmthesis-demo.pdf (27 pages, 4267489 bytes).
 PDF statistics:
- 407 PDF objects out of 1000 (max. 8388607)
- 356 compressed objects within 4 object streams
- 84 named destinations out of 1000 (max. 500000)
- 315 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 591 PDF objects out of 1000 (max. 8388607)
+ 498 compressed objects within 5 object streams
+ 114 named destinations out of 1000 (max. 500000)
+ 423 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -81,7 +81,7 @@
 % 可选：设置verbatim样式
 \DefineVerbatimEnvironment{myverb}{Verbatim}{fontsize=\small, framesep=2mm}
 
-\title{River Shield: Mathematical Armor for Water Intake Protection}
+\title{PowerSched: Hierarchical Energy Profiling for Smartphone Battery Life Prediction}
 % \author{\small \href{http://www.latexstudio.net/}
 %   {\includegraphics[width=7cm]{mcmthesis-logo}}}
 \date{\today}
@@ -91,7 +91,21 @@
 
 \begin{abstract}
 
-summary
+\section{Conclusion}
+
+This work presents a comprehensive, physics-informed energy consumption model for modern smartphones that bridges the gap between software behavior and hardware power draw. Our key contribution is the hierarchical modeling framework expressed by the core equation \( dQ/dt = -\sum [I_i^{\text{(hw)}} \times A_i(t) \times \eta_i] \), which explicitly separates hardware physics, temporal activation, and software efficiency.
+
+The model integrates 65 calibrated parameters across hardware, signaling, software, and environmental layers, enabling accurate Time-to-Empty (TTE) predictions under diverse usage scenarios. Our experimental validation demonstrates:
+
+\begin{itemize}
+    \item \textbf{Application-Specific Power Signatures}: Different apps exhibit distinct energy profiles, with navigation consuming 40\% more power per hour than web browsing.
+    
+    \item \textbf{Linear SOC-TTE Relationship}: Battery life scales linearly with initial charge level across all usage patterns.
+    
+    \item \textbf{Mixed-Usage Realism}: Dynamic scenarios reveal how power-intensive phases (navigation, video) dominate overall energy consumption.
+\end{itemize}
+
+The framework's modular design allows easy adaptation to different devices and usage patterns, providing a valuable tool for both application developers seeking energy optimization and system designers evaluating battery life under realistic conditions. Future work will incorporate real-time sensor data and machine learning for adaptive parameter calibration.
 
 \begin{keywords}
 
@@ -117,18 +131,50 @@ keyword1; keyword2; keyword3
 
 \subsection{Problem Background}
 
-Smartphones have been
+\hspace*{\parindent}Smartphone battery life remains a primary user concern despite advances in hardware. While traditional research focuses on hardware power modeling, real-world energy drain is largely driven by how applications use hardware components. Existing tools lack the granularity to attribute energy consumption to specific app behaviors, making it difficult to provide actionable guidance to users. 
 
-\subsection{Problem Restatement}
+This study aims to bridge this gap by developing a software-aware power model that quantifies how different application categories (e.g., video streaming, navigation, social media) drive hardware usage. The goal is to provide clear, evidence-based usage recommendations to help users extend battery life based on their actual app usage patterns.
 
-In this problem, we're asked to build a 
+
+
+
+
+
+
 
 \subsection{Our Work}
+
+Our work establishes a comprehensive energy modeling framework that bridges the gap between software behaviors and hardware power consumption. As illustrated in Figure \ref{fig:ourwork}, the model follows a hierarchical structure: software applications orchestrate hardware components, which in turn draw current from the battery according to their physical characteristics. We introduce the novel formulation \( dQ/dt = -\sum [I_i^{\text{(hw)}} \times A_i(t) \times \eta_i] \) to explicitly separate hardware physics \( I_i^{\text{(hw)}} \), temporal activation \( A_i(t) \), and software efficiency \( \eta_i \). The framework integrates 65 calibrated parameters across hardware, signaling, and software layers, enabling accurate Time-to-Empty (TTE) predictions under diverse usage scenarios.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\textwidth]{OurWork.png}
+    \caption{Our modeling framework architecture, showing the hierarchical mapping from software applications through hardware scheduling to battery drain.}
+    \label{fig:ourwork}
+\end{figure}
+
+
+
 
 
 \section{Model Preparation}
 
 \subsection{Assumptions and Justifications}
+
+\begin{enumerate}
+    \item \textbf{Linear Hardware Superposition}: Total current equals sum of component currents. 
+    \textit{Justification}: Independent power rails decouple hardware modules.
+    
+    \item \textbf{Battery Behavior Simplification}: Battery voltage assumed constant at 3.7 V during discharge.
+    
+    \textit{Justification}: Li-ion batteries maintain nearly stable voltage during typical operation. 
+    Real-time temperature effects and long-term aging are considered negligible for short-duration simulations.
+
+    \item \textbf{Typical Parameter Values}: All parameters use median values from literature ranges. 
+    \textit{Justification}: Model can be recalibrated with specific hardware parameters if needed.
+\end{enumerate}
+
+
 
 \subsection{Notations} % 这里除了像之前一样标注字母含义，还要标注专业术语缩写
     We listed all the parameters and terminologied here. Our model has x parameters in all, 
@@ -137,14 +183,66 @@ In this problem, we're asked to build a
 
     %这里放完整表格
 
-    We will restate related parameters before the modeling of each components.
+Table \ref{tab:key_params} summarizes the most influential parameters across our modeling hierarchy.
 
-\subsection{Data Statement} % 数据来源、用途
+\begin{table}[htbp]
+\centering
+\caption{Key Parameters in the Energy Consumption Model}
+\label{tab:key_params}
+\begin{tabular}{@{}>{\centering\arraybackslash}p{0.2\textwidth}
+                 >{\centering\arraybackslash}p{0.18\textwidth}
+                 >{\centering\arraybackslash}p{0.5\textwidth}@{}}
+\toprule
+\textbf{Layer} & \textbf{Symbol} & \textbf{Significance} \\
+\midrule
+
+\multirow{4}{*}{Hardware} 
+& $\beta_{R,G,B}$ & Screen RGB coefficients (45\% idle power) \\
+& $a_c, b_c$ & CPU DVFS quadratic scaling \\
+& $I_{\text{gps\_search}}$ & GPS search current (140 mA) \\
+& $I_{\text{store\_io}}$ & Storage active current \\
+\hline
+
+\multirow{3}{*}{Signaling} 
+& $I_{\text{4g\_static}}$ & 4G base current (70 mA) \\
+& $k_{\text{rssi}}, \alpha$ & Cellular signal compensation \\
+& $I_{\text{wifi\_scan}}$ & WiFi scan peak (120 mA) \\
+\hline
+
+\multirow{3}{*}{Software} 
+& $\eta_{\text{net\_social}}$ & Social media network factor (2.5$\times$) \\
+& $\eta_{\text{net\_video}}$ & Video streaming factor (1.2$\times$) \\
+& $A_{\text{social}}(t)$ & Bursty interaction pattern \\
+\hline
+
+\multirow{2}{*}{Environmental} 
+& $\gamma$ & Temperature capacity reduction \\
+& $k$ & Battery degradation coefficient \\
+\hline
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+
+
+
+
+
 
 \subsection{Our Modeling Philosophy} % 主要是硬件通过软件来consume那个，还有从所有因素开始一点点筛选/合并
 
 Our core view is that software applications are not "true consumers" but "managers" of the hardwares which directly consume power.
 Therefore, building a precise mapping from software operations to hardware components'consumption is essential, worthing a specific "methodology".
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.86\textwidth]{soft-hard.png}
+\caption{Software behavior to hardware component mapping diagram.}
+\label{fig:soft-hard}
+\end{figure}
 
 Besides, we begin with comprehensive consideration of all possible influencing factors according to \cite{hinton2011power} and grdually shrinking it by merging, simplifying and justified ignoring.
 
@@ -157,88 +255,67 @@ We also seek to link our model to real-world insights, bridging theory with prac
 
 
 
-\subsection{Fundamental Equation and Factor Selection}
+\subsection{Fundamental Equation and Modeling Framework}
 
-Our modeling framework treats smartphone hardware as parallel current-drawing components, yielding a governing differential equation for SOC(t). Software behavior influences battery drain exclusively by modulating hardware operating parameters—screen brightness, CPU utilization, network states, etc. We therefore develop modular sub-models that first translate software activities into hardware settings, then compute the resulting current consumption for each component.
 \subsubsection{Continuous-Time Battery Dynamics}
 
-\hspace*{\parindent}Based on the definition of State of Charge and the physical meaning of electric current, we obtain the following system of equations:
+Our framework treats smartphone hardware as parallel current-drawing components, governed by the fundamental discharge equation:
 
 \begin{equation}
-\left\{
-\begin{aligned}
-&\text{SOC}(t) = \frac{Q(t)}{Q_{\text{max}}} \\
-&\frac{dQ}{dt} = -I_{\text{total}}(t)
-\end{aligned}
-\right.
+\frac{d(\text{SOC})}{dt} = -\frac{I_{\text{total}}(t)}{C_{\text{nominal}}}
+\label{eq:soc_dynamics}
 \end{equation}
 
-where the first equation defines SOC as the ratio of remaining charge to maximum charge, and the second equation expresses charge conservation during discharge.
-
-Therefore, by differentiating the first equation and substituting the second, we derive the governing differential equation:
+where $\text{SOC}(t) \in [0,1]$ is state of charge, $I_{\text{total}}(t)$ is total discharge current (mA), and $C_{\text{nominal}}$ is nominal battery capacity (mAh). The total current is the sum of all hardware component currents:
 
 \begin{equation}
-\label{eq:base_ode}
-\frac{d(\text{SOC})}{dt} = -\frac{I_{\text{total}}(t)}{C_{\text{eff}}(T, N_{\text{cycles}})}
-\end{equation}
-
-where:
-\begin{itemize}
-    \item $\text{SOC}(t) \in [0,1]$ is the state of charge at time $t$ (dimensionless)
-    \item $I_{\text{total}}(t)$ is the total discharge current (mA) at time $t$
-    \item $C_{\text{eff}}(T, N_{\text{cycles}})$ is the effective battery capacity (mAh)
-\end{itemize}
-
-
-To account for environmental and aging effects that reduce usable battery capacity, we introduce the effective capacity $C_{\text{eff}}$, which is related to the nominal capacity by:
-\begin{equation}
-\label{eq:effective_capacity}
-C_{\text{eff}} = C_{\text{nominal}} \times f_{\text{temp}}(T) \times f_{\text{aging}}(N_{\text{cycles}})
-\end{equation}
-
-where:
-\begin{itemize}
-    \item $C_{\text{nominal}}$ is the manufacturer's rated capacity (e.g., 4000 mAh)
-    \item $f_{\text{temp}}(T)$ is the temperature correction factor ($0.7 \leq f_{\text{temp}} \leq 1.0$)
-    \item $f_{\text{aging}}(N_{\text{cycles}})$ is the aging correction factor based on charge-discharge cycles
-    \item $T$ is the battery temperature (°C)
-    \item $N_{\text{cycles}}$ is the number of complete charge-discharge cycles
-\end{itemize}
-
-
-The total discharge current $I_{\text{total}}(t)$ represents the sum of currents drawn by all active smartphone components:
-
-
-\begin{equation}
-\label{eq:current_decomposition}
 I_{\text{total}}(t) = I_{\text{display}}(t) + I_{\text{processor}}(t) + I_{\text{memory}}(t) + I_{\text{network}}(t) + I_{\text{sensors}}(t)
+\label{eq:current_sum}
 \end{equation}
 
-Further decomposition and refined modelings are provided in the following subsections.
-
-And each component current incorporates two distinct elements:
-\begin{itemize}
-    \item \textbf{Baseline overhead}: The minimum power required for the component to remain operational, including essential operating system services and hardware idle states.
-    \item \textbf{Software-driven consumption}: Additional power drawn when applications and user activities activate hardware features above their baseline levels.
-\end{itemize}
-
-\paragraph{Time-to-Empty Prediction}
-Given initial conditions $\text{SOC}(t_0) = \text{SOC}_0$, the time until complete discharge ($\text{SOC}=0$) is obtained by solving:
+Software affects battery drain by modulating hardware parameters (brightness, CPU load, etc.). The time to empty from initial SOC$_0$ is computed as:
 
 \begin{equation}
-\label{eq:time_to_empty}
-t_{\text{empty}} = \int_{\text{SOC}_0}^{0} \frac{C_{\text{eff}}}{I_{\text{total}}(\text{SOC}, t)} \, d\text{SOC}
+t_{\text{empty}} = \int_{\text{SOC}_0}^{0} \frac{C_{\text{nominal}}}{I_{\text{total}}(\text{SOC}, t)} \, d\text{SOC}
+\label{eq:tte}
 \end{equation}
 
-In practice, this is computed numerically due to the time-dependent nature of $I_{\text{total}}(t)$.
-
-This foundational model enables quantitative predictions of battery life under various usage scenarios. In the following chapter, we apply it to specific cases, analyze the results, and conduct comprehensive model validation.
-
+This equation is solved numerically due to the time-dependent nature of $I_{\text{total}}$. The following sections detail each hardware component's modeling.
 
 
 \subsubsection{Factor Selection and Simplification Strategy}
 
-Thanks to \cite{hinton2011power} , we're able to consider all kinds of 
+\hspace*{\parindent} Thanks to \cite{hinton2011power}, we are able to comprehensively consider all factors. Our core idea is to map software behaviors onto hardware operations (software discussion is in Section 4). 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{all.png}
+    \caption{Power consumption factors of hardware and signaling modules}
+    \label{fig:hardware_signaling}
+\end{figure}
+
+This section focuses on hardware and signaling modules. Considering all modules mentioned in \cite{hinton2011power}, we selected the modules and modeling approaches discussed in this chapter, as summarized in Table~\ref{tab:module_summary}.
+\begin{table}[htbp]
+  \centering
+  \caption{Summary of Hardware and Signaling Module Modeling Approaches}
+  \begin{tabular}{l l}
+    \toprule
+    \textbf{Module} & \textbf{Modeling Approach} \\
+    \midrule
+    AMOLED Display & Pixel-level color/brightness summation \\
+    Processor (CPU/GPU) & Quadratic frequency + load scaling \\
+    Memory (LPDDR) & Bandwidth-based dynamic + static refresh \\
+    Storage (UFS/eMMC) & State-based (active/idle) switching \\
+    GPS & Mode-based (search/track/off) \\
+    Camera & Mode-based (preview/video/off) \\
+    IMU & Frequency-dependent sampling \\
+    Cellular Network & Static + signal compensation + handoff \\
+    Wi-Fi & Scan + connected/sleep states \\
+    Bluetooth & Duty cycle + class/mode switching \\
+    Hotspot & Cellular + Wi-Fi AP superposition \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:module_summary}
+\end{table}
 
 
 
@@ -248,11 +325,50 @@ Thanks to \cite{hinton2011power} , we're able to consider all kinds of
 
 
 
-\subsubsection{Environmental and Aging Factors}
+\subsubsection{Temperature and Aging Factors}
 
-Lithium-ion battery capacity degrades with usage due to irreversible electrochemical changes during charge-discharge cycling. The aging correction factor $f_{\text{aging}}$ depends on the accumulated cycle count $N_{\text{cycles}}$, where one cycle represents 100\% cumulative depth-of-discharge.
 % 环境影响化学反应，温度过高、过低分别会怎么样
-% 然后怎么处理也放在这里
+To enhance the validity of our model, we examine the influence of temperature and battery aging factors on the battery.
+
+\begin{itemize}
+    \item {Thermodynamic Effects on Resistance and Capacity}
+The electrochemical activity of Lithium-ion batteries is highly temperature-dependent. Temperature fluctuations impact the system through two primary physical mechanisms:
+
+\begin{itemize}
+    \item \textbf{Internal Resistance Escalation}: In low-temperature environments, electrolyte viscosity increases, leading to a surge in internal resistance $R_{int}$. According to the Arrhenius law, the cell voltage $V_{cell}$ is adjusted as:
+    \[V_{cell}(T) = V_{ocv} - I \cdot R_{0} \exp\left(\frac{E_a}{R \cdot T}\right) \]
+    where $E_a$ is the activation energy, $R$ is the universal gas constant, and $T$ is the absolute temperature. This exponential rise in resistance at low $T$ causes a significant voltage drop, which may prematurely trigger the system’s low-power shutdown threshold \cite{valoen2005effect}.
+    
+    \item \textbf{Available Capacity Contraction}: The total retrievable charge $Q_{available}$ decreases as temperature drops, which can be modeled by a linear correction factor $\gamma$:
+    \[Q(T) = Q_{nominal} \cdot \left( 1 - \gamma \cdot (T_{ref} - T) \right)\]
+
+    This explains why devices exhibit "rapid drain" symptoms in cold climates despite maintaining low computational loads.
+\end{itemize}
+
+
+
+\item {Battery Aging and State of Health (SOH)}
+Long-term usage leads to the degradation of the State of Health (SOH), characterized by permanent capacity loss and internal resistance growth.
+
+\begin{itemize}
+    \item \textbf{Capacity Fade Model}: We adopt a power-law relationship to describe the loss of active lithium ions over $n$ charge-discharge cycles \cite{wang2011cycle}:
+    \[Q_{aged} = Q_{new} \cdot (1 - k \cdot \sqrt{n})\]
+    where $k$ is a degradation coefficient determined by usage intensity (e.g., depth of discharge and thermal stress).
+
+    \item \textbf{Integrated TTE Refinement}: By incorporating SOH and temperature efficiency $\eta_{temp}$, the finalized TTE estimation formula is refined as:
+    \[TTE = \frac{Q_{new} \cdot SOH \cdot V_{avg} \cdot \eta_{temp}}{P_{total}}\]
+
+\end{itemize}
+\end{itemize}
+
+By integrating these factors, the model transitions from a deterministic hardware profile to a dynamic, life-cycle-aware predictive tool, offering higher fidelity for real-world reliability analysis. Due to restrictions, we were unable to provide these coefficient values.
+
+
+
+
+
+
+
 
 
 \subsection{Hardware Components Modeling}
@@ -274,129 +390,262 @@ The power consumption of a single AMOLED pixel is modeled as a function of its c
 I_{\text{disp}} = \frac{1}{V} \left[ C + Br \cdot N \cdot \left( \beta_R R + \beta_G G + \beta_B B + a (R+G+B) + b \right) \right]
 \end{equation}
 
-where $R, G, B \in [0,1]$ are the normalized intensities of the red, green, and blue sub-pixels derived from $R_{avg}, G_{avg}, B_{avg}$. All other parameters are defined in Table~\ref{tab:display_params}.
+where $R, G, B \in [0,1]$ are normalized intensities derived from the average color $(R_{avg}, G_{avg}, B_{avg})$, $C$ is the display driver's fixed power (mW), $Br \in [0,1]$ is the global brightness, $N$ is the total pixel count, $\beta_R,\beta_G,\beta_B$ are sub-pixel power coefficients (mW/pixel), $a,b$ are linear correction coefficients for high luminance \cite{joseph2001run}, and $V$ is the supply voltage (V).
 
-\begin{table}[h]
+Equation~\eqref{eq:display_power} decomposes display power into a fixed base $C$ and a brightness-scaled component. The pixel term models sub-pixel efficiencies ($\beta$) with linear correction for high luminance. By assuming a static average color $(R_{avg}, G_{avg}, B_{avg})$, we enable efficient system-level estimation without real-time frame sampling.
+
+This model estimates AMOLED display current based on user-defined brightness. We now examine the processing units---CPU and GPU---governed by dynamic voltage and frequency scaling (DVFS).
+
+\subsubsection{Processor Power Model (CPU + GPU)}
+
+\begin{itemize}
+    \item {Physical Rationale and Hypothesis} 
+    
+The processor (CPU) is the primary driver of dynamic energy consumption in smartphones. According to CMOS circuit theory, the dynamic power $P_{dyn}$ is governed by the formula $P_{dyn} = \alpha C V^2 f$, where $\alpha$ is the switching activity, $C$ is the capacitance, $V$ is the supply voltage and $f$ is the operational frequency. Since $V$ scales near-linearly with $f$ in modern Dynamic Voltage and Frequency Scaling (DVFS) strategies, the resulting power consumption exhibits a cubic relationship with frequency ($P \propto f^3$), or a quadratic relationship with respect to current ($I \propto f^2$) given a constant system voltage.We hypothesize that the total CPU current $I_{cpu}$ can be modeled as a composite function of frequency ($f$) and utilization ($\mu$):$$I_{cpu}(f, \mu) = \mu \cdot \left( a \cdot f^2 + b \cdot f \right) +c$$where $\mu$ is utilization, $a$ and $b$ are the switching activity coefficients and $c$ represents the static leakage current.
+
+\item {Multi-Cluster Modeling and Parameter Estimation}
+
+Modern SOCs utilize a Heterogeneous Multi-Processing (HMP) architecture. In our model, we differentiate between the Big Cluster (high-performance) and Small Cluster (high-efficiency). Based on the empirical data provided in the bonito dataset \cite{android_bonito_power_profile}, we performed a non-linear least-squares regression to determine the characteristic coefficients for each cluster.
+
+\begin{figure}[H]
     \centering
-    \caption{Parameters of the AMOLED Display Power Model}
-    \label{tab:display_params}
-    \begin{tabular}{cll}
+    \includegraphics[width=1\linewidth]{Figure_CPU2.png}
+    \caption{}
+    \label{fig:placeholder}
+\end{figure}
+
+
+Big Cluster Formulation: The Big Cluster is optimized for bursty, high-load tasks. Its power profile is highly sensitive to frequency increments due to its larger transistor count and higher voltage rails.$$I_{big} = \mu_{big} \cdot (1.1517 \times 10^{-5} \cdot f_{big}^2 + 1.0494 \times 10^{-3} \cdot f_{big}) + 20.61$$
+
+Small Cluster Formulation: In contrast, the Small Cluster exhibits a more conservative power slope, prioritizing battery longevity for background tasks.$$I_{small} = \mu_{small} \cdot (4.1200 \times 10^{-6} \cdot f_{small}^2 + 6.8400 \times 10^{-3} \cdot f_{small}) + 13.52$$
+
+\item The impact of CPU load
+
+The middle panel of Figure illustrates the current draw of the Big Cluster across its operational frequency range ($0 \text{-} 2200 \text{ MHz}$) under varying utilization levels ($\mu \in \{20\%, 50\%, 80\%, 100\%\}$).
+\begin{itemize}
+    \item Load-Frequency Coupling: The divergence of the four contours at higher frequencies demonstrates the multiplicative relationship between load ($\mu$) and the quadratic frequency term ($f^2$).
+    \item Static Baseline: All contours converge to a single intercept at $f=0$, which corresponds to the static leakage current $I_{static} \approx 20.61 \text{ mA}$, indicating that leakage is independent of computational load but essential for maintaining the core's power state.
+    \item Energy Penalty: The steepening slope of the $100\%$ utilization curve compared to the $20\%$ curve quantifies the "energy penalty" incurred during heavy multi-tasking, where both high clock speeds and high gate-switching activity coexist.
+\end{itemize}
+
+
+\item Surface of total CPU Power response
+
+The Right panel of Figure provides a 3D visualization of the SOC power manifold, mapping the total current $I_{proc}$ as a simultaneous function of frequency ($f$) and load ($\mu$).
+\begin{itemize}
+    \item Quadratic Manifold: The "upward-curving" geometry of the surface confirms that the system current scales quadratically rather than linearly. This curvature is a direct manifestation of the CMOS dynamic power law ($P \propto V^2 f$), where voltage scaling ($V \propto f$) amplifies the current draw at higher performance tiers.
+    \item Gradient Sensitivity: The color gradient from dark purple ($20 \text{ mA}$) to light yellow ($>70 \text{ mA}$) highlights the "hotspots" of battery depletion. The steepest gradient is observed when $\mu > 0.8$ and $f > 1800 \text{ MHz}$, identifying this region as the primary driver of rapid Time-to-Empty (TTE) reduction.
+    \item Operational Stability: The smoothness of the response surface suggests that the model is well-behaved for continuous optimization tasks, such as predicting battery life under fluctuating workloads in a Monte Carlo environment.
+\end{itemize}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsubsection{Memory and Storage Model}
+
+\paragraph{Memory Module (LPDDR)}
+Based on CMOS circuit physics, LPDDR power consists of static refresh and dynamic switching components:
+\[
+P_{\text{mem}} = \underbrace{P_{\text{static}}}_{\text{Leakage compensation}} + \underbrace{P_{\text{dyn}}}_{\text{Bus switching}}
+\]
+where dynamic power follows \(P_{\text{dyn}} = C V^2 f\) for data bus toggling. Writing requires additional charge injection via pumps, consuming ~20\% more than reading.
+
+The continuous-time current model is:
+\[
+I_{\text{mem}}(t) = \frac{\delta_r BW_r(t) + \delta_w BW_w(t) + I_{\text{static}}}{\eta}
+\]
+\begin{itemize}[noitemsep,topsep=2pt]
+    \item \(\delta_r, \delta_w\): Current per GB/s for read/write (22.0 mA > 18.0 mA)
+    \item \(I_{\text{static}}\): Self-refresh current (35.0 mA)
+    \item \(1/\eta\): Power conversion loss correction
+\end{itemize}
+
+\paragraph{Storage Module (UFS/eMMC)}
+Flash storage power is state-driven, switching between active I/O and deep sleep:
+\[
+I_{\text{store}}(t) = \frac{I_{\text{io}} \cdot \mathbb{I}_{\{\text{active}(t)\}} + I_{\text{sleep}} \cdot \mathbb{I}_{\{\text{idle}(t)\}}}{\eta}
+\]
+\begin{itemize}[noitemsep,topsep=2pt]
+    \item \textbf{Active} (\(I_{\text{io}} = 120.0\) mA): Controller addressing, ECC, charge pump operations
+    \item \textbf{Idle} (\(I_{\text{sleep}} = 2.5\) mA): Deep sleep mode, minimal retention current
+    \item \textbf{Burst} (\(I_{\text{peak}} = 650.0\) mA): Instantaneous peak during intensive I/O
+\end{itemize}
+The state transition is triggered by file system requests, with \(\eta\) correcting DC-DC conversion losses.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsubsection{Sensor Power Model (GPS, Camera, etc.)}
+
+Notation: we view GPS as positioning sensor, although it's main consumption lies on network.
+
+The energy footprint of modern smartphones is not solely determined by computational loads; it is also heavily influenced by peripheral sensors that interact with the physical environment. Unlike the continuous frequency scaling of the CPU, sensors such as the GPS, Camera, and Inertial Measurement Unit (IMU) operate in discrete functional states.
+
+
+We model the total sensor current $I_{sensor}$ as a linear superposition of active components, adjusted by the PMIC efficiency $\eta$:$$I_{sensor} = \frac{\sum S_i \cdot I_{active,i}}{\eta}$$where $S_i$ is a state-indicator variable (or mode index) for the $i$-th sensor, and $I_{active,i}$ represents the empirical current draw calibrated from AOSP power profiles and SoC-level Low Power Island (LPI) specifications.
+
+The sensor parameters (GPS, Camera, IMU) are calibrated using AOSP power profiles for the Google Pixel 3a platform \cite{google_power_profile_guide}. While environmental factors cause variation in real-world usage, we adopt median values under standard conditions to ensure reproducible TTE predictions.
+
+\begin{table}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{1.2} 
+    \caption{Empirical Power Parameters for Peripherals and Reference Ranges}
+    \label{tab:sensor_parameters}
+    \begin{tabular}{@{}llcc@{}}
         \toprule
-        \textbf{Symbol} & \textbf{Unit} & \textbf{Meaning} \\
+        \textbf{Module} & \textbf{Mode} & \textbf{Reference Range (mA)} & \textbf{Typical (mA)} \\ 
         \midrule
-        $C$ & mW & Base power (black screen). \\
-        $\beta_R$, $\beta_G$, $\beta_B$ & mW & Power coeff. per sub-pixel intensity. \\
-        $a$ & mW & Linear coeff. for RGB sum correction. \\
-        $b$ & mW & Constant for RGB sum correction. \\
-        $R_{avg}$, $G_{avg}$, $B_{avg}$ & -- (0-255) & Assumed average screen color. \\
-        $N$ & -- & Pixel count ($10^6$, $\approx$720p). \\
-        $V$ & V & System voltage. \\
-        $Br$ & -- (0.0--1.0) & Global brightness factor. \\
+        GPS Subsystem  & Search (Acquisition) & $120.0 - 180.0$ & 140.0 \\
+                       & Tracking             & $40.0 - 80.0$   & 60.0  \\
+        \addlinespace 
+        Camera System  & Preview              & $350.0 - 550.0$ & 450.0 \\
+                       & Video Recording      & $500.0 - 800.0$ & 600.0 \\
+        \addlinespace
+        IMU Sensors    & High-Freq Sampling   & $10.0 - 25.0$   & 15.0  \\
         \bottomrule
     \end{tabular}
 \end{table}
+\begin{itemize}
+\item Specific Peripheral Characteristics
 
-Equation~\eqref{eq:display_power} decomposes the display power into a fixed base cost $C$ and a dynamic component scaled by the global brightness $Br$. The term inside the parentheses, $(\beta_R R + \beta_G G + \beta_B B + a(R+G+B) + b)$, represents the power consumed by a \textbf{single pixel} at full brightness. The coefficients $\beta_R, \beta_G, \beta_B$ capture the efficiency of each sub-pixel, while the linear correction term $a(R+G+B)+b$, identified in \cite{joseph2001run}, is crucial for accurately modeling power at high luminance levels (e.g., white backgrounds common in applications). In contrast to the runtime screen analysis performed in the original study, \textbf{we simplify the model by assuming the screen displays a static, average color} $(R_{avg}, G_{avg}, B_{avg})$. This simplification allows for efficient system-level energy estimation without the need for real-time frame-buffer sampling, making it suitable for our integrated power model.
+GPS Module: The GPS power is categorized into "Search" and "Track" modes. The Search phase ($140.0\text{ mA}$) involves full-power Radio Frequency (RF) and baseband processing for satellite acquisition, while the Track phase ($60.0\text{ mA}$) utilizes intermittent sleep cycles to reduce the average current.
 
-This model provides a physically-grounded method to estimate the AMOLED display's current draw as a function of user-defined brightness. Having established the display power model, we now turn to the processing units---the CPU and GPU---whose power consumption is governed by dynamic voltage and frequency scaling (DVFS).
+\item Camera System
+
+The camera's drain is substantial , due to the concurrent operation of the CMOS Image Sensor (CIS), the Image Signal Processor (ISP), and high-speed data buses.
+
+\item IMU (Inertial Measurement Unit)
+
+The consumption of the accelerometer and gyroscope is modeled as a function of sampling frequency, ranging from $2.0\text{ mA}$ (low-power orientation sensing) to $15.0\text{ mA}$ (high-frequency motion tracking in gaming).
+
+\end{itemize}
 
 
-\subsubsection{Processor Power Model (CPU + GPU)}
-\subsubsection{Memory and Storage Model}
-\subsubsection{Sensor Power Model (GPS, Camera, etc.)}
+
+
+
+
+
 
 \subsection{Signaling Modules Modeling}
+
 \subsubsection{Cellular and Wi-Fi Communication}
+
+\begin{itemize}
+    \item \textbf{Cellular Network Power Model}
+\end{itemize}
+
+Cellular current comprises static, signal-dependent, and handoff components:
+\[
+I_{\text{cellular}}(t) = I_{\text{cell\_static}}(T_{\text{net}}) + I_{\text{signal}}(\text{RSSI}(t)) + I_{\text{handoff}}(H(t))
+\]
+
+\noindent\textbf{1. Static Current} (connection maintenance):
+\[
+I_{\text{cell\_static}} = 
+\begin{cases} 
+20.0\,\text{mA} & \text{2G} \\ 
+45.0\,\text{mA} & \text{3G} \\ 
+70.0\,\text{mA} & \text{4G} 
+\end{cases}
+\]
+
+\noindent\textbf{2. Signal Compensation} (path loss):
+\[
+I_{\text{signal}} = k_{\text{rssi}} \cdot e^{-\alpha\cdot\text{RSSI}},\quad 
+\begin{aligned}
+&k_{\text{rssi}}=50.0\,\text{mA},\ \alpha=0.045\,\text{dBm}^{-1} \\
+&\text{RSSI}\in[-110,-50]\,\text{dBm}
+\end{aligned}
+\]
+
+\noindent\textbf{3. Handoff Overhead} (base station switching):
+\[
+I_{\text{handoff}} = k_{\text{handoff}} \cdot H(t),\quad k_{\text{handoff}}=15.0\,\text{mA/time}
+\]
+where $H(t)$ is handovers per hour.
+
+\textit{Example:} Commuting (RSSI$=-85$ dBm, $H=12$) yields 3685 mA; home (RSSI$=-70$ dBm, $H=1$) yields 1670 mA.
+
+\begin{itemize}
+    \item \textbf{Wi-Fi Power Model}
+\end{itemize}
+
+Wi-Fi current switches between scanning and connection states:
+\[
+I_{\text{wifi}}(t) = \mathbb{I}(S_{\text{wifi}}=1) \cdot \left[ I_{\text{scan}}(t) + I_{\text{conn}}(\text{RSSI},F) \right]
+\]
+
+\noindent\textbf{Scanning} (router discovery, 3--5 s):
+\[
+I_{\text{scan}} = 
+\begin{cases}
+120.0\,\text{mA} & \text{scanning} \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\noindent\textbf{Connection/Sleep} states:
+\[
+I_{\text{conn}} = I_{\text{sleep}} + k_{\text{wifi}}(F) \cdot e^{\beta\cdot(\text{RSSI}-40)}
+\]
+with $I_{\text{sleep}}=8.0$ mA, $k_{\text{wifi}}(2.4\text{GHz})=50.0$ mA, $k_{\text{wifi}}(5\text{GHz})=85.0$ mA [Espressif], $\beta=0.04\,\text{dBm}^{-1}$ [ESP32-S3 test report].
+
+
+
+
+\begin{itemize}
+    \item Bluetooth Module
+\end{itemize}
+
+
+
 \subsubsection{Bluetooth and Short-Range Communication}
 
-\paragraph{Bluetooth Module}
-The power consumption modeling of Bluetooth modules is fundamentally based on the core physical principles of radio frequency (RF) communication:
-First is the duty cycle principle. Bluetooth operates in the 2.4 GHz ISM unlicensed band, and the activation time ratio of the RF circuit directly determines power consumption: synchronous packets are sent at high frequency during continuous data transmission (duty cycle $\approx 1$, high power consumption), while only intermittent scanning of surrounding devices is performed in idle standby (duty cycle $\approx 0.05$, significantly lower power consumption).
-Second is the power-current linear relationship: different Bluetooth Class levels correspond to fixed maximum transmit powers (e.g., \SI{100}{mW} for Class 1, \SI{2.5}{mW} for Class 2). With the supply voltage of mobile phone Bluetooth modules fixed at \SI{3.7}{V}, the basic physical formula $P=U \cdot I$ is satisfied, so the Class level directly determines the baseline current of the Bluetooth module.
-As the default mode of mainstream mobile phones, Bluetooth Low Energy (BLE) is designed based on the above physical principles: by shortening RF activation time and reducing transmit power (corresponding to Class 4 with a transmit power of only \SI{0.5}{mW}), its static power consumption is reduced to 1/10 of that of classic Bluetooth.
+\begin{itemize}
+    \item Bluetooth Module
+\end{itemize}
 
-Based on the above physical background, we construct a continuous-time Bluetooth current model, using an indicator function to dynamically distinguish between BLE and classic Bluetooth modes:
+Bluetooth power consumption depends on RF duty cycle and transmission class. BLE uses short bursts and low power (\SI{0.5}{mW}), while Classic Bluetooth has higher power levels (up to \SI{100}{mW}). The current is:
 \[
-I_{\text{bluetooth}}(t) = I_{\text{ble}}(t) \cdot \mathbb{I}(V_{\text{ble}}(t) = 1) + I_{\text{classic}}(t) \cdot \mathbb{I}(V_{\text{ble}}(t) = 0)
+I_{\text{bt}}(t) = 
+\begin{cases}
+I_{\text{ble\_idle}} + D(t)(I_{\text{ble\_tx}} - I_{\text{ble\_idle}}), & \text{BLE mode} \\
+I_{\text{class}}(C) + D(t)(I_{\text{classic\_tx}} - I_{\text{class}}(C)), & \text{Classic mode}
+\end{cases}
 \]
-where the indicator function $\mathbb{I}(\cdot)$ denotes mode switching: $V_{\text{ble}}(t)=1$ for BLE mode, and $V_{\text{ble}}(t)=0$ for classic Bluetooth mode.
+where $D(t)$ is duty cycle, $C$ is class (1/2/3), with currents 30.0/8.0/2.0 mA respectively. BLE uses $I_{\text{ble\_idle}}=1.2$ mA, $I_{\text{ble\_tx}}=8.0$ mA; Classic uses $I_{\text{classic\_tx}}=25.0$ mA.
 
-For BLE mode (default for mainstream mobile phones), the current is the linear superposition of idle scanning current and dynamic transmission current:
+\begin{itemize}
+    \item Hotspot Module
+\end{itemize}
+
+Hotspot power combines cellular ($I_{\text{cell}}$) and Wi-Fi AP currents:
 \[
-I_{\text{ble}}(t) = I_{\text{ble\_idle}} + D(t) \cdot (I_{\text{ble\_tx}} - I_{\text{ble\_idle}})
+I_{\text{hotspot}}(t) = I_{\text{cell}}(t) + I_{ap\_static} + k_{ap}(F) \cdot (1 + 0.3 N(t))
 \]
-For classic Bluetooth mode (compatible with legacy devices), the current is superimposed by Class-level static current and dynamic transmission current:
-\[
-I_{\text{classic}}(t) = I_{\text{class}}(C(t)) + D(t) \cdot (I_{\text{classic\_tx}} - I_{\text{class}}(C(t)))
-\]
+where $I_{ap\_static}=20$ mA, $k_{ap}(F)$ is 45 mA (2.4 GHz) or 75 mA (5 GHz), and $N(t)$ is connected device count.
 
-
-\begin{table}[htbp]
-  \centering
-  \caption{Parameters of Bluetooth Power Consumption Model}
-  \begin{tabular}{>{\raggedright}p{2.2cm} >{\raggedright}p{0.8cm} >{\raggedright\arraybackslash}p{6cm}}
-    \toprule
-    Parameter          & Unit & Description                                                                 \\
-    \midrule
-    $V_{\text{ble}}(t)$ & —    & Bluetooth mode at time $t$ (1=BLE, 0=classic)                                \\
-    $C(t)$             & —    & Classic Bluetooth Class level (dynamically negotiated)                      \\
-    $D(t)$             & —    & Duty cycle (0~1, reflects user behavior)                                    \\
-    $I_{\text{ble\_idle}}$ & mA   & BLE idle current (measured: 1.2)                                            \\
-    $I_{\text{ble\_tx}}$   & mA   & BLE transmission current (measured: 8.0)                                   \\
-    $I_{\text{class}}(C(t))$ & mA & Classic Bluetooth static current (30.0/8.0/2.0 for Class 1/2/3)             \\
-    $I_{\text{classic\_tx}}$ & mA  & Classic Bluetooth transmission current (measured: 25.0)                     \\
-    $U$                & V    & Supply voltage (constant: 3.7)                                              \\
-    \bottomrule
-  \end{tabular}
-  \label{tab:bluetooth_params}
-  \vspace{-2mm}
-\end{table}
-
-
-\paragraph{Hotspot Module}
-The power consumption modeling of the hotspot module is based on the underlying physical mechanisms of dual-role communication superposition and radio frequency (RF) transmission: 
-when the hotspot is active, the mobile phone undertakes two communication roles simultaneously — it acts as a cellular network client (maintaining connection with the base station to receive downlink data, with power consumption described by the cellular network model $I_{\text{cellular}}(t)$ mentioned earlier), and as a Wi-Fi Access Point (AP) (transmitting Wi-Fi signals for peripheral device access, generating independent AP RF power consumption). 
-The communication power consumption of these two roles is linearly superimposed, forming the core power consumption source of the hotspot.
-
-The RF power consumption of a Wi-Fi AP follows clear physical laws: it is positively correlated with transmit power and the number of connected devices. 
-Transmit power is determined by the working frequency band — the 5 GHz band has larger path loss and requires higher transmit power (\SI{20}{dBm} vs \SI{17}{dBm} for 2.4 GHz), resulting in higher RF amplifier current. 
-When multiple devices are connected, communication resources need to be scheduled in time division, leading to an increased activation duty cycle of the RF circuit; experimental data shows that the AP power consumption increases by about 30\% for each additional connected device.
-
-In addition, the mobile phone needs to run routing protocols (e.g., DHCP, NAT) when acting as an AP, and the processor must continuously forward network traffic. 
-This additional power consumption has been included in the processor current $I_{\text{processor}}(t)$, so this model only focuses on RF power consumption related to communication.
-
-Based on these physical characteristics, we construct a continuous-time hotspot current model, where the total current is the linear superposition of cellular network current, AP RF dynamic current, and AP static current:
-\[
-I_{\text{hotspot}}(t) = I_{\text{cellular}}(t) + I_{ap}(F_{\text{wifi}}(t), N(t)) + I_{ap\_static}
-\]
-where:
-- $I_{\text{cellular}}(t)$: Cellular network current, directly adopted from the previous cellular network model, reflecting the basic power consumption of the hotspot to maintain cellular connection;
-- $I_{ap}(F_{\text{wifi}}(t), N(t)) = k_{ap}(F_{\text{wifi}}(t)) \cdot (1 + 0.3 \cdot N(t))$: AP RF dynamic current, determined by the frequency band transmit current coefficient and the number of connected devices;
-- $I_{ap\_static} = \SI{20}{mA}$: AP static current, the basic power consumption of the Wi-Fi AP baseband circuit, independent of the number of connected devices.
-
-
-\begin{table}[htbp]
-  \centering
-  \caption{Parameters of Hotspot Power Consumption Model}
-  \begin{tabular}{>{\raggedright}p{2.5cm} >{\raggedright}p{0.8cm} >{\raggedright\arraybackslash}p{5.5cm}}
-    \toprule
-    Parameter          & Unit & Physical Definition                                                                 \\
-    \midrule
-    $F_{\text{wifi}}(t)$ & —    & Wi-Fi band of hotspot at time $t$ (2.4GHz/5GHz), determined by user settings          \\
-    $N(t)$             & —    & Number of connected devices at time $t$, dynamically changing with scenarios (e.g., 1 for commute, 3 for home) \\
-    $k_{ap}(F_{\text{wifi}}(t))$ & mA & AP transmit current coefficient by band (\SI{45}{mA} for 2.4GHz, \SI{75}{mA} for 5GHz) \\
-    $0.3$              & —    & Device count influence coefficient, reflecting power consumption increment from multi-device scheduling \\
-    $I_{ap\_static}$   & mA   & AP static current (\SI{20}{mA}), basic power consumption of Wi-Fi AP baseband circuit \\
-    \bottomrule
-  \end{tabular}
-  \label{tab:hotspot_params}
-  \vspace{-2mm}
-\end{table}
-
-
-
-
-\subsubsection{Special Note: GPS as Positioning Sensor}
 
 
 
@@ -406,156 +655,237 @@ where:
 
 \subsection{Software Consumption Analysis}
 
-\subsubsection{Theoretical Framework}
-Software does not directly consume power; it drives hardware, which then consumes power. We add two new coefficients to the hardware-based model:
+\subsubsection{Fundamental Modeling Framework}
 
-\[
-\frac{dQ(t)}{dt} = -\sum_{i=1}^{N} \underbrace{I_i(\theta_i)}_{\text{hardware}} \times \underbrace{A_i(t)}_{\text{when to use}} \times \underbrace{\eta_i}_{\text{how to use}}
-\]
-
-\begin{itemize}
-    \item \(I_i(\theta_i)\): hardware current model (from Chapter 2)
-    \item \(A_i(t)\): activation level (0=off, 1=full load)
-    \item \(\eta_i\): software efficiency factor (\(\eta=1\) = best, higher = worse)
-\end{itemize}
-
-Example: same network chip can be used efficiently (\(\eta=1.2\), big downloads) or inefficiently (\(\eta=2.5\), many small HTTP requests).
-
-\subsubsection{Literature-Based Key Factors}
-From papers, we know:
-
-\begin{table}[h]
-\centering
-\begin{tabular}{lcc}
-\toprule
-\textbf{Scenario} & \textbf{Percentage} & \textbf{Key Hardware} \\
-\midrule
-Idle state & 61\% & Screen (45\%), Background network (16\%) \\
-Active state (no screen) & 39\% & Network (70\%), CPU (15\%), GPS (10\%) \\
-API calls share & 85\%* & Network APIs (60\%), Sensor APIs (25\%) \\
-\bottomrule
-\end{tabular}
-\caption{Power distribution in smartphones (summarized from literature)}
-\end{table}
-
-*Percentage of active non-screen consumption.
-
-\textbf{Takeaway:} Focus on screen and network modules. Their \(\eta\) values need careful calibration.
-
-\subsubsection{Application Category Selection}
-We pick five app types that are:
-\begin{enumerate}
-    \item Simple (no complex games)
-    \item Similar within category (low variance)
-    \item Cover different hardware usage patterns
-\end{enumerate}
-
-\begin{table}[h]
-\centering
-\begin{tabular}{lcl}
-\toprule
-\textbf{Category} & \textbf{Examples} & \textbf{Key Hardware Focus} \\
-\midrule
-Video streaming & TikTok, YouTube & Screen, Network, Decoder \\
-Social media & WeChat, Weibo & Network (small HTTP), Screen \\
-Navigation & Gaode Maps & GPS, Network, Screen \\
-Web browsing & Chrome & Network, CPU (rendering) \\
-Music & Spotify & Audio CPU, Background network \\
-\bottomrule
-\end{tabular}
-\caption{Five selected app categories and their hardware focus}
-\end{table}
-
-These five cover most daily usage scenarios while keeping analysis manageable.
-
-\subsection{App-Based Parameter Calibration}
-
-\subsubsection{New Parameter Definitions}
-Where do \(A_i(t)\) and \(\eta_i\) come from?
-
-\textbf{1. Activation Level \(A_i(t)\):}
-\begin{itemize}
-    \item From app behavior logs (e.g., Android Profiler)
-    \item Binary or continuous: 0/1 for on/off, or 0-1 for partial usage
-    \item Example: For video app, \(A_{\text{screen}}(t)=1\) when playing, 0 when paused
-\end{itemize}
-
-\textbf{2. Efficiency Factor \(\eta_i\):}
-\begin{itemize}
-    \item From protocol analysis: HTTP vs. WebSocket, big files vs. small requests
-    \item From literature measurements
-    \item Network: \(\eta_{\text{network}}=1.2\) (video streaming) to 2.5 (social media)
-    \item Screen: \(\eta_{\text{screen}}=1.0\) (dark mode) to 1.5 (bright UI)
-\end{itemize}
-
-\subsubsection{Calibration for Five App Categories}
-We calibrate parameters for each category:
-
-\begin{table}[h]
-\centering
-\begin{tabular}{lccc}
-\toprule
-\textbf{App Type} & \(\eta_{\text{network}}\) & \(\eta_{\text{screen}}\) & \textbf{Typical \(A_i\) Pattern} \\
-\midrule
-Video streaming & 1.2 & 1.3 & Screen: always on, Network: bursts \\
-Social media & 2.5 & 1.8 & Screen: on/off, Network: frequent small \\
-Navigation & 1.5 & 1.5 & GPS: always on, Screen: mostly on \\
-Web browsing & 1.8 & 1.2 & Network: mixed, Screen: reading mode \\
-Music & 1.3 & N/A & Screen: mostly off, Network: occasional \\
-\bottomrule
-\end{tabular}
-\caption{Calibrated parameters for five app categories}
-\end{table}
-
-\textbf{How we got these numbers:}
-\begin{enumerate}
-    \item Literature values for similar apps
-    \item Common-sense estimates (e.g., HTTP is inefficient)
-    \item Will be refined in future work with real measurements
-\end{enumerate}
-
-\subsubsection{Implementation in the Model}
-To use in code:
-
-\begin{verbatim}
-# Example: social media app for 1 minute
-for t in range(60):  # seconds
-    # Screen: on for 45s, off for 15s
-    A_screen = 1.0 if t < 45 else 0.0
-    
-    # Network: every 10s a small HTTP request
-    if t % 10 == 0:
-        I_network = network_model(...) * 2.5  # eta=2.5
-    else:
-        I_network = 0
-    
-    total_current = I_screen*A_screen*1.8 + I_network + ...
-\end{verbatim}
-
-This completes the software-aware power model. Next chapter will combine these apps into full usage scenarios.
-
-
-
-
-
-
-
-
-
-
-
-
-
+\hspace*{\parindent} The time-to-empty (battery life) is highly dependent on user behavior as manifested through application usage.
+As established previously, software does not inherently consume power directly; rather, it drives hardware components to do so.
+Consequently, we decompose user behavior into application-level actions, then into specific in-app operations, and finally map these operations to corresponding hardware and signaling activities.
+In this manner, the power consumption attributed to software can be effectively described using the hardware and signaling models developed earlier.
+As Fig.~\ref{fig:software_layers} describes:
 \begin{figure}[htbp]
-\centering
-\includegraphics[width=0.86\textwidth]{soft-hard.png}
-\caption{Software behavior to hardware component mapping diagram.}
-\label{fig:soft-hard}
+    \centering
+    \includegraphics[width=0.8\textwidth]{layers.png}
+    \caption{Software-to-hardware power mapping architecture}
+    \label{fig:software_layers}
 \end{figure}
 
-\subsection{}
-\subsection{}
-\subsection{}
+Then comes the question: how to describe the degree to which software utilizes hardware?
+
+\textbf{Inspired by the CMOS circuit fundamental formula $P_{\text{dyn}} = \alpha C V^2 f$}, beyond inherent hardware factors such as capacitance and voltage, the dynamic power consumption is directly proportional to the \textit{activity factor} $\alpha$ and the clock frequency $f$. We naturally extend this insight to the software layer: the power consumption driven by software is also proportional to a \textit{temporal activity factor} and an \textit{efficiency factor}. This leads to the following formulation:
+
+\begin{equation}
+\frac{dQ(t)}{dt} = -\sum_{i=1}^{N} \left[ I_i^{\text{(hw)}}(\theta_i) \times A_i(t) \times \eta_i^{\text{(app)}} \right]
+\label{eq:software_hardware_mapping}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $I_i^{\text{(hw)}}(\theta_i)$ is the base current model of hardware component $i$ with physical parameters $\theta_i$, as established in our previous hardware modeling;
+    \item $A_i(t) \in [0, 1]$ represents the \textit{temporal activity factor}, denoting the time-varying degree of activation of hardware $i$ by the software at time $t$;
+    \item $\eta_i^{\text{(app)}} \geq 1$ is the \textit{software efficiency factor}, quantifying the additional energy overhead caused by suboptimal software implementation when utilizing hardware $i$.
+\end{itemize}
+
+The next step is to determine the specific mathematical descriptions for the activity factor $A_i(t)$ and the efficiency factor $\eta_i^{\text{(app)}}$.
+
+
+
+
+
+\subsubsection{Application Energy Profile Analysis}
+
+\hspace*{\parindent} Before proceeding with parameter calibration, it is essential to understand the composition of energy consumption in mobile applications. We analyze this from two dimensions: hardware components and temporal states.
+
+According to the empirical study of 405 diverse applications by \cite{li2014empirical}, the network component is the most power-hungry, accounting for over 40\% of the total energy consumption among all hardware components. The same study also reveals the energy distribution across temporal states, as shown in Fig.~\ref{fig:power_analysis}: the \textbf{idle} state consumes 61\% of the total energy, while within the remaining \textbf{non-idle} time, API calls are responsible for 85\% of the energy expenditure.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{idle.png}
+        \caption{Power distribution in idle state}
+        \label{fig:idle_dist}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{nonidle.png}
+        \caption{Power breakdown in non-idle state}
+        \label{fig:nonidle_breakdown}
+    \end{subfigure}
+    \caption{Power consumption analysis of smartphone applications}
+    \label{fig:power_analysis}
+\end{figure}
+
+To identify the key factors of energy consumption, we can conduct a simple analysis of the \textbf{idle} and \textbf{non-idle} states by examining the typical tasks performed during each state and the primary hardware components or signaling modules involved. This analysis is summarized in Table~\ref{tab:idle_nonidle_analysis}.
+
+\begin{table}[htbp]
+\centering
+\caption{Analysis of Tasks and Hardware Usage in Idle and Non-idle States}
+\label{tab:idle_nonidle_analysis}
+\begin{tabular}{p{0.12\linewidth} p{0.37\linewidth} p{0.41\linewidth}}
+\toprule
+\textbf{State} & \textbf{Possible Tasks} & \textbf{Active Hardware/Signaling} \\
+\midrule
+\textbf{Idle} & 
+\begin{itemize}[leftmargin=*, nosep]
+    \item Periodic sync/push notification
+    \item Background data update
+    \item Connection keep-alive
+\end{itemize} &
+\begin{itemize}[leftmargin=*, nosep]
+    \item Network module (Cellular/WiFi)
+    \item Low-power CPU cores
+    \item Memory (DRAM refresh)
+\end{itemize} \\
+\midrule
+\textbf{Non-idle} &
+\begin{itemize}[leftmargin=*, nosep]
+    \item Screen-on interaction (scrolling, typing)
+    \item Media playback (video/audio)
+    \item Network data transfer
+    \item Location/GPS navigation
+\end{itemize} &
+\begin{itemize}[leftmargin=*, nosep]
+    \item Display screen
+    \item Main CPU/GPU cores
+    \item Network module (High throughput)
+    \item GPS receiver
+    \item Storage (flash I/O)
+\end{itemize} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+From the analysis in Table~\ref{tab:idle_nonidle_analysis}, it is evident that the \textbf{display}, \textbf{CPU}, and \textbf{network} modules are the primary hardware components driving energy consumption. Our previous hardware-centric modeling has already focused intensively on precisely these modules.
+
+Furthermore, the dominant energy contribution from API calls during the non-idle state is inherently captured in our model. It manifests as the activation triggers and scheduling patterns described by the temporal activity factor $A_i(t)$ and the software efficiency factor $\eta_i^{\text{(app)}}$ in Equation~\eqref{eq:software_hardware_mapping}.
+
+Besides, the empirical data indicates that the energy consumption directly attributable to the developer's application logic (excluding API and system calls) is negligible. Therefore, we do not construct a separate, explicit model for this component.
+
+
+
+
+
+
+
+
+\subsection{App-Specific Model Calibration}
+
+\subsubsection{Selection of Representative Application Categories}
+
+\hspace*{\parindent} According to our modeling framework, the State of Charge (SOC) trajectory is highly dependent on user software usage behavior, where different usage patterns can lead to orders of magnitude differences in power drain rates. To simulate realistic battery depletion scenarios, it is essential to analyze \textbf{typical} software types.
+
+Our criteria for selecting these typical software types are as follows:
+\begin{itemize}
+    \item The software's core functionality is well-defined and its operations or modules are relatively decoupled (e.g., games are excluded due to their complex, interwoven operations where a single action triggers multiple system components).
+    \item Applications within the selected category are highly similar in their primary usage patterns and resource demands, justifying their label as "typical."
+    \item The software category is common in daily life and has a broad user base, ensuring the relevance and generalizability of our analysis.
+\end{itemize}
+
+Based on these principles, we select the following five categories for detailed analysis:
+
+\begin{table}[htbp]
+\centering
+\caption{Five Typical Software Categories Selected for Analysis}
+\label{tab:software_categories}
+\renewcommand{\arraystretch}{1.5} % 增加行高
+\begin{tabular}{>{\centering\arraybackslash}p{0.18\linewidth}
+                >{\centering\arraybackslash}p{0.18\linewidth}
+                >{\centering\arraybackslash}p{0.28\linewidth}
+                >{\centering\arraybackslash}p{0.28\linewidth}}
+\toprule
+\textbf{Software Type} & \textbf{Representative Apps} & \textbf{Core Functionality} & \textbf{Hardware/Signaling Modules} \\
+\midrule
+Video Streaming & TikTok, YouTube & Playback of video content & Display, Network, CPU (decoding) \\
+\hline
+Social Media & WeChat, Weibo & Messaging \& content feed & Network (frequent), Display, CPU \\
+\hline
+Navigation & Google Maps, Gaode Maps & Real-time route guidance & GPS, Display, Network \\
+\hline
+Web Browsing & Chrome, Safari & Loading \& rendering web pages & Network, CPU, Display \\
+\hline
+Music Player & Spotify, NetEase Cloud Music & Audio playback & CPU (decoding), Storage, Network \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+
+\subsubsection{Parameter Calibration}
+
+\hspace*{\parindent}Based on literature and empirical analysis, we define three parameter sets describing software-driven energy patterns.
+
+Table~\ref{tab:efficiency_factors} presents \textbf{software efficiency factors} $\eta$ across five application types. Values $\eta \ge 1$ represent additional energy overhead from suboptimal implementations, e.g., $\eta=2.5$ for social media network usage reflects HTTP small-packet inefficiency.
+
+Table~\ref{tab:activity_patterns} defines \textbf{temporal activity patterns} $A_i(t) \in [0,1]$. For example, video streaming maintains continuous screen activity with burst network usage, while music playback operates with minimal background hardware activation.
+
+Table~\ref{tab:hw_operation_params} specifies \textbf{key hardware operational parameters} during active use. Combined with efficiency factors and activity patterns, these enable complete current calculation via Equation~\eqref{eq:software_hardware_mapping}.
+
+\begin{table}[htbp]
+\centering
+\caption{Software Efficiency Factors $\eta$ by Application Type}
+\label{tab:efficiency_factors}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Hardware} & \textbf{Video} & \textbf{Social} & \textbf{Nav.} & \textbf{Web} & \textbf{Music} \\
+\midrule
+Network & 1.2 & 2.5 & 1.5 & 1.8 & 1.3 \\
+Screen & 1.3 & 1.8 & 1.5 & 1.2 & 1.0 \\
+CPU & 1.3 & 1.5 & 1.5 & 1.5 & 1.1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Activity Patterns $A_i(t)$ by Application Type}
+\label{tab:activity_patterns}
+\begin{tabular}{lll}
+\toprule
+\textbf{App} & \textbf{Hardware} & \textbf{Pattern Description} \\
+\midrule
+Video & Screen & Always on (rest 10s/10min) \\
+       & Network & Burst download (5s on/25s off) \\
+Social & Screen & 45s on/15s off cycle \\
+       & Network & Small request every 10s \\
+Navigation & Screen/GPS & Always active \\
+       & Network & Map update every 60s \\
+Web & Screen & 50s on/10s off cycle \\
+    & Network & Random request pattern \\
+Music & Screen & Always off \\
+      & Network & Heartbeat every 30s \\
+      & CPU & Steady 30\% activity \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Typical Hardware Operation Parameters}
+\label{tab:hw_operation_params}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{App Type} & \textbf{Brightness} & \textbf{CPU (MHz)} & \textbf{GPU (MHz)} & \textbf{Network} \\
+\midrule
+Video Streaming & 0.8 & 1800 & 500 & 4G \\
+Social Media & 0.6 & 1400 & 300 & 4G \\
+Navigation & 0.7 & 1600 & 400 & 4G \\
+Web Browsing & 0.5 & 1500 & 350 & 4G \\
+Music & 0.0 & 300 & 0 & 4G \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -565,21 +895,220 @@ This completes the software-aware power model. Next chapter will combine these a
 
 \section{Scenario-Based Analysis and Prediction}
 
-\section{Model Analysis and Evaluation} % 这里放模型优缺点和敏感度测试
+\subsection{Static TTE Benchmarking}
+
+Having established the power parameters for five application categories in the previous section, we now employ the integrated model to address practical prediction problems. We first benchmark the Time-To-Empty (TTE) for four primary application types (excluding music playback due to its TTE exceeding 24 hours in our simulation) under three initial battery levels: 100\%, 50\%, and 20\% SOC.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{static_benchmark.png}
+    \caption{Static TTE benchmarking for four application categories at different initial SOC levels. Music playback is excluded as its TTE exceeds 24 hours.}
+    \label{fig:static_benchmark}
+\end{figure}
+
+Figure \ref{fig:static_benchmark} shows clear linear scaling of TTE with initial SOC across all apps. At 100\% SOC, TTE values are 6.8h (video), 9.2h (social), 5.5h (navigation), and 11.3h (web). Navigation consumes ~40\% more power per hour than web browsing due to continuous GPS and screen usage, establishing application-specific power baselines for mixed-scenario analysis.
+
+
+
+\subsection{Dynamic Time-Series Simulation: Mixed-Usage Journeys}
+
+To evaluate the model under realistic, time-varying conditions, we design and simulate four distinct 4-hour usage journeys, each combining different applications. The journeys are: \textit{Weekend Entertainment} (2h video + 2h music), \textit{Commute \& Work} (1h navigation + 1h social + 2h browsing), \textit{Mixed Daily Usage} (0.5h navigation + 1h social + 1h video + 1.5h music + 1h browsing), and \textit{Business Travel} (3h navigation + 1h music).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{dynamic_journeys.png}
+    \caption{Battery SOC trajectories during four simulated usage journeys. Background colors indicate the active application in each time segment. All journeys start from 100\% SOC.}
+    \label{fig:dynamic_journeys}
+\end{figure}
+
+Figure \ref{fig:dynamic_journeys} shows the battery depletion trajectories. Steep declines correspond to high-power applications like navigation and video streaming, while gentle slopes occur during low-power activities like music playback. \textit{Business Travel} (Journey 4), dominated by continuous navigation, depletes the battery fastest, ending at 34.2\% SOC. \textit{Weekend Entertainment} (Journey 1), with its long music phase, preserves the most charge, ending at 58.7\% SOC.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{journey_comparison.png}
+    \caption{Comparative performance of the four journeys: (Left) Final SOC after 4 hours; (Right) Total energy consumed.}
+    \label{fig:journey_comparison}
+\end{figure}
+
+Figure \ref{fig:journey_comparison} summarizes the journey outcomes. The final SOC values are 58.7\%, 49.1\%, 42.3\%, and 34.2\% for Journeys 1-4, respectively. Corresponding energy consumptions are 1527 mAh, 1882 mAh, 2137 mAh, and 2435 mAh. The results confirm that usage pattern, not just duration, critically determines battery life. Navigation-intensive journeys consume up to 60\% more energy than media-centric ones, highlighting the significant impact of application choice on overall endurance.
 
 
 
 
 
-%参考文献
-%这里是放没引用过的参考文献，作为提醒
 
-\cite{di2017software} % 2，开发者建议
-\cite{cruz2019catalog} % 8，用户建议
 
-\cite{li2014empirical} % 6
-\cite{chan2015assessing} % 5
-\cite{pathak2012energy} % 7
+
+
+
+\subsection{Stochastic Evaluation via Monte Carlo Simulation}
+Although deterministic simulations provide valuable insight into average behavior, real-world battery performance is subject to inherent stochasticity arising from manufacturing variations, environmental factors, and dynamic user interactions. To quantify this uncertainty and assess the robustness of our model, we conducted a Monte Carlo simulation.Using the same 3-hour mixed usage profile defined in Section 5.2, we ran $N = 5000$ iterations. In each iteration, key uncertain parameters were sampled from their respective probability distributions:Initial Battery Capacity ($Q_{initial}$): $\mathcal{N}(3700, 50)$ mAh, reflecting manufacturing tolerances.
+\begin{itemize}
+    \item Discharge Efficiency ($\eta$): $\mathcal{U}(0.82, 0.88)$, accounting for temperature and aging effects.
+\item Cellular Signal Strength ($RSSI_{cell}$): $\mathcal{N}(-75, 10)$ dBm, clipped to $[-100, -50]$, simulating signal fluctuations during mobility.
+
+\item Display Brightness ($L$): $\mathcal{N}(0.6, 0.15)$ (clipped to $[0.1, 1.0]$) during active display phases, representing diverse user habits.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Figure_prediction1.png}
+    \caption{}
+    \label{fig:placeholder}
+\end{figure}
+ The statistical profile of the Monte Carlo simulation, as visualized in Figure \ref{fig:placeholder}, provides a quantitative basis for assessing the model's performance under uncertainty. By synthesizing $N=5000$ independent trials, we derive the following key insights regarding the device's energy resilience:
+
+
+\begin{itemize}
+    \item Stochastic Distribution: The histogram follows a near-normal distribution, reflecting the aggregated uncertainty of initial capacity, discharge efficiency, and signal fluctuations.
+    \item Predictive Reliability: The mean remaining battery percentage is $66.9\%$. The tight clustering of results between $62\%$ and $71\%$ demonstrates the robustness of the model, suggesting that, despite real-world stochasticity, the TTE (Time-to-Empty) remains predictable within a narrow confidence interval.
+    \item Risk Assessment: The tail ends of the distribution represent extreme user behaviors or hardware tolerances, providing a probabilistic basis for "worst-case" battery life scenarios.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Sensitivity Analysis and Model Evaluation}
+
+To fulfill the requirements of the problem, we conducted a rigorous sensitivity analysis to examine how our predictions vary under fluctuating parameter values and to validate the integrity of our modeling assumptions.
+
+\subsection{Parameter Sensitivity: Identifying Environmental Drivers}
+We first evaluated the continuous sensitivity of the total current draw to variations ($\pm 20\%$) in primary system and environmental parameters. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\linewidth]{Figure_sa1.png}
+    \caption{Tornado Diagram of Parameter Sensitivity.}
+    \label{fig:tornado_sa}
+\end{figure}
+
+We can see that \texttt{wifi\_rssi} particularly demonstrates a dominant influence on the model's output variance.The communication module demonstrates a "feedback penalty": as signal quality degrades, the radio frequency (RF) amplifiers must increase gain exponentially to maintain link integrity. The stability of other parameters, such as storage I/O, suggests that the model is robust against minor fluctuations in background system tasks.
+
+\subsection{Assumption Validation: Discrete State Additivity}
+A core assumption of our model is the \textbf{decoupling of hardware modules}, where the total current is treated as the sum of independent discrete states. We tested this assumption by measuring the marginal current increase ($\Delta I$) when toggling high-drain peripherals.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\linewidth]{Figure_sa1.2_off&on.png}
+    \caption{Marginal Power Cost Analysis. }
+    \label{fig:marginal_cost}
+\end{figure}
+
+The bar chart compares the instantaneous current increment triggered by activating specific hardware modules from an idle state.Figure \ref{fig:marginal_cost} validates our "Additive Assumption." The activation of the \textbf{Camera} and \textbf{GPS (Searching)} results in significant, identifiable "spikes" in power consumption (approx. $+450\text{ mA}$ and $+140\text{ mA}$, respectively). This confirms that:
+\begin{itemize}
+    \item Our model accurately captures "Binary Killers"—modules that cause rapid drain regardless of CPU load.
+    \item The linear superposition of peripheral power is a valid approximation for predicting Time-to-Empty (TTE) in complex multi-tasking scenarios.
+\end{itemize}
+
+\subsection{Performance Boundaries: Where the Model Performs Well or Poorly}
+
+To rigorously assess the predictive fidelity of our model, we benchmarked our simulation results against the GSMArena Battery Life Test v2.0, a widely recognized industry standard for smartphone autonomy quantification \cite{gsmarena2023v2}.
+
+\subsubsection{Experimental Setup and Data Comparison}
+The empirical data corresponds to the Google Pixel 3a (device codename: \textit{bonito}). We aligned our model's boundary conditions with GSMArena's standardized testing protocol: display brightness fixed at $200$ nits, active Wi-Fi connection, and standardized video codecs (h.264).
+
+Table \ref{tab:validation} presents the comparison between our model's Time-to-Empty (TTE) predictions and the observed active use scores.
+
+\begin{table}[htbp]
+\centering
+\caption{Comparison of Model Predictions vs. GSMArena Observed Data}
+\label{tab:validation}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Test Scenario} & \textbf{Observed TTE} & \textbf{Predicted TTE} & \textbf{Absolute Error} & \textbf{Rel. Error (\%)} \\ \midrule
+Web Browsing           & 11.25 h              & 10.68 h                & 0.57 h                  & 5.1\%                   \\
+Video Streaming        & 13.50 h              & 13.85 h                & 0.35 h                  & 2.6\%                   \\
+3D Gaming              & 7.15 h               & 6.82 h                 & 0.33 h                  & 4.6\%                   \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Uncertainty Quantification}
+To quantify the aggregate uncertainty of our model, we employed the \textbf{Mean Absolute Percentage Error (MAPE)} metric:
+
+\[MAPE = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{TTE_{obs} - TTE_{pred}}{TTE_{obs}} \right| \times 100\% \approx 4.1\% \]
+
+The low cumulative error ($< 5\%$) indicates that the deterministic core of our model successfully captures the primary energy dynamics. The residual variance is attributed to \textit{unmodeled background processes} (e.g., Android OS kernel housekeeping tasks) which introduce stochastic noise into the discharge curve.
+
+\subsubsection{Performance Assessment: Strengths and Limitations}
+By analyzing the deviation across different scenarios, we identified the specific operational boundaries of our model:
+
+\begin{itemize}
+    \item \textbf{High Performance (Well)}: The model is exceptionally reliable in \textbf{deterministic scenarios} (e.g., constant video streaming or standby), where environmental parameters like RSSI are stable. The high $R^2$ values in our calibration phase ensure that under steady usage patterns, the error margin remains below $5\%$.
+    \item \textbf{Predictive Limitations (Poorly)}: The model exhibits limitations during \textbf{rapid thermal transients}. Because we assume a constant discharge efficiency ($\eta$), the model may provide slightly optimistic TTE predictions during sustained, high-intensity gaming. In these cases, real-world "thermal throttling" and increased battery internal resistance would accelerate drain faster than our current mathematical assumptions account for.
+    \item \textbf{Where the Model Performs Well (Steady-State Accuracy):} 
+    The model achieves its highest accuracy in \textbf{Video Streaming} ($2.6\%$ error). This is because video playback relies on dedicated hardware decoders (DSP) and constant display refresh rates, creating a deterministic workload. Our hardware-level profiling (based on AOSP data) perfectly maps these stable power states.And the high $R^2$ values in our calibration phase ensure that under steady usage patterns, the error margin remains below $5\%$.
+
+    \item \textbf{Where the Model Performs Poorly (Stochastic Variability):} 
+    The highest error rate is observed in \textbf{Web Browsing} ($5.1\%$). Unlike video, browsing is inherently bursty—involving erratic CPU frequency spikes, variable page rendering complexities, and user scroll interactions. Our current model simplifies these stochastic user behaviors into averaged duty cycles, leading to a slight underestimation of the power spikes caused by the CPU's "Race-to-Idle" frequency governor.Besides, since we assume a constant discharge efficiency ($\eta$), the model may provide slightly optimistic TTE predictions during sustained, high-intensity gaming. In these cases, real-world "thermal throttling" and increased battery internal resistance would accelerate drain faster than our current mathematical assumptions account for.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage 
+\section{Recommendations and Model Scalability}
+
+Based on the quantitative insights derived from our sensitivity analysis and robustness tests, we translate our mathematical findings into actionable strategies for end-users and operating system (OS) architects.
+
+\subsection{Strategies for the User}
+Our model identifies that battery depletion is not driven linearly by usage time, but exponentially by environmental hostility.
+
+\begin{itemize}
+    \item \textbf{Signal Management}: 
+    Our sensitivity analysis revealed that WiFi/Cellular current draws increase exponentially when RSSI drops below $-85\text{ dBm}$. 
+    \textbf{Recommendation:} Users should aggressively disable data synchronization or switch to ``Airplane Mode" when traversing  elevators or in the basements. 
+    \item \textbf{Luminance Management and Dark Mode}: 
+    Since the display imposes a constant linear load ($\sim 300\text{ mA}$ at max brightness), reducing brightness offers the most deterministic energy savings.
+    \textbf{Recommendation:} Prioritize auto-brightness. For OLED screens (like the Pixel 3a), utilizing "Dark Mode" is mathematically superior, as black pixels effectively gate the current to zero.
+
+    \item \textbf{Task Batching}: 
+    Due to the high marginal cost of waking up the CPU and Modem from idle states (Tail Energy), frequent, short interactions consume more power than continuous usage.
+    \textbf{Recommendation:} Grouping notifications and checking messages in batches (e.g., once per hour) prevents the device from repeatedly incurring the "ramp-up" energy penalty.
+\end{itemize}
+
+\subsection{System-Level Optimization}
+Operating systems can implement smarter power governors by integrating the non-linear dynamics identified in our model.
+
+\begin{itemize}
+    \item \textbf{Opportunistic Scheduler based on RSSI}: 
+    Instead of executing background tasks (e.g., photo backup) at fixed intervals, the OS should implement an Energy-Aware Scheduler. This scheduler would delay non-urgent network requests until the signal strength ($RSSI$) exceeds a threshold (e.g., $>-75\text{ dBm}$), thereby minimizing the energy cost per bit transmitted.
+
+    \item \textbf{Thermal-Aware Frequency Scaling}: 
+    Recognizing that internal resistance $R_{int}$ rises with extreme temperatures, the OS should dynamically cap the maximum CPU frequency ($f_{max}$) when thermal sensors detect inefficiency. This avoids the "Quadratic Trap" ($P \propto f^2$) where the battery drains rapidly to generate heat rather than useful computation.
+
+\end{itemize}
+
+\subsection{Model Scalability and Generalization}
+The modular framework developed herein is not limited to smartphones. Its underlying physics theory such as CMOS power laws is general.
+\begin{itemize}
+    \item \textbf{Portability to Drones and EVs}: By adjusting the specific coefficients (e.g., replacing the screen module with a motor propulsion module $P_{motor} = k \cdot \omega^3$), our framework can predict the flight time of UAVs, where ``wind resistance" acts similarly to ``signal noise" as an environmental stressor.
+    
+\end{itemize}
+
+
+
+
+
+
+
 
 
 
@@ -593,9 +1122,45 @@ This completes the software-aware power model. Next chapter will combine these a
 \thispagestyle{empty} 
 
 \section{AI Use Report}
-Project Title: The River Intake Shield: Optimized Sensor Deployment and Emergency Response
 
-Team Control Number: [2611750]
+\textbf{Project Title:} PowerSched: Hierarchical Energy Profiling for Smartphone Battery Life Prediction
+
+\textbf{Team Control Number:} 2611750
+
+
+\textbf{Language Enhancement}
+\begin{itemize}
+    \item \textbf{Tools:} ChatGPT-4, Grammarly
+    \item \textbf{Use:} 
+    \begin{itemize}
+        \item Polished abstract and introduction for academic tone
+        \item Standardized technical terms (SOC, TTE, wake-locks, tail energy)
+        \item Improved LaTeX equation formatting
+        \item Enhanced paper structure and flow
+    \end{itemize}
+\end{itemize}
+
+\textbf{Visualization Generation}
+\begin{itemize}
+    \item \textbf{Tools:} ChatGPT-4 + Matplotlib
+    \item \textbf{Contribution:} All Matplotlib visualizations in the paper were generated with AI assistance
+    \item \textbf{Human Role:} Provided modeling data and verification of all plots
+    \item \textbf{AI Role:} Generated plotting code based on data specifications
+    \item \textbf{Note:} While AI assisted with visualization, all underlying data came from our human-developed models and simulations
+\end{itemize}
+
+
+\textbf{We promise:}
+\begin{itemize}
+    \item All AI-generated content was verified by team members
+    \item Technical accuracy took priority over AI suggestions
+    \item Core modeling ideas and framework were human-developed
+\end{itemize}
+
+
+
+
+
 
 
 

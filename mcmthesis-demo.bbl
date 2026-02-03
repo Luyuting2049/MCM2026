@@ -43,158 +43,63 @@
     \field{year}{2010}
   \endentry
 
-  \entry{chan2015assessing}{article}{}{}
-    \name{author}{8}{}{%
-      {{hash=CCA}{%
-         family={Chan},
-         familyi={C\bibinitperiod},
-         given={Chien\bibnamedelima Aun},
-         giveni={C\bibinitperiod\bibinitdelim A\bibinitperiod},
-      }}%
-      {{hash=LW}{%
-         family={Li},
-         familyi={L\bibinitperiod},
-         given={Wenwen},
-         giveni={W\bibinitperiod},
-      }}%
-      {{hash=BS}{%
-         family={Bian},
-         familyi={B\bibinitperiod},
-         given={Sen},
-         giveni={S\bibinitperiod},
-      }}%
-      {{hash=CLI}{%
-         family={Chih-Lin},
-         familyi={C\bibinithyphendelim L\bibinitperiod},
-         given={I},
-         giveni={I},
-      }}%
-      {{hash=GAF}{%
-         family={Gygax},
+  \entry{google_power_profile_guide}{online}{}{}
+    \name{author}{1}{}{%
+      {{hash=G}{%
+         family={Google},
          familyi={G\bibinitperiod},
-         given={Andre\bibnamedelima F},
-         giveni={A\bibinitperiod\bibinitdelim F\bibinitperiod},
-      }}%
-      {{hash=LC}{%
-         family={Leckie},
-         familyi={L\bibinitperiod},
-         given={Christopher},
-         giveni={C\bibinitperiod},
-      }}%
-      {{hash=YM}{%
-         family={Yan},
-         familyi={Y\bibinitperiod},
-         given={Ming},
-         giveni={M\bibinitperiod},
-      }}%
-      {{hash=HK}{%
-         family={Hinton},
-         familyi={H\bibinitperiod},
-         given={Kerry},
-         giveni={K\bibinitperiod},
       }}%
     }
-    \list{publisher}{1}{%
-      {IEEE}%
-    }
-    \strng{namehash}{CCA+1}
-    \strng{fullhash}{CCALWBSCLIGAFLCYMHK1}
+    \strng{namehash}{G1}
+    \strng{fullhash}{G1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{sortinit}{C}
-    \field{sortinithash}{C}
-    \field{number}{11}
-    \field{pages}{182\bibrangedash 191}
-    \field{title}{Assessing network energy consumption of mobile applications}
-    \field{volume}{53}
-    \field{journaltitle}{IEEE Communications Magazine}
-    \field{year}{2015}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{note}{Technical documentation for hardware component power estimation}
+    \field{title}{Power Values: Android Open Source Project Source}
+    \verb{url}
+    \verb https://source.android.com/docs/core/power/values
+    \endverb
+    \field{year}{2023}
   \endentry
 
-  \entry{cruz2019catalog}{article}{}{}
-    \name{author}{2}{}{%
-      {{hash=CL}{%
-         family={Cruz},
-         familyi={C\bibinitperiod},
-         given={Luis},
-         giveni={L\bibinitperiod},
-      }}%
-      {{hash=AR}{%
-         family={Abreu},
-         familyi={A\bibinitperiod},
-         given={Rui},
-         giveni={R\bibinitperiod},
+  \entry{android_bonito_power_profile}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=G}{%
+         family={{Google Android Open Source Project}},
+         familyi={G\bibinitperiod},
       }}%
     }
-    \list{publisher}{1}{%
-      {Springer}%
-    }
-    \strng{namehash}{CLAR1}
-    \strng{fullhash}{CLAR1}
+    \strng{namehash}{G2}
+    \strng{fullhash}{G2}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{sortinit}{C}
-    \field{sortinithash}{C}
-    \field{number}{4}
-    \field{pages}{2209\bibrangedash 2235}
-    \field{title}{Catalog of energy patterns for mobile applications}
-    \field{volume}{24}
-    \field{journaltitle}{Empirical software engineering}
-    \field{year}{2019}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{howpublished}{\url{https://cs.android.com/android/platform/superproject/main/+/main:external/perfetto/src/trace_processor/metrics/sql/android/power_profile_data/bonito.sql}}
+    \field{note}{Accessed: 2024-02-02}
+    \field{title}{Power Profile Data for Device 'bonito' (Google Pixel 3a)}
+    \field{year}{2024}
   \endentry
 
-  \entry{di2017software}{inproceedings}{}{}
-    \name{author}{6}{}{%
-      {{hash=DND}{%
-         family={Di\bibnamedelima Nucci},
-         familyi={D\bibinitperiod\bibinitdelim N\bibinitperiod},
-         given={Dario},
-         giveni={D\bibinitperiod},
-      }}%
-      {{hash=PF}{%
-         family={Palomba},
-         familyi={P\bibinitperiod},
-         given={Fabio},
-         giveni={F\bibinitperiod},
-      }}%
-      {{hash=PA}{%
-         family={Prota},
-         familyi={P\bibinitperiod},
-         given={Antonio},
-         giveni={A\bibinitperiod},
-      }}%
-      {{hash=PA}{%
-         family={Panichella},
-         familyi={P\bibinitperiod},
-         given={Annibale},
-         giveni={A\bibinitperiod},
-      }}%
-      {{hash=ZA}{%
-         family={Zaidman},
-         familyi={Z\bibinitperiod},
-         given={Andy},
-         giveni={A\bibinitperiod},
-      }}%
-      {{hash=DLA}{%
-         family={De\bibnamedelima Lucia},
-         familyi={D\bibinitperiod\bibinitdelim L\bibinitperiod},
-         given={Andrea},
-         giveni={A\bibinitperiod},
+  \entry{gsmarena2023v2}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=G}{%
+         family={{GSMArena Team}},
+         familyi={G\bibinitperiod},
       }}%
     }
-    \list{organization}{1}{%
-      {IEEE}%
-    }
-    \strng{namehash}{DND+1}
-    \strng{fullhash}{DNDPFPAPAZADLA1}
+    \strng{namehash}{G3}
+    \strng{fullhash}{G3}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{sortinit}{D}
-    \field{sortinithash}{D}
-    \field{booktitle}{2017 IEEE 24th international conference on software analysis, evolution and reengineering (SANER)}
-    \field{pages}{103\bibrangedash 114}
-    \field{title}{Software-based energy profiling of android apps: Simple, efficient and reliable?}
-    \field{year}{2017}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{howpublished}{\url{https://www.gsmarena.com/battery-test-v2.php3}}
+    \field{note}{Accessed: 2024-02-03. Empirical benchmark data for Pixel 3a (Bonito)}
+    \field{title}{GSMArena Battery Life Test v2.0: The New Active Use Score}
+    \field{year}{2023}
   \endentry
 
   \entry{hinton2011power}{article}{}{}
@@ -316,37 +221,63 @@
     \field{year}{2014}
   \endentry
 
-  \entry{pathak2012energy}{inproceedings}{}{}
-    \name{author}{3}{}{%
-      {{hash=PA}{%
-         family={Pathak},
-         familyi={P\bibinitperiod},
-         given={Abhinav},
-         giveni={A\bibinitperiod},
+  \entry{valoen2005effect}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=VLO}{%
+         family={Val{\o}en},
+         familyi={V\bibinitperiod},
+         given={Lars\bibnamedelima Ole},
+         giveni={L\bibinitperiod\bibinitdelim O\bibinitperiod},
       }}%
-      {{hash=HYC}{%
-         family={Hu},
-         familyi={H\bibinitperiod},
-         given={Y\bibnamedelima Charlie},
-         giveni={Y\bibinitperiod\bibinitdelim C\bibinitperiod},
-      }}%
-      {{hash=ZM}{%
-         family={Zhang},
-         familyi={Z\bibinitperiod},
-         given={Ming},
-         giveni={M\bibinitperiod},
+      {{hash=RJN}{%
+         family={Reimers},
+         familyi={R\bibinitperiod},
+         given={Jan\bibnamedelima N},
+         giveni={J\bibinitperiod\bibinitdelim N\bibinitperiod},
       }}%
     }
-    \strng{namehash}{PAHYCZM1}
-    \strng{fullhash}{PAHYCZM1}
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{VLORJN1}
+    \strng{fullhash}{VLORJN1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{sortinit}{P}
-    \field{sortinithash}{P}
-    \field{booktitle}{Proceedings of the 7th ACM european conference on Computer Systems}
-    \field{pages}{29\bibrangedash 42}
-    \field{title}{Where is the energy spent inside my app? Fine Grained Energy Accounting on Smartphones with Eprof}
-    \field{year}{2012}
+    \field{sortinit}{V}
+    \field{sortinithash}{V}
+    \field{pages}{197\bibrangedash 207}
+    \field{title}{The effect of temperature and discharge current on the cycle life of Li-ion batteries}
+    \field{volume}{150}
+    \field{journaltitle}{Journal of Power Sources}
+    \field{year}{2005}
+  \endentry
+
+  \entry{wang2011cycle}{article}{}{}
+    \true{moreauthor}
+    \true{morelabelname}
+    \name{author}{1}{}{%
+      {{hash=WJ}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={John},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{WJ+1}
+    \strng{fullhash}{WJ+1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \field{number}{8}
+    \field{pages}{3941\bibrangedash 3948}
+    \field{title}{Cycle-life model for graphite-LiFePO4 cells}
+    \field{volume}{196}
+    \field{journaltitle}{Journal of Power Sources}
+    \field{year}{2011}
   \endentry
 \enddatalist
 \endinput
